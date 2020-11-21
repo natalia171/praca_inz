@@ -30,6 +30,8 @@ $haslo1 = mysqli_real_escape_string($conn, $_REQUEST['haslo1']);
 $sql = "INSERT INTO pacjenci (email, imie, nazwisko, telefon, pesel, data_urodzenia, haslo)
 VALUES ('$email','$imie','$nazwisko','$telefon','$pesel','$data_urodzenia','$haslo')";
 
+echo "haslo: " . $haslo . " haslo1: " . $haslo1; 
+
 if ($haslo== $haslo1){
 	echo "hasla takie same";
 	
