@@ -7,9 +7,9 @@ email: <input type="text" name="email"><br>
 Imie: <input type="text" name="imie"><br>
 Nazwisko: <input type="text" name="nazwisko"><br>
 telefon: <input type="text" name="telefon"><br>
-PESEL: <input type="text" name="PESEL"><br>
+PESEL: <input type="text" name="pesel"><br>
 Data urodzin: <input type="text" name="data_urodzin"><br>
-Haslo: <input type="text" name="haslo1"><br>
+Haslo: <input type="text" name="haslo"><br>
 Powtorz haslo: <input type="text" name="haslo1"><br>
 
 <input type="submit">
