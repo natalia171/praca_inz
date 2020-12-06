@@ -11,7 +11,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".welcome"></activity>
+        <activity android:name=".PanelPacjenta"></activity>
+        <activity android:name=".welcome" />
         <activity android:name=".rejestracja" />
         <activity android:name=".login">
             <intent-filter>

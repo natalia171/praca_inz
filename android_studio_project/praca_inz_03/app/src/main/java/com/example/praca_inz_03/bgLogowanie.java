@@ -23,14 +23,14 @@ import java.net.URLEncoder;
  * Created by faiizii on 11-Feb-18.
  */
 
-public class background extends AsyncTask <String, Void,String> {
+public class bgLogowanie extends AsyncTask <String, Void,String> {
 
     AlertDialog dialog;
     Context context;
     String result = "";
     public Boolean login = false;
 
-    public background(Context context)
+    public bgLogowanie(Context context)
     {
         this.context = context;
     }
@@ -42,14 +42,16 @@ public class background extends AsyncTask <String, Void,String> {
     }
     @Override
     protected void onPostExecute(String s) {
-        dialog.setMessage(s);
-        dialog.show();
-        if(s.contains("login successful"))
+        if(s.contains("1"))
         {
             Intent intent_name = new Intent();
-            intent_name.setClass(context.getApplicationContext(),MainActivity.class);
+            intent_name.setClass(context.getApplicationContext(),PanelPacjenta.class);
             context.startActivity(intent_name);
+        }else{
+            dialog.setMessage("Złe hasło lub login");
+            dialog.show();
         }
+
     }
     @Override
     protected String doInBackground(String... voids) {
@@ -57,7 +59,7 @@ public class background extends AsyncTask <String, Void,String> {
         String user = voids[0];
         String pass = voids[1];
 
-        String connstr = "http://192.168.1.6/login.php";
+        String connstr = "http://192.168.1.164/login.php";
 
         try {
             URL url = new URL(connstr);
