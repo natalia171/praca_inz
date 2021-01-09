@@ -28,9 +28,11 @@ public class bgRejestracja extends AsyncTask<String, Void,String> {
     {
         this.context = context;
     }
+    //Po wykonaniu (skad wie ze wykonal - wcisniecie buttona???) wraca do mainactivity
     @Override
     protected void onPostExecute(String s) {
             Intent intent_name = new Intent();
+            // po co jest context i czym on jest???????
             intent_name.setClass(context.getApplicationContext(),MainActivity.class);
             context.startActivity(intent_name);
     }

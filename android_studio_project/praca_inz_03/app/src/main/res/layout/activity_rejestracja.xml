@@ -4,7 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".rejestracja">
+    tools:context=".rejestracja"
+    style="@style/stylTLA"
+    >
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -17,55 +19,55 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="25sp"
-            android:text="test"
+            android:hint="e-mail"
             android:id="@+id/email"
             />
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="25sp"
-            android:text="aaaa"
+            android:hint="Imię"
             android:id="@+id/imie"
             />
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="25sp"
-            android:text="kkkk"
+            android:hint="Nazwisko"
             android:id="@+id/nazwisko"
             />
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="25sp"
-            android:text="90090999999"
+            android:hint="PESEL"
             android:id="@+id/pesel"
             />
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="25sp"
-            android:text="888899999"
+            android:hint="Numer telefonu"
             android:id="@+id/telefon"/>
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="25sp"
-            android:text="2000-09-09"
+            android:hint="Data urodzenia"
             android:id="@+id/data_urodzenia"
             />
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="25sp"
-            android:text="test"
+            android:hint="Hasło"
             android:id="@+id/haslo"
             />
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="25sp"
-            android:text="test"
+            android:hint="Powtórz hasło"
             android:id="@+id/haslo1"
             />
         />
@@ -74,8 +76,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="25sp"
-            android:text="Dodaj"
+            android:text="DODAJ"
             android:onClick="DodajBtn"
+            style="@style/stylbatona"
+
             />
     </LinearLayout>
 </RelativeLayout>

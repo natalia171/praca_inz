@@ -7,11 +7,13 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.util.Log;
+import android.widget.Spinner;
 
 
 public class MainActivity extends AppCompatActivity {
     EditText pas,usr;
     String IP="192.168.1.164";
+    Spinner listaSpecjalizacji;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,14 +26,15 @@ public class MainActivity extends AppCompatActivity {
         String user = usr.getText().toString();
         String pass = pas.getText().toString();
 
+        //????? tworzenie klasy bglogowanie  i tworzenie stringa z nazwa usera i haslem
         bgLogowanie bg = new bgLogowanie(this);
-
         String res=bg.execute(user,pass).toString();
-        Log.d("MW","ccc "+res);
+        Log.d("MainACC","Odpowiedz logowanie "+res);
 
     }
 
     public void rejestracja(View view) {
+        //tworzenie nowej aktywnosci  i jej uruchomienie
         Intent intencjaRejestracja = new Intent(this,rejestracja.class);
         startActivity(intencjaRejestracja);
     }

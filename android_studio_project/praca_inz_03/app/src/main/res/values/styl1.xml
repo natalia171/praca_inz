@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+        <style name="stylbatona" parent="Theme.AppCompat.Light.DarkActionBar">
+            <item name="android:layout_width">match_parent</item>
+            <item name="android:layout_height">wrap_content</item>
+            <item name="android:textSize">25sp</item>
+            <item name="android:textStyle">bold</item>
+            <item name="android:textColor">#FFFFFF</item>
+            <item name="android:background">#9370DB</item>
+        </style>
+    <style name="stylTLA" parent="Theme.AppCompat.Light.DarkActionBar">
+
+        <item name="android:background">#D8BFD8</item>
+    </style>
+</resources>

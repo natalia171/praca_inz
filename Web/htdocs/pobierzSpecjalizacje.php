@@ -10,18 +10,18 @@ if ($conn->connect_error) {
 
 
 
-
+$data = array();
 $sql = "select distinct specjalizacja from lekarze";
 $result = $conn->query($sql);
 if ($result->num_rows > 0) {
   // output data of each row
   
   while($row = $result->fetch_assoc()) {
-    echo $row["specjalizacja"] . "<br>";
+	$data[] = $row;
   }
-} else {
-  echo "0 results";
-}
+} 
+
+echo json_encode($data);
 
 $conn->close();
 ?>
