@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.util.Log;
+import android.widget.Toast;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -28,7 +29,7 @@ public class bgLogowanie extends AsyncTask <String, Void,String> {
     //stworzenie pustego stringa wynikowego
     String result = "";
     //stworzenie zmiennej typu boolean domyslnie falszywej
-    public Boolean login = false;
+   // public Boolean login = false;
 
     //???????
     public bgLogowanie(Context context)
@@ -48,13 +49,16 @@ public class bgLogowanie extends AsyncTask <String, Void,String> {
     @Override
     // funkcja po wykonaniu ??????
     protected void onPostExecute(String s) {
-        //skąd zna "S"???????
+        //s to wynik wykonania doInBackground
         if(s.contains("1"))
         {
             //tworzenie kolejnej aktywnosci - panelu pacjenta
             Intent intent_name = new Intent();
             intent_name.setClass(context.getApplicationContext(),PanelPacjenta.class);
             context.startActivity(intent_name);
+            Toast toast= Toast.makeText(context,"Zalogowano",Toast.LENGTH_LONG);
+            toast.show();
+
         }else{
             dialog.setMessage("Złe hasło lub login");
             dialog.show();
@@ -65,33 +69,24 @@ public class bgLogowanie extends AsyncTask <String, Void,String> {
     //czemu (String... voids)?????
     protected String doInBackground(String... voids) {
 
-        //??????? czym jest voids??
+        // dodawanie elementow do tablicy voids
         String user = voids[0];
         String pass = voids[1];
 
-        String connstr = "http://192.168.1.164/login.php";
+        String connstr = "http://192.168.0.18/login.php";
 
         try {
-            //stworzenie nowego połączenia do strony internetowej???
             URL url = new URL(connstr);
             HttpURLConnection http = (HttpURLConnection) url.openConnection();
-            //ustawienie metody post do przekazywania elementow
-            //????? czemu post a nie get
             http.setRequestMethod("GET");
-            //????????włączenie otrzymywania danych???
             http.setDoInput(true);
-            //????włączenie wysyłania danych??
             http.setDoOutput(true);
-
-            //stworzenie stringa do wysłania?? czemu getoutputstream??
             OutputStream ops = http.getOutputStream();
-            // po co jest buffered writer?
             BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(ops,"UTF-8"));
-            //skoro pobrał string przez getoutputstream to po co tworzyc string data
             String data = URLEncoder.encode("email","UTF-8")+"="+URLEncoder.encode(user,"UTF-8")
                     +"&&"+URLEncoder.encode("haslo","UTF-8")+"="+URLEncoder.encode(pass,"UTF-8");
             writer.write(data);
-            Log.d("MW",data);
+            Log.d("bgLogowanie",data);
             writer.flush(); // wysyła o co było napisane przez buffered writer
             writer.close(); // zamyka buffered writer
             ops.close(); // konczy tworzenie stringa do wyslania?????????
@@ -101,10 +96,10 @@ public class bgLogowanie extends AsyncTask <String, Void,String> {
             BufferedReader reader = new BufferedReader(new InputStreamReader(ips,"ISO-8859-1"));
             //tworzenie pustego stringa "line"
             String line ="";
-            //????????? skad czyta linie?
+            //czytanie linii i sprawdzenie czy jest rozna od null
             while ((line = reader.readLine()) != null)
             {
-                // skad jest result?
+                // do wyniku dopisana zostaje linia
                 result += line;
                 Log.d("bgL",line);
             }
@@ -113,9 +108,10 @@ public class bgLogowanie extends AsyncTask <String, Void,String> {
             http.disconnect();
             return result;
 
-            //po co te catche????????
+            //zle sformuowany adres url
         } catch (MalformedURLException e) {
             result = e.getMessage();
+            //blad odczytu?
         } catch (IOException e) {
             result = e.getMessage();
         }

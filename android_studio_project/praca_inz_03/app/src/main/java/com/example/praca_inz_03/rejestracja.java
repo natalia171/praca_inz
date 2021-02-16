@@ -36,7 +36,7 @@ public class rejestracja extends AppCompatActivity {
         String haslo = has.getText().toString();
         String haslo1 = has1.getText().toString();
 
-        //  ??????? stworzenie klasy rejestracja i wyslanie jej danych z edittextow
+        //  ??????? stworzenie klasy rejestracja i wywolanie jej z danymi z edittextow
         bgRejestracja bg = new bgRejestracja(this);
         bg.execute(email, imie, nazwisko, pesel, telefon, data_urodzenia, haslo, haslo1);
     }
