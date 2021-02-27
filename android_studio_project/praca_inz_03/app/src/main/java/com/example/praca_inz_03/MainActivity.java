@@ -37,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
         //tworzenie nowej aktywnosci  i jej uruchomienie
         Intent intencjaRejestracja = new Intent(this,rejestracja.class);
         startActivity(intencjaRejestracja);
+
     }
     //public String getIP{
    //     return IP;

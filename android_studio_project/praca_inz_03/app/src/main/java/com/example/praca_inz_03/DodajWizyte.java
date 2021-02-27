@@ -10,19 +10,30 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.Toast;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Set;
 
 
 public class DodajWizyte extends AppCompatActivity {
     String pSpecjalizacja;//="internista"; //Zmien zeby pokazywalo lekarza wybranego ze spinnera
+    String ajdiWizyty;
     Context context;
-    ListView listaWizyt;
 
+    ListView listaWizyt;
+    String iDpacjenta="";
+    //String ajdi;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        iDpacjenta = getIntent().getStringExtra("ajdi");
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dodaj_wizyte);
@@ -45,7 +56,7 @@ public class DodajWizyte extends AppCompatActivity {
         listaSpecjalizacjiSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
-                pSpecjalizacja= (String) listaSpecjalizacjiSpinner.getSelectedItem();
+                pSpecjalizacja= (String) listaSpecjalizacjiSpinner.getSelectedItem();//pobieranie stringa z konkretna specjalizacja
                 Wyswietl(pSpecjalizacja);
             }
 
@@ -60,18 +71,50 @@ public class DodajWizyte extends AppCompatActivity {
         listaWizyt = (ListView)findViewById(R.id.listaWizyt);
         bgPobierzDostepneWizyty bgPDW = new bgPobierzDostepneWizyty(this);
 
-        ArrayList<String> arrayList = new ArrayList<>();
+
+        HashMap<String, String> hashMapaWizyt = new HashMap<String,String>();
         try {
-            arrayList = (ArrayList<String>) bgPDW.execute(pSpecjalizacja).get();
+            hashMapaWizyt = (HashMap<String,String>) bgPDW.execute(pSpecjalizacja).get();
         }catch (Exception e){}
 
-        ArrayAdapter arrayAdapter = new ArrayAdapter(this,android.R.layout.simple_list_item_1,arrayList);
+
+        //Klucze z hashmapy
+        Set<String> IdWizyt = hashMapaWizyt.keySet();
+        ArrayList<String> ListaKluczyWizyt = new ArrayList<String>(IdWizyt);
+
+        //Opisy wizyt
+        Collection<String> ListaDanychWizyt = hashMapaWizyt.values();
+        ArrayList<String> arrayListWizyt = new ArrayList<String>(ListaDanychWizyt);
+
+        Log.i("XXXX","XXXX"+ hashMapaWizyt.values()+" "+arrayListWizyt.get(1)+" "+ListaKluczyWizyt.get(1));
+
+        ArrayAdapter arrayAdapter = new ArrayAdapter(this,android.R.layout.simple_list_item_1,arrayListWizyt);
         listaWizyt.setAdapter(arrayAdapter);
         listaWizyt.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
                 Object listItem = listaWizyt.getItemAtPosition(position);
                 Log.d("DoWi","ressponse "+listItem.toString());
+
+
+                try {
+                    // Log.d(result.toString(), "resultvalue");
+                    if (listItem.toString() != null) {
+                        // ADDED CODE IS HERE:
+                        JSONObject json = new JSONObject(listItem.toString());
+                        String message = json.getString("ID");
+                        Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
+                        Log.d("ajdikkk", message);
+                    } else {
+                        Toast.makeText(getApplicationContext(),
+                                "Unable to retrieve any data from server", Toast.LENGTH_LONG).show();
+                    }
+                } catch (JSONException e) {
+                    // YOU MAY WANT TO MAKE A TOAST HERE AS WELL
+                    e.printStackTrace();
+                }
+
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(DodajWizyte.this);
                 builder.setTitle("Potwierdzenie rezerwacji");

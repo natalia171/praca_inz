@@ -17,10 +17,11 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 
-public class bgPobierzDostepneWizyty extends AsyncTask<String, Void, List<String>> {
+public class bgPobierzDostepneWizyty extends AsyncTask<String, Void, HashMap<String,String>> {
     Context context; // po co jest context??????
 
 
@@ -42,16 +43,16 @@ public class bgPobierzDostepneWizyty extends AsyncTask<String, Void, List<String
 
 
     @Override
-    protected void onPostExecute(List<String> s) { //nic nie robi po wykoananiu
+    protected void onPostExecute(HashMap<String,String> s) { //nic nie robi po wykoananiu
     }
 
 
 
     @Override
-    protected List<String> doInBackground(String... voids) {
+    protected HashMap<String,String> doInBackground(String... voids) {
         String specjalizacja = voids[0];
 
-        String connstr = "http://192.168.0.18/pobierzDostepneWizyty.php";
+        String connstr = "http://192.168.1.164/pobierzDostepneWizyty.php";
 
 
 
@@ -93,17 +94,22 @@ public class bgPobierzDostepneWizyty extends AsyncTask<String, Void, List<String
             Log.d("bPDW", e.getMessage().toString());
         }
 
-
+        HashMap<String,String> wizytyHashMap= new HashMap<String,String>();
         JSONArray arr = null;
         try {
+            int i;
             arr = new JSONArray(result);
-            list = new ArrayList<String>();
-            for (int i = 0; i < arr.length(); i++) {
-                list.add(arr.getJSONObject(i).getString("imie")+"  "+arr.getJSONObject(i).getString("nazwisko")+"  "+arr.getJSONObject(i).getString("CZAS_START"));
+            String key;
+            String data;
+            for (i = 0; i < arr.length(); i++) {
+                key = "ID= "+arr.getJSONObject(i).getString("ID");
+                data = arr.getJSONObject(i).getString("imie")+"  "+arr.getJSONObject(i).getString("nazwisko")+"  "+arr.getJSONObject(i).getString("CZAS_START")+"  "+"ID= "+arr.getJSONObject(i).getString("ID");
+                wizytyHashMap.put( key,data );
             }
+
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        return list;
+        return wizytyHashMap;
     }
 }

@@ -22,7 +22,7 @@ import java.net.URL;
 import java.net.URLEncoder;
 
 
-public class bgLogowanie extends AsyncTask <String, Void,String> {
+public class bgPotwierdzWizyte extends AsyncTask <String, Void,String> {
 
     //utworzenie okienka dialogowego
     AlertDialog dialog;
@@ -30,13 +30,13 @@ public class bgLogowanie extends AsyncTask <String, Void,String> {
     //stworzenie pustego stringa wynikowego
     String result = "";
     String tab[]= new String[2];
-    String ajdi;
+
 
     //stworzenie zmiennej typu boolean domyslnie falszywej
-   // public Boolean login = false;
+    // public Boolean login = false;
 
     //???????
-    public bgLogowanie(Context context)
+    public bgPotwierdzWizyte(Context context)
     {
         this.context = context;
     }
@@ -53,36 +53,22 @@ public class bgLogowanie extends AsyncTask <String, Void,String> {
     @Override
     // funkcja po wykonaniu ??????
     protected void onPostExecute(String s) {
-        //s to wynik wykonania doInBackground
 
-        //Log.d("bgLc",s.toString());
-
-        if(s.contains("1"))
-        {
             //tworzenie kolejnej aktywnosci - panelu pacjenta
             Intent intent_name = new Intent();
             intent_name.setClass(context.getApplicationContext(),PanelPacjenta.class);////////
-            intent_name.putExtra("ajdi",ajdi);
             context.startActivity(intent_name);
-            Toast toast= Toast.makeText(context,"Zalogowano",Toast.LENGTH_LONG);
+            Toast toast= Toast.makeText(context,"Wizyta potwierdzona!",Toast.LENGTH_LONG);
             toast.show();
-
-
-
-        }else{
-            dialog.setMessage("Złe hasło lub login");
-            dialog.show();
-        }
-
-
     }
+
     @Override
     //czemu (String... voids)?????
     protected String doInBackground(String... voids) {
 
         // dodawanie elementow do tablicy voids
-        String user = voids[0];
-        String pass = voids[1];
+        String idWizyty = voids[0];
+        String idPacjenta = voids[1];
 
         String connstr = "http://192.168.1.164/login.php";
 
@@ -94,38 +80,16 @@ public class bgLogowanie extends AsyncTask <String, Void,String> {
             http.setDoOutput(true);
             OutputStream ops = http.getOutputStream();
             BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(ops,"UTF-8"));
-            String data = URLEncoder.encode("email","UTF-8")+"="+URLEncoder.encode(user,"UTF-8")
-                    +"&&"+URLEncoder.encode("haslo","UTF-8")+"="+URLEncoder.encode(pass,"UTF-8");
+            String data = URLEncoder.encode("ID","UTF-8")+"="+URLEncoder.encode(idWizyty,"UTF-8")
+                    +"&&"+URLEncoder.encode("ID_PACJENTA","UTF-8")+"="+URLEncoder.encode(idPacjenta,"UTF-8");
             writer.write(data);
-            Log.d("bgLogowanie",data);
+            Log.d("bgPotwierdzenie",data);
             writer.flush(); // wysyła o co było napisane przez buffered writer
             writer.close(); // zamyka buffered writer
             ops.close(); // konczy tworzenie stringa do wyslania?????????
 
-            //tworzenie stringa do odbioru?????????
-            InputStream ips = http.getInputStream();
-            BufferedReader reader = new BufferedReader(new InputStreamReader(ips,"ISO-8859-1"));
-            //tworzenie pustego stringa "line"
-            String line ="";
-            int i=0;
-            //czytanie linii i sprawdzenie czy jest rozna od null
-            while ((line = reader.readLine()) != null)
-            {
-                tab[i]=line;
-                Log.d("bgLb",tab[i]);
-                i++;
-                // do wyniku dopisana zostaje linia
-                result += line;
 
-                Log.d("bgL",line);
-                Log.d( "bgLa", result);
-            }
-            reader.close();
-            ips.close();
             http.disconnect();
-            ajdi=tab[1];
-
-            // return result;//+tab[1];
 
             //zle sformuowany adres url
         } catch (MalformedURLException e) {
@@ -135,8 +99,6 @@ public class bgLogowanie extends AsyncTask <String, Void,String> {
             result = e.getMessage();
         }
 
-       // Log.d( "bgLa", result);
-        //Log.d("bgLd",ajdi);
 
         return result;
 
