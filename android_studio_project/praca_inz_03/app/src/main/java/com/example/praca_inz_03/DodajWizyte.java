@@ -85,7 +85,7 @@ public class DodajWizyte extends AppCompatActivity {
         //Opisy wizyt
         Collection<String> ListaDanychWizyt = hashMapaWizyt.values();
         ArrayList<String> arrayListWizyt = new ArrayList<String>(ListaDanychWizyt);
-
+        //Info do loga
         Log.i("XXXX","XXXX"+ hashMapaWizyt.values()+" "+arrayListWizyt.get(1)+" "+ListaKluczyWizyt.get(1));
 
         ArrayAdapter arrayAdapter = new ArrayAdapter(this,android.R.layout.simple_list_item_1,arrayListWizyt);
