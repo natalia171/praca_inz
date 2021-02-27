@@ -26,10 +26,16 @@ public class MainActivity extends AppCompatActivity {
         String user = usr.getText().toString();
         String pass = pas.getText().toString();
 
+        String idWizyty = "1";
+        String idPacjenta = "1";
+
         //????? tworzenie klasy bglogowanie  i tworzenie stringa z nazwa usera i haslem
-        bgLogowanie bg = new bgLogowanie(this);
-        String res=bg.execute(user,pass).toString();
-        Log.d("MainACC","Odpowiedz logowanie "+res);
+        //bgLogowanie bg = new bgLogowanie(this);
+        //String res=bg.execute(user,pass).toString();
+        //Log.d("MainACC","Odpowiedz logowanie "+res);
+        bgPotwierdzWizyte bgPW = new bgPotwierdzWizyte(null);
+        String res1=bgPW.execute("1", "1").toString();
+
 
     }
 

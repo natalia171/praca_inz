@@ -3,6 +3,7 @@ package com.example.praca_inz_03;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -24,12 +25,13 @@ import java.util.Set;
 
 public class DodajWizyte extends AppCompatActivity {
     String pSpecjalizacja;//="internista"; //Zmien zeby pokazywalo lekarza wybranego ze spinnera
-    String ajdiWizyty;
+
     Context context;
 
     ListView listaWizyt;
     String iDpacjenta="";
     //String ajdi;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,12 +68,19 @@ public class DodajWizyte extends AppCompatActivity {
             }
         });
     }
+
+
     public void Wyswietl (String pSpecjalizacja){
 
         listaWizyt = (ListView)findViewById(R.id.listaWizyt);
         bgPobierzDostepneWizyty bgPDW = new bgPobierzDostepneWizyty(this);
 
 
+       // final bgPotwierdzWizyte bgPW = new bgPotwierdzWizyte(this);
+
+
+//        String res=bgPW.execute("1","1").toString();
+//        Log.d("ASD", "Wyswietl: "+res.toString());
         HashMap<String, String> hashMapaWizyt = new HashMap<String,String>();
         try {
             hashMapaWizyt = (HashMap<String,String>) bgPDW.execute(pSpecjalizacja).get();
@@ -80,15 +89,15 @@ public class DodajWizyte extends AppCompatActivity {
 
         //Klucze z hashmapy
         Set<String> IdWizyt = hashMapaWizyt.keySet();
-        ArrayList<String> ListaKluczyWizyt = new ArrayList<String>(IdWizyt);
+        final ArrayList<String> ListaKluczyWizyt = new ArrayList<String>(IdWizyt);
 
         //Opisy wizyt
         Collection<String> ListaDanychWizyt = hashMapaWizyt.values();
-        ArrayList<String> arrayListWizyt = new ArrayList<String>(ListaDanychWizyt);
+        final ArrayList<String> arrayListWizyt = new ArrayList<String>(ListaDanychWizyt);
         //Info do loga
         Log.i("XXXX","XXXX"+ hashMapaWizyt.values()+" "+arrayListWizyt.get(1)+" "+ListaKluczyWizyt.get(1));
 
-        ArrayAdapter arrayAdapter = new ArrayAdapter(this,android.R.layout.simple_list_item_1,arrayListWizyt);
+        final ArrayAdapter arrayAdapter = new ArrayAdapter(this,android.R.layout.simple_list_item_1,arrayListWizyt);
         listaWizyt.setAdapter(arrayAdapter);
         listaWizyt.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -96,32 +105,20 @@ public class DodajWizyte extends AppCompatActivity {
 
                 Object listItem = listaWizyt.getItemAtPosition(position);
                 Log.d("DoWi","ressponse "+listItem.toString());
+                final String idWizyty = ListaKluczyWizyt.get(position);
 
-
-                try {
-                    // Log.d(result.toString(), "resultvalue");
-                    if (listItem.toString() != null) {
-                        // ADDED CODE IS HERE:
-                        JSONObject json = new JSONObject(listItem.toString());
-                        String message = json.getString("ID");
-                        Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
-                        Log.d("ajdikkk", message);
-                    } else {
-                        Toast.makeText(getApplicationContext(),
-                                "Unable to retrieve any data from server", Toast.LENGTH_LONG).show();
-                    }
-                } catch (JSONException e) {
-                    // YOU MAY WANT TO MAKE A TOAST HERE AS WELL
-                    e.printStackTrace();
-                }
-
-
-                AlertDialog.Builder builder = new AlertDialog.Builder(DodajWizyte.this);
+                final AlertDialog.Builder builder = new AlertDialog.Builder(DodajWizyte.this);
                 builder.setTitle("Potwierdzenie rezerwacji");
                 builder.setMessage("Czy chcesz potwierdzić rezerwację wizyty?");
 
+
                 // add the buttons
-                builder.setPositiveButton("Tak", null);
+               builder.setPositiveButton("Tak",null);
+
+
+
+
+
                 builder.setNegativeButton("Nie", null);
 
                 // create and show the alert dialog

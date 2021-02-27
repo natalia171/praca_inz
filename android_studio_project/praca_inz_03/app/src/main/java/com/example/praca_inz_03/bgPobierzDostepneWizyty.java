@@ -76,7 +76,7 @@ public class bgPobierzDostepneWizyty extends AsyncTask<String, Void, HashMap<Str
 
             InputStream ips = http.getInputStream();
             BufferedReader reader = new BufferedReader(new InputStreamReader(ips, "ISO-8859-1"));
-            Log.d("bPDW","XXX "+data);
+
             String line = "";
             while ((line = reader.readLine()) != null) {
                 result += line;
