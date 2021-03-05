@@ -22,7 +22,6 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
 
-
 public class bgPotwierdzWizyte extends AsyncTask <String, Void,String> {
 
     //utworzenie okienka dialogowego
@@ -30,11 +29,12 @@ public class bgPotwierdzWizyte extends AsyncTask <String, Void,String> {
     Context context;
     //stworzenie pustego stringa wynikowego
     String result = "";
+   // String idPacjenta;
     public bgPotwierdzWizyte(Context context) {
         this.context = context;
     }
 
-/*
+
     @Override
     // funkcja po wykonaniu ??????
     protected void onPostExecute(String s) {
@@ -42,21 +42,23 @@ public class bgPotwierdzWizyte extends AsyncTask <String, Void,String> {
             //tworzenie kolejnej aktywnosci - panelu pacjenta
             Intent intent_name = new Intent();
             intent_name.setClass(context.getApplicationContext(),PanelPacjenta.class);
+            intent_name.putExtra("idPacjenta",s);
+        Log.d("id", "onPostExecute: ID w bg potwierdz wizyte: "+s);
             context.startActivity(intent_name);
             Toast toast= Toast.makeText(context,"Wizyta potwierdzona!",Toast.LENGTH_LONG);
             toast.show();
     }
-*/
+
     @Override
     //czemu (String... voids)?????
     protected String doInBackground(String... voids) {
-        Log.d("bglogowanie", "Uruchomienie ");
+        Log.d("bgPotwierzWizyte", "Uruchomienie ");
 
         // dodawanie elementow do tablicy voids
         String idWizyty = voids[0];
         String idPacjenta = voids[1];
 
-        String connstr = "http://192.168.1.164/potwierdzWizyte.php";
+        String connstr = "http://192.168.0.18/potwierdzWizyte.php";
 
         try {
             URL url = new URL(connstr);
@@ -70,28 +72,39 @@ public class bgPotwierdzWizyte extends AsyncTask <String, Void,String> {
             String data = URLEncoder.encode("ID","UTF-8")+"="+URLEncoder.encode(idWizyty,"UTF-8")
                     +"&&"+URLEncoder.encode("ID_PACJENTA","UTF-8")+"="+URLEncoder.encode(idPacjenta,"UTF-8");
             writer.write(data);
-            Log.d("bglogowanie", "Uruchomienie 1");
+            Log.d("bgPotwierzWizyte", "Uruchomienie 1");
             writer.flush(); // wysyła o co było napisane przez buffered writer
             writer.close(); // zamyka buffered writer
             ops.close(); // konczy tworzenie stringa do wyslania?????????
-            http.disconnect();
 
+
+            InputStream ips = http.getInputStream();
+            BufferedReader reader = new BufferedReader(new InputStreamReader(ips,"ISO-8859-1"));
+            String line ="";
+            while ((line = reader.readLine()) != null)
+            {
+                result += line;
+                Log.d("bgPotwierzWizyte","Odpowiedz "+line);
+            }
+            reader.close();
+            ips.close();
+            http.disconnect();
 
             //zle sformuowany adres url
         } catch (MalformedURLException e) {
             result = e.getMessage();
             //blad odczytu?
-            Log.d("bglogowanie", "Ex1 "+result);
+            Log.d("bgPotwierzWizyte", "Ex1 "+result);
 
         } catch (IOException e) {
             result = e.getMessage();
-            Log.d("bglogowanie", "Ex2 "+result);
+            Log.d("bgPotwierzWizyte", "Ex2 "+result);
 
         }
 
-        Log.d("bglogowanie", "NoEx "+result);
+        Log.d("bgPotwierzWizyte", "NoEx "+result);
 
-        return "OK";
+        return idPacjenta;
 
 
     }

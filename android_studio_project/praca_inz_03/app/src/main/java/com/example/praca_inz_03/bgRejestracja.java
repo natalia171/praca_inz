@@ -48,7 +48,7 @@ public class bgRejestracja extends AsyncTask<String, Void,String> {
         String haslo = voids[6];
         String haslo1= voids[7];
 
-        String connstr = "http://192.168.1.164/rejestracja.php";
+        String connstr = "http://192.168.0.18/rejestracja.php";
 
         try {
             URL url = new URL(connstr);

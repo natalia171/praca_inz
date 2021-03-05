@@ -23,22 +23,33 @@ import java.util.List;
 import java.util.Set;
 
 
+
+
 public class DodajWizyte extends AppCompatActivity {
     String pSpecjalizacja;//="internista"; //Zmien zeby pokazywalo lekarza wybranego ze spinnera
 
     Context context;
 
     ListView listaWizyt;
-    String iDpacjenta="";
-    //String ajdi;
-
+    //String idPacjenta;
+    String ajdi;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        iDpacjenta = getIntent().getStringExtra("ajdi");
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dodaj_wizyte);
+
+        Bundle bundle=getIntent().getExtras();
+       // ajdi = getIntent().getStringExtra("idPacjenta");
+        ajdi=bundle.getString("idPacjenta");
+        Log.d("id", "onCreate dodaj wizyte: ID w dodaj wizyte:  "+ajdi);
+
+//         bgPotwierdzWizyte bgPW = new bgPotwierdzWizyte(this);
+//         String ress=bgPW.execute("1",ajdi).toString();
+//         Log.d("Main","ressponse "+ress);
+
+
 
         final Spinner listaSpecjalizacjiSpinner;
         listaSpecjalizacjiSpinner = (Spinner) findViewById( R.id.listaSpecjalizacji); //podpina spinner do obiektu w widoku
@@ -74,13 +85,10 @@ public class DodajWizyte extends AppCompatActivity {
 
         listaWizyt = (ListView)findViewById(R.id.listaWizyt);
         bgPobierzDostepneWizyty bgPDW = new bgPobierzDostepneWizyty(this);
+//        bgPotwierdzWizyte bgPW = new bgPotwierdzWizyte(this);
+//        String ress=bgPW.execute("1","1").toString();
+//        Log.d("Main","ressponse "+ress);
 
-
-       // final bgPotwierdzWizyte bgPW = new bgPotwierdzWizyte(this);
-
-
-//        String res=bgPW.execute("1","1").toString();
-//        Log.d("ASD", "Wyswietl: "+res.toString());
         HashMap<String, String> hashMapaWizyt = new HashMap<String,String>();
         try {
             hashMapaWizyt = (HashMap<String,String>) bgPDW.execute(pSpecjalizacja).get();
@@ -107,20 +115,25 @@ public class DodajWizyte extends AppCompatActivity {
                 Log.d("DoWi","ressponse "+listItem.toString());
                 final String idWizyty = ListaKluczyWizyt.get(position);
 
-                final AlertDialog.Builder builder = new AlertDialog.Builder(DodajWizyte.this);
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(DodajWizyte.this);
                 builder.setTitle("Potwierdzenie rezerwacji");
                 builder.setMessage("Czy chcesz potwierdzić rezerwację wizyty?");
-
-
                 // add the buttons
-               builder.setPositiveButton("Tak",null);
 
+                builder.setPositiveButton("Tak",
 
-
-
-
+                        new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Log.d("id wizytowe", "id wizyty "+idWizyty);
+                        bgPotwierdzWizyte bgPW = new bgPotwierdzWizyte(DodajWizyte.this);
+                        String ress=bgPW.execute(idWizyty,ajdi).toString();
+                        Log.d("Main","ressponse "+ress);
+                    }
+                }
+                );
                 builder.setNegativeButton("Nie", null);
-
                 // create and show the alert dialog
                 AlertDialog dialog = builder.create();
                 dialog.show();

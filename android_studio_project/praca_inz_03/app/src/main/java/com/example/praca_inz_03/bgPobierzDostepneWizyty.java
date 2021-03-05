@@ -52,7 +52,7 @@ public class bgPobierzDostepneWizyty extends AsyncTask<String, Void, HashMap<Str
     protected HashMap<String,String> doInBackground(String... voids) {
         String specjalizacja = voids[0];
 
-        String connstr = "http://192.168.1.164/pobierzDostepneWizyty.php";
+        String connstr = "http://192.168.0.18/pobierzDostepneWizyty.php";
 
 
 
@@ -102,7 +102,7 @@ public class bgPobierzDostepneWizyty extends AsyncTask<String, Void, HashMap<Str
             String key;
             String data;
             for (i = 0; i < arr.length(); i++) {
-                key = "ID= "+arr.getJSONObject(i).getString("ID");
+                key = arr.getJSONObject(i).getString("ID");
                 data = arr.getJSONObject(i).getString("imie")+"  "+arr.getJSONObject(i).getString("nazwisko")+"  "+arr.getJSONObject(i).getString("CZAS_START")+"  "+"ID= "+arr.getJSONObject(i).getString("ID");
                 wizytyHashMap.put( key,data );
             }

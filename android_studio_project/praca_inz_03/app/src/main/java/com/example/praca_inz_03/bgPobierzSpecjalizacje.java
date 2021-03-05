@@ -35,7 +35,7 @@ public class bgPobierzSpecjalizacje extends AsyncTask<String, Void, List<String>
 
     @Override
     protected List<String> doInBackground(String... voids) {
-        String connstr = "http://192.168.1.164/pobierzSpecjalizacje.php";
+        String connstr = "http://192.168.0.18/pobierzSpecjalizacje.php";
         try {
             URL url = new URL(connstr);
             HttpURLConnection http = (HttpURLConnection) url.openConnection();

@@ -63,6 +63,8 @@ public class bgLogowanie extends AsyncTask <String, Void,String> {
             Intent intent_name = new Intent();
             intent_name.setClass(context.getApplicationContext(),PanelPacjenta.class);////////
             intent_name.putExtra("ajdi",ajdi);
+            Log.d("id", "bg logowanie: ID w bg logowanie"+ajdi);
+
             context.startActivity(intent_name);
             Toast toast= Toast.makeText(context,"Zalogowano",Toast.LENGTH_LONG);
             toast.show();
@@ -84,7 +86,7 @@ public class bgLogowanie extends AsyncTask <String, Void,String> {
         String user = voids[0];
         String pass = voids[1];
 
-        String connstr = "http://192.168.1.164/login.php";
+        String connstr = "http://192.168.0.18/login.php";
 
         try {
             URL url = new URL(connstr);
