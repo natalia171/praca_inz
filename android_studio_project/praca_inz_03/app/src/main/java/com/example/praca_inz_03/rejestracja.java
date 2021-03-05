@@ -9,10 +9,14 @@ import android.widget.EditText;
 public class rejestracja extends AppCompatActivity {
     //stworzenie edittextow
     EditText em, im, nazw, pes, tel, dat, has, has1;
+    String IP;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rejestracja);
+
+        IP = getIntent().getStringExtra("IP");
+
 
         //znalezienie i przypisanie edittextow
         em=(EditText)findViewById(R.id.email);
@@ -38,6 +42,6 @@ public class rejestracja extends AppCompatActivity {
 
         //  ??????? stworzenie klasy rejestracja i wywolanie jej z danymi z edittextow
         bgRejestracja bg = new bgRejestracja(this);
-        bg.execute(email, imie, nazwisko, pesel, telefon, data_urodzenia, haslo, haslo1);
+        bg.execute(email, imie, nazwisko, pesel, telefon, data_urodzenia, haslo, haslo1,IP);
     }
 }

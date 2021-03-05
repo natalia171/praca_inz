@@ -26,6 +26,7 @@ public class bgPobierzDostepneWizyty extends AsyncTask<String, Void, HashMap<Str
 
 
     String result = "";
+    String IP;
     List<String> list;
 
     public bgPobierzDostepneWizyty(Context context) {
@@ -51,8 +52,8 @@ public class bgPobierzDostepneWizyty extends AsyncTask<String, Void, HashMap<Str
     @Override
     protected HashMap<String,String> doInBackground(String... voids) {
         String specjalizacja = voids[0];
-
-        String connstr = "http://192.168.0.18/pobierzDostepneWizyty.php";
+        IP = voids[1];
+        String connstr = "http://"+IP+"/pobierzDostepneWizyty.php";
 
 
 

@@ -12,7 +12,7 @@ import android.widget.Spinner;
 
 public class MainActivity extends AppCompatActivity {
     EditText pas,usr;
-    String IP="192.168.1.164";
+    String IP="192.168.0.18";
     Spinner listaSpecjalizacji;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,13 +26,14 @@ public class MainActivity extends AppCompatActivity {
         String user = usr.getText().toString();
         String pass = pas.getText().toString();
         bgLogowanie bg = new bgLogowanie(this);
-        String res=bg.execute(user,pass).toString();
+        String res=bg.execute(user,pass,IP).toString();
         Log.d("MainACC","Odpowiedz logowanie "+res);
     }
 
     public void rejestracja(View view) {
         //tworzenie nowej aktywnosci  i jej uruchomienie
         Intent intencjaRejestracja = new Intent(this,rejestracja.class);
+        intencjaRejestracja.putExtra("IP",IP);
         startActivity(intencjaRejestracja);
 
     }

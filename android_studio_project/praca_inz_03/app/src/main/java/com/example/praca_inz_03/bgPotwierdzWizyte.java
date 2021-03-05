@@ -27,6 +27,7 @@ public class bgPotwierdzWizyte extends AsyncTask <String, Void,String> {
     //utworzenie okienka dialogowego
     AlertDialog dialog;
     Context context;
+    String IP;
     //stworzenie pustego stringa wynikowego
     String result = "";
    // String idPacjenta;
@@ -43,6 +44,7 @@ public class bgPotwierdzWizyte extends AsyncTask <String, Void,String> {
             Intent intent_name = new Intent();
             intent_name.setClass(context.getApplicationContext(),PanelPacjenta.class);
             intent_name.putExtra("idPacjenta",s);
+            intent_name.putExtra("IP",IP);
         Log.d("id", "onPostExecute: ID w bg potwierdz wizyte: "+s);
             context.startActivity(intent_name);
             Toast toast= Toast.makeText(context,"Wizyta potwierdzona!",Toast.LENGTH_LONG);
@@ -57,8 +59,9 @@ public class bgPotwierdzWizyte extends AsyncTask <String, Void,String> {
         // dodawanie elementow do tablicy voids
         String idWizyty = voids[0];
         String idPacjenta = voids[1];
+        IP = voids[2];
 
-        String connstr = "http://192.168.0.18/potwierdzWizyte.php";
+        String connstr = "http://"+IP+"/potwierdzWizyte.php";
 
         try {
             URL url = new URL(connstr);

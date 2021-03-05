@@ -32,6 +32,7 @@ public class DodajWizyte extends AppCompatActivity {
 
     ListView listaWizyt;
     //String idPacjenta;
+    String IP;
     String ajdi;
 
     @Override
@@ -42,6 +43,7 @@ public class DodajWizyte extends AppCompatActivity {
 
         Bundle bundle=getIntent().getExtras();
         ajdi = getIntent().getStringExtra("idPacjenta");
+        IP = getIntent().getStringExtra("IP");
         //ajdi=bundle.getString("idPacjenta");
         Log.d("id", "onCreate dodaj wizyte: ID w dodaj wizyte:  "+ajdi);
 
@@ -57,7 +59,7 @@ public class DodajWizyte extends AppCompatActivity {
 
         List<String> listaSpecjalizacji= new ArrayList<>(); //tworzy liste
         try {
-            listaSpecjalizacji = bg.execute().get(); //przypisuje do listy wynik z klasy
+            listaSpecjalizacji = bg.execute(IP).get(); //przypisuje do listy wynik z klasy
             Log.d("DoWi","ressponse "+listaSpecjalizacji.get(0));
         }catch (Exception e){}
        ArrayAdapter<String> adp1 = new ArrayAdapter<String>(this,  android.R.layout.simple_list_item_1, listaSpecjalizacji);//tworzy arrayadapter ktory bedzie posiadal wartosci listaspecjalizacji
@@ -91,7 +93,7 @@ public class DodajWizyte extends AppCompatActivity {
 
         HashMap<String, String> hashMapaWizyt = new HashMap<String,String>();
         try {
-            hashMapaWizyt = (HashMap<String,String>) bgPDW.execute(pSpecjalizacja).get();
+            hashMapaWizyt = (HashMap<String,String>) bgPDW.execute(pSpecjalizacja,IP).get();
         }catch (Exception e){}
 
 
@@ -128,7 +130,7 @@ public class DodajWizyte extends AppCompatActivity {
                     public void onClick(DialogInterface dialog, int which) {
                         Log.d("id wizytowe", "id wizyty "+idWizyty);
                         bgPotwierdzWizyte bgPW = new bgPotwierdzWizyte(DodajWizyte.this);
-                        String ress=bgPW.execute(idWizyty,ajdi).toString();
+                        String ress=bgPW.execute(idWizyty,ajdi,IP).toString();
                         Log.d("Main","ressponse "+ress);
                     }
                 }

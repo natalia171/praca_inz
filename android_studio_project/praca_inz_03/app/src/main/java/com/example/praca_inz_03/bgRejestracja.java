@@ -21,6 +21,7 @@ import java.net.URLEncoder;
 public class bgRejestracja extends AsyncTask<String, Void,String> {
     AlertDialog dialog;
     Context context;
+    String IP;
     String result = "";
     public Boolean login = false;
 
@@ -47,8 +48,9 @@ public class bgRejestracja extends AsyncTask<String, Void,String> {
         String data_urodzenia= voids[5];
         String haslo = voids[6];
         String haslo1= voids[7];
+        IP = voids[8];
 
-        String connstr = "http://192.168.0.18/rejestracja.php";
+        String connstr = "http://"+IP+"/rejestracja.php";
 
         try {
             URL url = new URL(connstr);

@@ -19,7 +19,7 @@ import java.util.List;
 public class bgPobierzSpecjalizacje extends AsyncTask<String, Void, List<String>> {
     Context context; // po co jest context??????
 
-
+    String IP;
     String result = "";
     List<String> list;
 
@@ -35,7 +35,8 @@ public class bgPobierzSpecjalizacje extends AsyncTask<String, Void, List<String>
 
     @Override
     protected List<String> doInBackground(String... voids) {
-        String connstr = "http://192.168.0.18/pobierzSpecjalizacje.php";
+        IP = voids[0];
+        String connstr = "http://"+IP+"/pobierzSpecjalizacje.php";
         try {
             URL url = new URL(connstr);
             HttpURLConnection http = (HttpURLConnection) url.openConnection();

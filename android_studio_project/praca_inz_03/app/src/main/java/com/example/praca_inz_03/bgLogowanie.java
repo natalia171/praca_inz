@@ -31,6 +31,7 @@ public class bgLogowanie extends AsyncTask <String, Void,String> {
     String result = "";
     String tab[]= new String[2];
     String ajdi;
+    String IP;
 
     //stworzenie zmiennej typu boolean domyslnie falszywej
    // public Boolean login = false;
@@ -63,6 +64,8 @@ public class bgLogowanie extends AsyncTask <String, Void,String> {
             Intent intent_name = new Intent();
             intent_name.setClass(context.getApplicationContext(),PanelPacjenta.class);////////
             intent_name.putExtra("idPacjenta",ajdi);
+           // Log.d("IP", "onPostExecute: IP"+IP);
+            intent_name.putExtra("IP",IP);
             Log.d("id", "bg logowanie: ID w bg logowanie"+ajdi);
 
             context.startActivity(intent_name);
@@ -85,8 +88,10 @@ public class bgLogowanie extends AsyncTask <String, Void,String> {
         // dodawanie elementow do tablicy voids
         String user = voids[0];
         String pass = voids[1];
+        IP = voids[2];
 
-        String connstr = "http://192.168.0.18/login.php";
+       // String connstr = "http://192.168.0.18/login.php";
+        String connstr = "http://"+IP+"/login.php";
 
         try {
             URL url = new URL(connstr);

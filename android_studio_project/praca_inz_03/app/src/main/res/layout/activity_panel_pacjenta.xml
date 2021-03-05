@@ -14,21 +14,31 @@
         android:orientation="vertical"
         android:layout_margin="10dp"
         android:padding="10dp"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
         android:layout_centerInParent="true"
         >
+
         <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="25sp"
-        android:text="Panel pacjenta"/>
-        <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="DODAJ WIZYTĘ"
-            android:textSize="25sp"
+            android:text="@string/panel_pacjenta"
+            android:textSize="25sp" />
+
+        <Button
             android:id="@+id/dodajWizyte"
-            android:onClick="dodajWizte"
             style="@style/stylbatona"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="dodajWizte"
+            android:text="@string/dodaj_wizyt"
+            android:textSize="25sp" />
+
+        <ListView
+            android:id="@+id/listaWizyt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
             />
         </LinearLayout>
 
