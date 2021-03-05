@@ -14,7 +14,7 @@ String ajdi;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_panel_pacjenta);
-        ajdi = getIntent().getStringExtra("ajdi");
+        ajdi = getIntent().getStringExtra("idPacjenta");
         Log.d("id", "onCreate: ID w panelu pacjenta:  "+ajdi);
 
 

@@ -41,8 +41,8 @@ public class DodajWizyte extends AppCompatActivity {
         setContentView(R.layout.activity_dodaj_wizyte);
 
         Bundle bundle=getIntent().getExtras();
-       // ajdi = getIntent().getStringExtra("idPacjenta");
-        ajdi=bundle.getString("idPacjenta");
+        ajdi = getIntent().getStringExtra("idPacjenta");
+        //ajdi=bundle.getString("idPacjenta");
         Log.d("id", "onCreate dodaj wizyte: ID w dodaj wizyte:  "+ajdi);
 
 //         bgPotwierdzWizyte bgPW = new bgPotwierdzWizyte(this);
