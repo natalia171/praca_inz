@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">praca_inz_03</string>
     <string name="dodaj_wizyt">DODAJ WIZYTĘ</string>
-    <string name="panel_pacjenta">Panel pacjenta</string>
+    <string name="panel_pacjenta">PANEL PACJENTA</string>
+    <string name="Historia_wizyt">Historia wizyt:</string>
+
 </resources>

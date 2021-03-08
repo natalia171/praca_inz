@@ -12,7 +12,7 @@ import android.widget.Spinner;
 
 public class MainActivity extends AppCompatActivity {
     EditText pas,usr;
-    String IP="192.168.0.18";
+    String IP="192.168.1.164";
     Spinner listaSpecjalizacji;
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -23,19 +23,42 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/panel_pacjenta"
+            android:textColor="@android:color/black"
             android:textSize="25sp" />
 
         <Button
             android:id="@+id/dodajWizyte"
             style="@style/stylbatona"
+            android:paddingLeft="30pt"
+            android:paddingRight="30pt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:onClick="dodajWizte"
             android:text="@string/dodaj_wizyt"
+            android:layout_marginTop="12pt"
+            android:textSize="25sp" />
+        <TextView
+            android:layout_marginTop="20pt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/Historia_wizyt"
             android:textSize="25sp" />
 
         <ListView
-            android:id="@+id/listaWizyt"
+            android:id="@+id/historiaWizyt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            />
+        <TextView
+            android:layout_marginTop="20pt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nadchodzące wizyty:"
+            android:textSize="25sp" />
+
+        <ListView
+            android:id="@+id/nadchodząceWizyty"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
