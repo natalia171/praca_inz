@@ -20,30 +20,27 @@ import java.net.URL;
 
 
 import java.net.URLEncoder;
-
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 
 
-public class bgPobierzDostepneWizyty extends AsyncTask<String, Void, HashMap<String,String>> {
+public class bgPobierzNadchodzaceWizyty extends AsyncTask<String, Void, List<String>> {
     Context context; // po co jest context??????
 
     SimpleDateFormat sdf= new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
     String aktualnyCzas = sdf.format(new Date());
-    String result = "";
     String IP;
-
+    String result = "";
 
     List<String> list;
 
-    public bgPobierzDostepneWizyty(Context context) {
-
+    public bgPobierzNadchodzaceWizyty(Context context)
+    {
         this.context = context;
     }
 
@@ -56,19 +53,19 @@ public class bgPobierzDostepneWizyty extends AsyncTask<String, Void, HashMap<Str
 
 
 
+
     @Override
-    protected void onPostExecute(HashMap<String,String> s) { //nic nie robi po wykoananiu
+    protected void onPostExecute(List<String> s) { //nic nie robi po wykoananiu
     }
 
 
 
     @Override
-    protected HashMap<String,String> doInBackground(String... voids) {
-        String specjalizacja = voids[0];
+    protected List<String> doInBackground(String... voids) {
+        String idPacjenta = voids[0];
         IP = voids[1];
-        String connstr = "http://"+IP+"/pobierzDostepneWizyty.php";
 
-
+        String connstr = "http://"+IP+"/nadchodzaceWizyty.php";
 
 
 
@@ -81,23 +78,23 @@ public class bgPobierzDostepneWizyty extends AsyncTask<String, Void, HashMap<Str
 
             OutputStream ops = http.getOutputStream(); //skad pobiera output stream i czym  on jest???????
             BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(ops,"UTF-8"));
-            String data = URLEncoder.encode("specjalizacja","UTF-8")+"="+URLEncoder.encode(specjalizacja,"UTF-8")
+            String data = URLEncoder.encode("ID_PACJENTA","UTF-8")+"="+URLEncoder.encode(idPacjenta,"UTF-8")
                     +"&&"+URLEncoder.encode("CZAS_START","UTF-8")+"="+URLEncoder.encode(aktualnyCzas,"UTF-8");
             writer.write(data);
             writer.flush(); // wysyła o co było napisane przez buffered writer
             Log.d("bPDW","Uruchamia try 2");
             writer.close(); // zamyka buffered writer
             Log.d("bPDW","Uruchamia try 3");
-            ops.close(); // konczy tworzenie stringa do wyslania?????????
+            ops.close();
 
 
 
             InputStream ips = http.getInputStream();
-            BufferedReader reader = new BufferedReader(new InputStreamReader(ips, "ISO-8859-1"));
+            BufferedReader reader = new BufferedReader(new InputStreamReader(ips,"ISO-8859-1"));
 
-            String line = "";
-            while ((line = reader.readLine()) != null) {
-
+            String line ="";
+            while ((line = reader.readLine()) != null)
+            {
                 result += line;
 
             }
@@ -106,28 +103,24 @@ public class bgPobierzDostepneWizyty extends AsyncTask<String, Void, HashMap<Str
             http.disconnect();
 
 
-            Log.d("bPDW","odczyt "+result);
+            //Log.d("MW",result);
         }
-
-        catch (Exception e) {
-            Log.d("bPDW", e.getMessage().toString());
-        }
-
-
+        // po co ten catch???????
+        catch (Exception e ){
+            Log.d("bPS",e.getMessage().toString());
+        };
 
 
-
-        HashMap<String,String> wizytyHashMap= new HashMap<String,String>();
         JSONArray arr = null;
         try {
-            int i;
+
             arr = new JSONArray(result);
-            String key;
-            String data;
-            for (i = 0; i < arr.length(); i++) {
-                key = arr.getJSONObject(i).getString("ID");
-                data = arr.getJSONObject(i).getString("imie")+"  "+arr.getJSONObject(i).getString("nazwisko")+"  "+arr.getJSONObject(i).getString("CZAS_START");
-                wizytyHashMap.put( key,data );
+            list = new ArrayList<String>();
+
+            for(int i = 0; i < arr.length(); i++){
+
+                list.add(arr.getJSONObject(i).getString("imie")+" "+arr.getJSONObject(i).getString("nazwisko")+"  "+arr.getJSONObject(i).getString("CZAS_START"));
+
             }
 
         } catch (JSONException e) {
@@ -135,7 +128,7 @@ public class bgPobierzDostepneWizyty extends AsyncTask<String, Void, HashMap<Str
         }
 
 
-        return wizytyHashMap;
+        return list;
     }
 
 }

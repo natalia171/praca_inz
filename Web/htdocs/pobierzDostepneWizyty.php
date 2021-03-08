@@ -9,9 +9,12 @@ if ($conn->connect_error) {
 
 
 $specjalizacja = mysqli_real_escape_string($conn, $_REQUEST['specjalizacja']);
+$CZAS_START = mysqli_real_escape_string($conn, $_REQUEST['CZAS_START']);
+
 
 $data = array();
-$sql = "select l.imie,l.nazwisko,w.CZAS_START,w.CZAS_STOP, w.ID from wizyty as w INNER JOIN lekarze as l ON w.ID_LEKARZA=l.ID where specjalizacja='$specjalizacja' and ID_PACJENTA='0' order by `CZAS_START` ASC";
+
+$sql = "select l.imie,l.nazwisko,w.CZAS_START,w.CZAS_STOP, w.ID from wizyty as w INNER JOIN lekarze as l ON w.ID_LEKARZA=l.ID where (( specjalizacja='$specjalizacja' and ID_PACJENTA='0' and CZAS_START>'$CZAS_START') ) order by `CZAS_START` ASC";
 $result = $conn->query($sql);
 if ($result->num_rows > 0) {
   // output data of each row
