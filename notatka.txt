@@ -1,1 +1,8 @@
-zatwierdzanie wizyty
+	Panel pacjenta
+-anulowanie wizyty
+
+	Panel pracownika rejestracji
+-dodanie nowych wizyt (wybór ze spinnara nazwiska lekarza)
+-dodanie nowych lekarzy
+-dodanie nowych pacjentow
+	

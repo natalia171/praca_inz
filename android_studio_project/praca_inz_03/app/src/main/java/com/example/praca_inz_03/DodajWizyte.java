@@ -19,6 +19,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Set;
 
@@ -91,21 +92,21 @@ public class DodajWizyte extends AppCompatActivity {
 //        String ress=bgPW.execute("1","1").toString();
 //        Log.d("Main","ressponse "+ress);
 
-        HashMap<String, String> hashMapaWizyt = new HashMap<String,String>();
+        LinkedHashMap<String, String> LinkedhashMapaWizyt = new LinkedHashMap<String,String>();
         try {
-            hashMapaWizyt = (HashMap<String,String>) bgPDW.execute(pSpecjalizacja,IP).get();
+            LinkedhashMapaWizyt = (LinkedHashMap<String,String>) bgPDW.execute(pSpecjalizacja,IP).get();
         }catch (Exception e){}
 
 
         //Klucze z hashmapy
-        Set<String> IdWizyt = hashMapaWizyt.keySet();
+        Set<String> IdWizyt = LinkedhashMapaWizyt.keySet();
         final ArrayList<String> ListaKluczyWizyt = new ArrayList<String>(IdWizyt);
 
         //Opisy wizyt
-        Collection<String> ListaDanychWizyt = hashMapaWizyt.values();
+        Collection<String> ListaDanychWizyt = LinkedhashMapaWizyt.values();
         final ArrayList<String> arrayListWizyt = new ArrayList<String>(ListaDanychWizyt);
         //Info do loga
-        Log.i("XXXX","XXXX"+ hashMapaWizyt.values()+" "+arrayListWizyt.get(1)+" "+ListaKluczyWizyt.get(1));
+        Log.i("XXXX","XXXX"+ LinkedhashMapaWizyt.values()+" "+arrayListWizyt.get(1)+" "+ListaKluczyWizyt.get(1));
 
         final ArrayAdapter arrayAdapter = new ArrayAdapter(this,android.R.layout.simple_list_item_1,arrayListWizyt);
         listaWizyt.setAdapter(arrayAdapter);

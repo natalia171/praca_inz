@@ -27,11 +27,12 @@ import java.util.ArrayList;
 
 import java.util.Date;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
 
 
-public class bgPobierzDostepneWizyty extends AsyncTask<String, Void, HashMap<String,String>> {
+public class bgPobierzDostepneWizyty extends AsyncTask<String, Void, LinkedHashMap<String,String>> {
     Context context; // po co jest context??????
 
     SimpleDateFormat sdf= new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
@@ -57,13 +58,13 @@ public class bgPobierzDostepneWizyty extends AsyncTask<String, Void, HashMap<Str
 
 
     @Override
-    protected void onPostExecute(HashMap<String,String> s) { //nic nie robi po wykoananiu
+    protected void onPostExecute(LinkedHashMap<String,String> s) { //nic nie robi po wykoananiu
     }
 
 
 
     @Override
-    protected HashMap<String,String> doInBackground(String... voids) {
+    protected LinkedHashMap<String,String> doInBackground(String... voids) {
         String specjalizacja = voids[0];
         IP = voids[1];
         String connstr = "http://"+IP+"/pobierzDostepneWizyty.php";
@@ -117,7 +118,7 @@ public class bgPobierzDostepneWizyty extends AsyncTask<String, Void, HashMap<Str
 
 
 
-        HashMap<String,String> wizytyHashMap= new HashMap<String,String>();
+        LinkedHashMap<String,String> LinkedwizytyHashMap= new LinkedHashMap<String,String>();
         JSONArray arr = null;
         try {
             int i;
@@ -127,7 +128,7 @@ public class bgPobierzDostepneWizyty extends AsyncTask<String, Void, HashMap<Str
             for (i = 0; i < arr.length(); i++) {
                 key = arr.getJSONObject(i).getString("ID");
                 data = arr.getJSONObject(i).getString("imie")+"  "+arr.getJSONObject(i).getString("nazwisko")+"  "+arr.getJSONObject(i).getString("CZAS_START");
-                wizytyHashMap.put( key,data );
+                LinkedwizytyHashMap.put( key,data );
             }
 
         } catch (JSONException e) {
@@ -135,7 +136,7 @@ public class bgPobierzDostepneWizyty extends AsyncTask<String, Void, HashMap<Str
         }
 
 
-        return wizytyHashMap;
+        return LinkedwizytyHashMap;
     }
 
 }
