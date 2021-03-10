@@ -25,17 +25,18 @@ import java.util.ArrayList;
 
 
 import java.util.Date;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
 
 
-public class bgPobierzNadchodzaceWizyty extends AsyncTask<String, Void, List<String>> {
+public class bgPobierzNadchodzaceWizyty extends AsyncTask<String, Void, LinkedHashMap<String,String>> {
     Context context; // po co jest context??????
 
     SimpleDateFormat sdf= new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
     String aktualnyCzas = sdf.format(new Date());
-    String IP;
     String result = "";
+    String IP;
 
     List<String> list;
 
@@ -55,16 +56,15 @@ public class bgPobierzNadchodzaceWizyty extends AsyncTask<String, Void, List<Str
 
 
     @Override
-    protected void onPostExecute(List<String> s) { //nic nie robi po wykoananiu
+    protected void onPostExecute(LinkedHashMap<String,String> s) { //nic nie robi po wykoananiu
     }
 
 
 
     @Override
-    protected List<String> doInBackground(String... voids) {
+    protected LinkedHashMap<String,String> doInBackground(String... voids) {
         String idPacjenta = voids[0];
         IP = voids[1];
-
         String connstr = "http://"+IP+"/nadchodzaceWizyty.php";
 
 
@@ -88,15 +88,13 @@ public class bgPobierzNadchodzaceWizyty extends AsyncTask<String, Void, List<Str
             ops.close();
 
 
-
             InputStream ips = http.getInputStream();
             BufferedReader reader = new BufferedReader(new InputStreamReader(ips,"ISO-8859-1"));
-
             String line ="";
             while ((line = reader.readLine()) != null)
             {
                 result += line;
-
+                Log.d("bgPotwierzWizyte","Odpowiedz "+line);
             }
             reader.close();
             ips.close();
@@ -105,22 +103,22 @@ public class bgPobierzNadchodzaceWizyty extends AsyncTask<String, Void, List<Str
 
             //Log.d("MW",result);
         }
-        // po co ten catch???????
+
         catch (Exception e ){
             Log.d("bPS",e.getMessage().toString());
-        };
+        }
 
-
+        LinkedHashMap<String,String> LinkedNastWizytyHashMap= new LinkedHashMap<String,String>();
         JSONArray arr = null;
         try {
-
+            int i;
             arr = new JSONArray(result);
-            list = new ArrayList<String>();
-
-            for(int i = 0; i < arr.length(); i++){
-
-                list.add(arr.getJSONObject(i).getString("imie")+" "+arr.getJSONObject(i).getString("nazwisko")+"  "+arr.getJSONObject(i).getString("CZAS_START"));
-
+            String key;
+            String data;
+            for (i = 0; i < arr.length(); i++){
+                key = arr.getJSONObject(i).getString("ID");
+                data = arr.getJSONObject(i).getString("imie")+"  "+arr.getJSONObject(i).getString("nazwisko")+"  "+arr.getJSONObject(i).getString("CZAS_START");
+                LinkedNastWizytyHashMap.put( key,data );
             }
 
         } catch (JSONException e) {
@@ -128,7 +126,7 @@ public class bgPobierzNadchodzaceWizyty extends AsyncTask<String, Void, List<Str
         }
 
 
-        return list;
+        return LinkedNastWizytyHashMap;
     }
 
 }

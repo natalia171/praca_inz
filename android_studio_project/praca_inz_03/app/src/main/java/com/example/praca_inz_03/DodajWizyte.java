@@ -63,10 +63,10 @@ public class DodajWizyte extends AppCompatActivity {
             listaSpecjalizacji = bg.execute(IP).get(); //przypisuje do listy wynik z klasy
             Log.d("DoWi","ressponse "+listaSpecjalizacji.get(0));
         }catch (Exception e){}
-       ArrayAdapter<String> adp1 = new ArrayAdapter<String>(this,  android.R.layout.simple_list_item_1, listaSpecjalizacji);//tworzy arrayadapter ktory bedzie posiadal wartosci listaspecjalizacji
+        ArrayAdapter<String> adp1 = new ArrayAdapter<String>(this,  android.R.layout.simple_list_item_1, listaSpecjalizacji);//tworzy arrayadapter ktory bedzie posiadal wartosci listaspecjalizacji
         adp1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
-       listaSpecjalizacjiSpinner.setAdapter(adp1);
+        listaSpecjalizacjiSpinner.setAdapter(adp1);
 
 
         listaSpecjalizacjiSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -127,14 +127,14 @@ public class DodajWizyte extends AppCompatActivity {
                 builder.setPositiveButton("Tak",
 
                         new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        Log.d("id wizytowe", "id wizyty "+idWizyty);
-                        bgPotwierdzWizyte bgPW = new bgPotwierdzWizyte(DodajWizyte.this);
-                        String ress=bgPW.execute(idWizyty,ajdi,IP).toString();
-                        Log.d("Main","ressponse "+ress);
-                    }
-                }
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                Log.d("id wizytowe", "id wizyty "+idWizyty);
+                                bgPotwierdzWizyte bgPW = new bgPotwierdzWizyte(DodajWizyte.this);
+                                String ress=bgPW.execute(idWizyty,ajdi,IP).toString();
+                                Log.d("Main","ressponse "+ress);
+                            }
+                        }
                 );
                 builder.setNegativeButton("Nie", null);
                 // create and show the alert dialog

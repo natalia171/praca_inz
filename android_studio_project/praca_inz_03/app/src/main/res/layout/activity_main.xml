@@ -31,20 +31,49 @@
         android:text="test"
         android:inputType="textPassword"
         android:id="@+id/haslo" />
-    <Button
-        android:text="LOGIN"
-        android:onClick="login"
-        android:id="@+id/login"
-        style="@style/stylbatona"
-        />
+
+    <RadioGroup
+        android:id="@+id/radiogroup1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:layout_marginTop="6pt"
+        android:gravity="center"
+        >
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Pacjent"
+            android:textSize="20sp"
+            android:id="@+id/RadioPacjent"/>
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Lekarz"
+            android:layout_marginLeft="20pt"
+            android:textSize="20sp"
+            android:id="@+id/RadioLekarz"/>
+        </RadioGroup>
+
+        <Button
+            android:text="ZALOGUJ"
+            android:onClick="login"
+            android:id="@+id/login"
+            android:layout_marginTop="6pt"
+            style="@style/stylbatona"
+            />
 
         <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="25sp"
-        android:text="Zarejestruj się"
-        android:onClick="rejestracja"
-        android:id="@+id/rejestr"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_marginTop="6pt"
+            android:textSize="23sp"
+            android:text="Zarejestruj się"
+            android:onClick="rejestracja"
+            android:id="@+id/rejestr"
             />
+
     </LinearLayout>
 </RelativeLayout>
