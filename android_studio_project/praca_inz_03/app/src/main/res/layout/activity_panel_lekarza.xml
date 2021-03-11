@@ -35,9 +35,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:onClick="dodajWizte"
-            android:text="@string/dodaj_wizyt"
+            android:text="DODAJ NOWY TERMIN"
             android:layout_marginTop="12pt"
-            android:textSize="25sp" />
+            android:textSize="22sp" />
         <TextView
             android:layout_marginTop="20pt"
             android:layout_width="wrap_content"

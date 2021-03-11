@@ -113,9 +113,9 @@ public class PanelLekarza extends AppCompatActivity {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 Log.d("id terminu", "id terminu "+idTerminu);
-                              //  bgAnulujTermin bgAT = new bgAnulujTermin(PanelLekarza.this);
-                              //  String ress=bgAT.execute(idTerminu,ajdi,IP).toString();
-                              //  Log.d("Main","ressponse "+ress);
+                                bgAnulujTermin bgAT = new bgAnulujTermin(PanelLekarza.this);
+                                String ress=bgAT.execute(idTerminu,ajdi,IP).toString();
+                                Log.d("Main","ressponse "+ress);
                             }
                         }
                 );
@@ -136,11 +136,11 @@ public class PanelLekarza extends AppCompatActivity {
     public void dodajWizte(View view) {
         String idLekarza = ajdi;
         //idPacjenta=getIntent().getStringExtra("s");
-        Intent intencjaDodajWizyte = new Intent(this, DodajWizyte.class);
-        intencjaDodajWizyte.putExtra("idPacjenta", idLekarza);
+        Intent intencjaDodajWizyte = new Intent(this, DodajNowyTerminLekarz.class);
+        intencjaDodajWizyte.putExtra("idLekarza", idLekarza);
         intencjaDodajWizyte.putExtra("IP", IP);
         startActivity(intencjaDodajWizyte);
-        Log.d("id", "dodajWizyte funkcja: ID w panelu pacjenta:  " + idLekarza);
+        Log.d("id", "panel lekarza:  " + idLekarza);
 
 
     }

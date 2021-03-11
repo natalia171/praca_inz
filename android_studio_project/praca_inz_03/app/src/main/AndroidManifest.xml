@@ -11,7 +11,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".PanelLekarza"></activity>
+        <activity android:name=".DodajNowyTerminLekarz"></activity>
+        <activity android:name=".PanelLekarza" />
         <activity android:name=".rejestracjaLekarza" />
         <activity android:name=".DodajWizyte" />
         <activity android:name=".PanelPacjenta" />
