@@ -60,10 +60,10 @@ public class bgLogowanieLekarz extends AsyncTask <String, Void,String> {
 
         if(s.contains("1"))
         {
-            //tworzenie kolejnej aktywnosci - panelu pacjenta
+            //tworzenie kolejnej aktywnosci - panelu lekarza
             Intent intent_name = new Intent();
-            intent_name.setClass(context.getApplicationContext(),PanelPacjenta.class);////////
-            intent_name.putExtra("idPacjenta",ajdi);
+            intent_name.setClass(context.getApplicationContext(),PanelLekarza.class);////////
+            intent_name.putExtra("idLekarza",ajdi);
             // Log.d("IP", "onPostExecute: IP"+IP);
             intent_name.putExtra("IP",IP);
             Log.d("id", "bg logowanie: ID w bg logowanie"+ajdi);

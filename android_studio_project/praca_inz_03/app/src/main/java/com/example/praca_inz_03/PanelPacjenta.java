@@ -49,22 +49,6 @@ public class PanelPacjenta extends AppCompatActivity {
         nadchodzaceWizyty = findViewById(R.id.nadchodząceWizyty);
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         //pobieranie historii wizyt
         bgPobierzHistorieWizyt bgPHW = new bgPobierzHistorieWizyt(this); //tworzy nowa klase
 
