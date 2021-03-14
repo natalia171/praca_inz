@@ -62,6 +62,7 @@
             android:id="@+id/login"
             android:layout_marginTop="6pt"
             style="@style/stylbatona"
+             android:background="@drawable/rounded_corners"
             />
 
         <TextView

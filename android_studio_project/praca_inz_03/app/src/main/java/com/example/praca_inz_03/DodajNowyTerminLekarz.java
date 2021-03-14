@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.text.InputType;
 import android.view.View;
@@ -13,6 +14,7 @@ import android.widget.TimePicker;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Locale;
 
 public class DodajNowyTerminLekarz extends AppCompatActivity {
 
@@ -24,6 +26,14 @@ public class DodajNowyTerminLekarz extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //zmiana jezyka na polski, zeby w kalendarzu byly polskie napisy
+        String languageToLoad  = "pl";
+        Locale locale = new Locale(languageToLoad);
+        Locale.setDefault(locale);
+        Configuration config = new Configuration();
+        config.locale = locale;
+        getBaseContext().getResources().updateConfiguration(config, getBaseContext().getResources().getDisplayMetrics());
+
         setContentView(R.layout.activity_dodaj_nowy_termin_lekarz);
         wizytaStart=findViewById(R.id.date_time_inputStart);
         wizytaKoniec=findViewById(R.id.date_time_inputEnd);
@@ -52,7 +62,9 @@ public class DodajNowyTerminLekarz extends AppCompatActivity {
 
     private void pokazWyborWizytyStart(final EditText date_time_in) {
         final Calendar kalendarz=Calendar.getInstance();
-        DatePickerDialog.OnDateSetListener wyborDaty=new DatePickerDialog.OnDateSetListener() {
+
+
+                DatePickerDialog.OnDateSetListener wyborDaty=new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
                 kalendarz.set(Calendar.YEAR,year);

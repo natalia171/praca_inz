@@ -20,12 +20,6 @@
         >
 
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="PANEL LEKARZA"
-            android:textColor="@android:color/black"
-            android:textSize="30sp" />
 
         <Button
             android:id="@+id/dodajWizyte"
@@ -67,5 +61,10 @@
             />
 
     </LinearLayout>
+    <TextView
+        style="@style/PanelTextview"
+
+        android:text="PANEL LEKARZA"
+        />
 
 </RelativeLayout>

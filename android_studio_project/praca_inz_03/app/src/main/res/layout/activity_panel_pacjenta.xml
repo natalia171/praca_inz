@@ -20,13 +20,6 @@
         >
 
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/panel_pacjenta"
-            android:textColor="@android:color/black"
-            android:textSize="30sp" />
-
         <Button
             android:id="@+id/dodajWizyte"
             style="@style/stylbatona"
@@ -35,8 +28,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:onClick="dodajWizte"
-            android:text="@string/dodaj_wizyt"
-            android:layout_marginTop="12pt"
+            android:text="UMÓW WIZYTĘ"
+            android:layout_marginTop="40pt"
             android:textSize="25sp" />
         <TextView
             android:layout_marginTop="20pt"
@@ -66,5 +59,10 @@
             />
 
         </LinearLayout>
+
+    <TextView
+        style="@style/PanelTextview"
+        android:text="@string/panel_pacjenta"
+         />
 
 </RelativeLayout>

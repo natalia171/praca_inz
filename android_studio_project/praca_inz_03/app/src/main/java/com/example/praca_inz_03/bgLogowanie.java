@@ -4,9 +4,13 @@ package com.example.praca_inz_03;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.BufferedReader;
@@ -47,6 +51,7 @@ public class bgLogowanie extends AsyncTask <String, Void,String> {
     protected void onPreExecute() {
         //stworzenie okienka dialogowego z tytulem "login status"
         dialog = new AlertDialog.Builder(context).create();
+
         dialog.setTitle("Login Status");
     }
 
@@ -69,9 +74,14 @@ public class bgLogowanie extends AsyncTask <String, Void,String> {
             Log.d("id", "bg logowanie: ID w bg logowanie"+ajdi);
 
             context.startActivity(intent_name);
-            Toast toast= Toast.makeText(context,"Zalogowano",Toast.LENGTH_LONG);
-            toast.show();
 
+
+            Toast toast= Toast.makeText(context,"Zalogowano",Toast.LENGTH_LONG);
+            View view = toast.getView();
+            view.getBackground().setColorFilter(Color.parseColor("#C39BD3"), PorterDuff.Mode.SRC_IN);
+            TextView text = view.findViewById(android.R.id.message);
+            text.setTextColor(Color.parseColor("#000000"));
+            toast.show();
 
 
         }else{
