@@ -79,7 +79,6 @@
             android:text="DODAJ"
             android:onClick="DodajBtn"
             style="@style/stylbatona"
-
-            />
+            android:background="@drawable/rounded_corners"            />
     </LinearLayout>
 </RelativeLayout>

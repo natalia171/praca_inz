@@ -77,9 +77,10 @@
             android:layout_height="wrap_content"
             android:textSize="25sp"
             android:text="DODAJ"
+            android:layout_marginTop="15pt"
             android:onClick="DodajBtn"
             style="@style/stylbatona"
-
+            android:background="@drawable/rounded_corners"
             />
     </LinearLayout>
 </RelativeLayout>

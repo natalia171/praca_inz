@@ -30,6 +30,7 @@
             android:layout_height="wrap_content"
             android:onClick="dodajWizte"
             android:text="DODAJ NOWY TERMIN"
+            android:background="@drawable/rounded_corners"
             android:layout_marginTop="12pt"
             android:textSize="22sp" />
         <TextView

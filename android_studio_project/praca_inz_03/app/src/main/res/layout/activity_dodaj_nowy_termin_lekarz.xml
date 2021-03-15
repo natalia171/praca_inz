@@ -55,7 +55,10 @@
             android:paddingRight="50pt"
             android:text="DODAJ"
             android:onClick="DodajTermin"
-            style="@style/stylbatona"/>
+            style="@style/stylbatona"
+            android:background="@drawable/rounded_corners"
+
+            />
 
     </LinearLayout>
 
