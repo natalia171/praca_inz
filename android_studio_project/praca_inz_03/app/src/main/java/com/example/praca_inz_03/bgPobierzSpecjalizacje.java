@@ -71,6 +71,7 @@ public class bgPobierzSpecjalizacje extends AsyncTask<String, Void, List<String>
             list = new ArrayList<String>();
             for(int i = 0; i < arr.length(); i++){
                 list.add(arr.getJSONObject(i).getString("specjalizacja"));
+
             }
 
         } catch (JSONException e) {

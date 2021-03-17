@@ -87,3 +87,8 @@ INSERT INTO `lekarze` (`ID`, `specjalizacja`, `imie`, `nazwisko`) VALUES
 (7, 'neurolog', 'Jolanta', 'Krzyszczak'),
 (8, 'chirurg', 'Szymon', 'Grudziński'),
 (9, 'psychiatra', 'Katarzyna', 'Michalczewska');
+
+
+tabela opinie
+
+CREATE TABLE `praca_inz`.`opinie` ( `ID_OPINII` INT(11) NOT NULL AUTO_INCREMENT , `ID_LEKARZA` INT(11) NOT NULL , `ID_PACJENTA` INT(11) NOT NULL , `TRESC_OPINII` VARCHAR(1000) NOT NULL , `OCENA` VARCHAR(3) NOT NULL , PRIMARY KEY (`ID_OPINII`)) ENGINE = InnoDB;

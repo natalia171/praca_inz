@@ -155,4 +155,11 @@ public class PanelPacjenta extends AppCompatActivity {
     }
 
 
+    public void opinie(View view) {
+        String idPacjenta = ajdi;
+        Intent intencjaOpinie = new Intent(this, Opinie.class);
+        intencjaOpinie.putExtra("idPacjenta", idPacjenta);
+        intencjaOpinie.putExtra("IP", IP);
+        startActivity(intencjaOpinie);
+    }
 }
