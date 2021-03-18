@@ -62,6 +62,9 @@
 
     </LinearLayout>
 
-
+    <TextView
+        style="@style/PanelTextview"
+        android:text="DODAJ TERMIN"
+        />
 
 </RelativeLayout>

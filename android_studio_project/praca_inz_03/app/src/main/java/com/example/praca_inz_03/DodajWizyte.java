@@ -63,8 +63,8 @@ public class DodajWizyte extends AppCompatActivity {
             listaSpecjalizacji = bg.execute(IP).get(); //przypisuje do listy wynik z klasy
             Log.d("DoWi","ressponse "+listaSpecjalizacji.get(0));
         }catch (Exception e){}
-        ArrayAdapter<String> adp1 = new ArrayAdapter<String>(this,  android.R.layout.simple_list_item_1, listaSpecjalizacji);//tworzy arrayadapter ktory bedzie posiadal wartosci listaspecjalizacji
-        adp1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        ArrayAdapter<String> adp1 = new ArrayAdapter<String>(this,  R.layout.spinner_close, listaSpecjalizacji);//tworzy arrayadapter ktory bedzie posiadal wartosci listaspecjalizacji
+        adp1.setDropDownViewResource(R.layout.spinner_open);
 
         listaSpecjalizacjiSpinner.setAdapter(adp1);
 

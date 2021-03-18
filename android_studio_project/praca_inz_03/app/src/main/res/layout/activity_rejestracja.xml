@@ -81,4 +81,8 @@
             style="@style/stylbatona"
             android:background="@drawable/rounded_corners"            />
     </LinearLayout>
+    <TextView
+        style="@style/PanelTextview"
+        android:text="REJESTRACJA"
+        />
 </RelativeLayout>
