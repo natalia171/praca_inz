@@ -102,7 +102,7 @@ public class bgPobierzDaneLekarza extends AsyncTask <String, Void,String> {
             arr = new JSONArray(result);
             String data;
             for (i = 0; i < arr.length(); i++) {;
-                data = arr.getJSONObject(i).getString("specjalizacja")+": "+arr.getJSONObject(i).getString("imie")+" "+arr.getJSONObject(i).getString("nazwisko");
+                data = arr.getJSONObject(i).getString("imie")+" "+arr.getJSONObject(i).getString("nazwisko")+" - "+arr.getJSONObject(i).getString("specjalizacja");
                 result=data;
             }
 

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Opinie"
+    tools:context=".PanelPacjenta"
     style="@style/stylTLA"
     >
 
@@ -20,17 +20,22 @@
         >
 
 
-        <Spinner
-            android:id="@+id/listaSpecjalizacji2"
-            android:layout_marginTop="100dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+        <TextView
+            android:layout_marginTop="30pt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Opinie Twoich pacjentów:"
+            android:textSize="25sp" />
+
         <ListView
-            android:id="@+id/listaNazwisk"
+            android:id="@+id/listaOpinii"
+            android:layout_width="wrap_content"
+            android:layout_height="200pt"
             android:layout_marginTop="30dp"
-            android:layout_width="match_parent"
-            android:layout_height="450dp"/>
+            />
+
     </LinearLayout>
+
     <TextView
         style="@style/PanelTextview"
         android:text="OPINIE"

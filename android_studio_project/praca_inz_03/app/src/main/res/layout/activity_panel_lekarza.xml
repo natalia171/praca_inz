@@ -31,10 +31,10 @@
             android:onClick="dodajWizte"
             android:text="DODAJ NOWY TERMIN"
             android:background="@drawable/rounded_corners"
-            android:layout_marginTop="12pt"
-            android:textSize="22sp" />
+            android:layout_marginTop="40pt"
+            android:textSize="20sp" />
         <TextView
-            android:layout_marginTop="20pt"
+            android:layout_marginTop="10pt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Twoje wolne terminy:"
@@ -45,10 +45,10 @@
             android:layout_width="wrap_content"
             android:textAlignment="center"
             android:layout_height="60pt"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="10dp"
             />
         <TextView
-            android:layout_marginTop="15pt"
+            android:layout_marginTop="10pt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Nadchodzące wizyty:"
@@ -58,14 +58,30 @@
             android:id="@+id/nadchodząceWizyty"
             android:layout_width="wrap_content"
             android:layout_height="60pt"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="10dp"
             />
+            <Button
+            android:id="@+id/podgladOpinii"
+            style="@style/stylbatona"
+            android:paddingLeft="30pt"
+            android:paddingRight="30pt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="podgladOpinii"
+            android:text="OPINIE PACJENTÓW"
+            android:background="@drawable/rounded_corners"
+            android:layout_marginTop="10pt"
+            android:textSize="20sp" />
+
 
     </LinearLayout>
     <TextView
         style="@style/PanelTextview"
-
         android:text="PANEL LEKARZA"
+        />
+    <TextView
+        style="@style/WYLOGUJgora"
+        android:onClick="wyloguj"
         />
 
 </RelativeLayout>

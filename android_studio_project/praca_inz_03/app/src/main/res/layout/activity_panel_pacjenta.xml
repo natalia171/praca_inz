@@ -79,5 +79,9 @@
         style="@style/PanelTextview"
         android:text="@string/panel_pacjenta"
          />
+    <TextView
+        style="@style/WYLOGUJgora"
+        android:onClick="wyloguj"
+        />
 
 </RelativeLayout>

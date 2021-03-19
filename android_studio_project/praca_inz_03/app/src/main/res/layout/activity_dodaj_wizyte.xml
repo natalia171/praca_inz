@@ -24,7 +24,7 @@
         android:id="@+id/listaWizyt"
         android:layout_marginTop="30dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="350dp"
         />
 
 
@@ -34,6 +34,9 @@
         style="@style/PanelTextview"
         android:text="DODAJ WIZYTE"
         />
-
+    <TextView
+        style="@style/WYLOGUJ"
+        android:onClick="wyloguj"
+        />
 
 </RelativeLayout>

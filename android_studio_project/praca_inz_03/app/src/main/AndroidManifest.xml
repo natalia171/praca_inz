@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.praca_inz_03" >
+    package="com.example.praca_inz_03">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -10,17 +10,36 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme" >
-        <activity android:name=".ProfilLekarza" >
-        </activity>
-        <activity android:name=".Opinie" />
-        <activity android:name=".DodajNowyTerminLekarz" />
-        <activity android:name=".PanelLekarza" />
-        <activity android:name=".rejestracjaLekarza" />
-        <activity android:name=".DodajWizyte" />
-        <activity android:name=".PanelPacjenta" />
-        <activity android:name=".rejestracja" />
-        <activity android:name=".MainActivity" >
+        android:theme="@style/AppTheme"
+        android:windowSoftInputMode="adjustPan">
+        <activity android:name=".OpiniePanelLekarza"></activity>
+        <activity
+            android:name=".ProfilLekarza"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".Opinie"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".DodajNowyTerminLekarz"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".PanelLekarza"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".rejestracjaLekarza"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".DodajWizyte"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".PanelPacjenta"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".rejestracja"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".MainActivity"
+            android:windowSoftInputMode="adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

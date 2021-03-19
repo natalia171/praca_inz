@@ -146,4 +146,16 @@ public class PanelLekarza extends AppCompatActivity {
     }
 
 
+    public void podgladOpinii(View view) {
+        String idLekarza = ajdi;
+        Intent intencjaOpinie = new Intent(this, OpiniePanelLekarza.class);
+        intencjaOpinie.putExtra("idLekarza", idLekarza);
+        intencjaOpinie.putExtra("IP", IP);
+        startActivity(intencjaOpinie);
+    }
+
+    public void wyloguj(View view) {
+        Intent wylogowanie = new Intent(this,MainActivity.class);
+        startActivity(wylogowanie);
+    }
 }

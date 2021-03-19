@@ -4,6 +4,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -147,4 +148,8 @@ public class DodajWizyte extends AppCompatActivity {
     }
 
 
+    public void wyloguj(View view) {
+        Intent wylogowanie = new Intent(this,MainActivity.class);
+        startActivity(wylogowanie);
+    }
 }

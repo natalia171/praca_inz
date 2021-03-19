@@ -2,6 +2,7 @@ package com.example.praca_inz_03;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -75,4 +76,8 @@ public class ProfilLekarza extends AppCompatActivity {
     }
 
 
+    public void wyloguj(View view) {
+        Intent wylogowanie = new Intent(this,MainActivity.class);
+        startActivity(wylogowanie);
+    }
 }

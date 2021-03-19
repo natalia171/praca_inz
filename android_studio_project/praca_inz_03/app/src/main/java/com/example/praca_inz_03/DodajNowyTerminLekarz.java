@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.text.InputType;
@@ -126,5 +127,10 @@ public class DodajNowyTerminLekarz extends AppCompatActivity {
         String ress=bgDNT.execute(idLekarza,IP,poczatekWizyty,koniecWizyty).toString();
 
 
+    }
+
+    public void wyloguj(View view) {
+        Intent wylogowanie = new Intent(this,MainActivity.class);
+        startActivity(wylogowanie);
     }
 }

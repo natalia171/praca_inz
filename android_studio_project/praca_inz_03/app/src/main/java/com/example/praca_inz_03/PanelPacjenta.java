@@ -162,4 +162,9 @@ public class PanelPacjenta extends AppCompatActivity {
         intencjaOpinie.putExtra("IP", IP);
         startActivity(intencjaOpinie);
     }
+
+    public void wyloguj(View view) {
+        Intent wylogowanie = new Intent(this,MainActivity.class);
+        startActivity(wylogowanie);
+    }
 }
