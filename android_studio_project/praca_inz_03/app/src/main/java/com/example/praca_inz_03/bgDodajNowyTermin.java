@@ -7,6 +7,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.text.format.DateUtils;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -64,16 +65,19 @@ public class bgDodajNowyTermin extends AsyncTask <String, Void,String> {
         String koniecWizyty = voids[3];
 
         String connstr = "http://"+IP+"/dodajTerminLekarz.php";
-
+        URL url = null;
+        HttpURLConnection http=null;
         try {
-            URL url = new URL(connstr);
-            HttpURLConnection http = (HttpURLConnection) url.openConnection();
+            url = new URL(connstr);
+            http = (HttpURLConnection) url.openConnection();
             http.setRequestMethod("POST");
             http.setDoInput(true);
             http.setDoOutput(true);
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             Date czas_od =null;
             Date czas_do = null;
+            Date czas_od_mod =null;
+            Date czas_do_mod = null;
             try {
                 czas_od = sdf.parse(poczatekWizyty);
                 czas_do = sdf.parse(koniecWizyty);
@@ -81,44 +85,48 @@ public class bgDodajNowyTermin extends AsyncTask <String, Void,String> {
                 Log.v("Exception", ex.getLocalizedMessage());
             }
 
-            int iloscKwadransow = (int) ((czas_do.getTime() - czas_od.getTime()) /(1000*60*15));
+            Log.d("15min", "Czas od "+poczatekWizyty+" sparsowana "+czas_od.toString());
             int kwadrans=1000*60*15;
+            int iloscKwadransow = (int) ((czas_do.getTime() - czas_od.getTime()) /(kwadrans));
+
+            Log.d("15min", "Ilosc kwadransow "+iloscKwadransow);
             String s_data_od= null;
             String s_data_do= null;
+            OutputStream ops = null;
+            BufferedWriter writer = null;
+            InputStream ips = null;
+            BufferedReader reader = null;
+            ops = http.getOutputStream();
+            writer = new BufferedWriter(new OutputStreamWriter(ops, "UTF-8"));
+
             for (int i=0;i<=iloscKwadransow;i++) {
-
-                s_data_od= String.valueOf(czas_do.getTime()+(i*kwadrans));
-                s_data_do= String.valueOf(czas_od.getTime()+(i*kwadrans));
-//                s_data_do=czas_od+(i*kwadrans);
-
-
-                OutputStream ops = http.getOutputStream();
-                BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(ops, "UTF-8"));
-
+                Log.d("bgPotwierzWizyte", "i= "+i);
+                czas_od_mod = new Date(czas_od.getTime()+i*kwadrans);
+                czas_do_mod = new Date(czas_od.getTime()+(i+1)*kwadrans);
+                s_data_od=sdf.format(czas_od_mod);
+                s_data_do=sdf.format(czas_do_mod);
                 String data = URLEncoder.encode("CZAS_START", "UTF-8") + "=" + URLEncoder.encode(s_data_od, "UTF-8")
                         + "&&" + URLEncoder.encode("CZAS_STOP", "UTF-8") + "=" + URLEncoder.encode(s_data_do, "UTF-8")
                         + "&&" + URLEncoder.encode("ID_LEKARZA", "UTF-8") + "=" + URLEncoder.encode(idLekarza, "UTF-8");
-                Log.d("15min", data);
+
+                Log.d("bgPotwierzWizyte", data);
                 writer.write(data);
                 writer.flush(); // wysyła o co było napisane przez buffered writer
-                writer.close(); // zamyka buffered writer
-                ops.close(); // konczy tworzenie stringa do wyslania?????????
-
-
-                InputStream ips = http.getInputStream();
-                BufferedReader reader = new BufferedReader(new InputStreamReader(ips, "ISO-8859-1"));
+                ips = http.getInputStream();
+                ops.flush();
+                reader = new BufferedReader(new InputStreamReader(ips, "ISO-8859-1"));
                 String line = "";
                 while ((line = reader.readLine()) != null) {
                     result += line;
-                    Log.d("bgPotwierzWizyte", "Odpowiedz " + line);
+                    Log.d("bgPotwierzWizyte", "Odpowiedz " +i+" "+line);
                 }
-                reader.close();
-                ips.close();
-                http.disconnect();
             }
-//koniec petli po kwadransach
+            http.disconnect();
+            writer.close(); // zamyka buffered writer
+            ops.close(); // konczy tworzenie stringa do wyslania?????????
+            reader.close();
+            ips.close();
 
-            //zle sformuowany adres url
         } catch (MalformedURLException e) {
             result = e.getMessage();
             //blad odczytu?
@@ -129,11 +137,7 @@ public class bgDodajNowyTermin extends AsyncTask <String, Void,String> {
             Log.d("bgPotwierzWizyte", "Ex2 "+result);
 
         }
-
         Log.d("bgPotwierzWizyte", "NoEx "+result);
-
         return idLekarza;
-
-
     }
 }
