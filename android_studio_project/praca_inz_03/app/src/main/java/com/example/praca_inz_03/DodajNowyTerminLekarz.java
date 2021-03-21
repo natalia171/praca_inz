@@ -6,15 +6,21 @@ import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.text.InputType;
+import android.util.Log;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Locale;
 
 public class DodajNowyTerminLekarz extends AppCompatActivity {
@@ -123,8 +129,26 @@ public class DodajNowyTerminLekarz extends AppCompatActivity {
     public void DodajTermin(View view) {
         String poczatekWizyty = wizytaStart.getText().toString();
         String koniecWizyty = wizytaKoniec.getText().toString();
-        bgDodajNowyTermin bgDNT = new bgDodajNowyTermin(DodajNowyTerminLekarz.this);
-        String ress=bgDNT.execute(idLekarza,IP,poczatekWizyty,koniecWizyty).toString();
+
+        try {
+            Log.d("DodajNowyTerminLekarz", "poczatek: " + poczatekWizyty + "koniec" + koniecWizyty);
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:00");
+            Date poczatek = sdf.parse(poczatekWizyty);
+            Date koniec = sdf.parse(koniecWizyty);
+            Log.d("DodajNowyTerminLekarz", "poczatek: " + poczatek + "koniec" + koniec);
+            if(koniec.getTime() > poczatek.getTime()) {
+                bgDodajNowyTermin bgDNT = new bgDodajNowyTermin(DodajNowyTerminLekarz.this);
+                String ress = bgDNT.execute(idLekarza, IP, poczatekWizyty, koniecWizyty).toString();
+            }else
+            {
+                Toast toast= Toast.makeText(DodajNowyTerminLekarz.this,"Czas końcowy musi być większy od początkowego!",Toast.LENGTH_LONG);
+                toast.show();
+            }
+        }
+        catch (Exception ex){
+
+        }
+
 
 
     }
