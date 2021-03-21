@@ -99,19 +99,22 @@ public class bgDodajNowyTermin extends AsyncTask <String, Void,String> {
             ops = http.getOutputStream();
             writer = new BufferedWriter(new OutputStreamWriter(ops, "UTF-8"));
 
-            for (int i=0;i<=iloscKwadransow;i++) {
+//            for (int i=0;i<iloscKwadransow;i++) {
+                int i=0;
                 Log.d("bgPotwierzWizyte", "i= "+i);
                 czas_od_mod = new Date(czas_od.getTime()+i*kwadrans);
                 czas_do_mod = new Date(czas_od.getTime()+(i+1)*kwadrans);
                 s_data_od=sdf.format(czas_od_mod);
                 s_data_do=sdf.format(czas_do_mod);
+                Log.d("bgPotwierzWizyte", s_data_od);
+                Log.d("bgPotwierzWizyte", s_data_do);
                 String data = URLEncoder.encode("CZAS_START", "UTF-8") + "=" + URLEncoder.encode(s_data_od, "UTF-8")
                         + "&&" + URLEncoder.encode("CZAS_STOP", "UTF-8") + "=" + URLEncoder.encode(s_data_do, "UTF-8")
                         + "&&" + URLEncoder.encode("ID_LEKARZA", "UTF-8") + "=" + URLEncoder.encode(idLekarza, "UTF-8");
 
-                Log.d("bgPotwierzWizyte", data);
+
                 writer.write(data);
-                writer.flush(); // wysyła o co było napisane przez buffered writer
+                Log.d("bgPotwierzWizyte", data);
                 ips = http.getInputStream();
                 ops.flush();
                 reader = new BufferedReader(new InputStreamReader(ips, "ISO-8859-1"));
@@ -120,12 +123,15 @@ public class bgDodajNowyTermin extends AsyncTask <String, Void,String> {
                     result += line;
                     Log.d("bgPotwierzWizyte", "Odpowiedz " +i+" "+line);
                 }
-            }
-            http.disconnect();
-            writer.close(); // zamyka buffered writer
-            ops.close(); // konczy tworzenie stringa do wyslania?????????
-            reader.close();
-            ips.close();
+                writer.flush(); // wysyła o co było napisane przez buffered writer
+                Log.d("bgPotwierzWizyte", "XXXX ");
+                http.disconnect();
+                writer.close(); // zamyka buffered writer
+                ops.close(); // konczy tworzenie stringa do wyslania?????????
+                reader.close();
+                ips.close();
+
+//            }
 
         } catch (MalformedURLException e) {
             result = e.getMessage();
