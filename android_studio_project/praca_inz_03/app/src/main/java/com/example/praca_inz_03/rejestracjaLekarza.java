@@ -6,14 +6,14 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 
-public class rejestracja extends AppCompatActivity {
+public class rejestracjaLekarza extends AppCompatActivity {
     //stworzenie edittextow
-    EditText em, im, nazw, pes, tel, dat, has, has1;
+    EditText em, im, nazw, pes, tel, spec, has, has1;
     String IP;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_rejestracja);
+        setContentView(R.layout.activity_rejestracja_lekarza);
 
         IP = getIntent().getStringExtra("IP");
 
@@ -24,7 +24,7 @@ public class rejestracja extends AppCompatActivity {
         nazw=(EditText)findViewById(R.id.nazwisko);
         pes =(EditText)findViewById(R.id.pesel);
         tel=(EditText)findViewById(R.id.telefon);
-        dat=(EditText)findViewById(R.id.data_urodzenia);
+        spec=(EditText)findViewById(R.id.specjalizacja);
         has=(EditText)findViewById(R.id.haslo);
         has1=(EditText)findViewById(R.id.haslo1);
     }
@@ -36,12 +36,12 @@ public class rejestracja extends AppCompatActivity {
         String nazwisko = nazw.getText().toString();
         String pesel = pes.getText().toString();
         String telefon = tel.getText().toString();
-        String data_urodzenia = dat.getText().toString();
+        String specjalizacja = spec.getText().toString();
         String haslo = has.getText().toString();
         String haslo1 = has1.getText().toString();
 
         //  ??????? stworzenie klasy rejestracja i wywolanie jej z danymi z edittextow
-        bgRejestracja bg = new bgRejestracja(this);
-        bg.execute(email, imie, nazwisko, pesel, telefon, data_urodzenia, haslo, haslo1,IP);
+        bgRejestracjaLekarza bgRL = new bgRejestracjaLekarza(this);
+        bgRL.execute(email, imie, nazwisko, pesel, telefon, specjalizacja, haslo, haslo1,IP);
     }
 }

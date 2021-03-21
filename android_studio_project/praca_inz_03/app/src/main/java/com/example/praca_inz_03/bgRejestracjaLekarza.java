@@ -18,24 +18,24 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
 
-public class bgRejestracja extends AsyncTask<String, Void,String> {
+public class bgRejestracjaLekarza extends AsyncTask<String, Void,String> {
     AlertDialog dialog;
     Context context;
     String IP;
     String result = "";
     public Boolean login = false;
 
-    public bgRejestracja(Context context)
+    public bgRejestracjaLekarza(Context context)
     {
         this.context = context;
     }
     //Po wykonaniu (skad wie ze wykonal - wcisniecie buttona???) wraca do mainactivity
     @Override
     protected void onPostExecute(String s) {
-            Intent intent_name = new Intent();
-            // po co jest context i czym on jest???????
-            intent_name.setClass(context.getApplicationContext(),MainActivity.class);
-            context.startActivity(intent_name);
+        Intent intent_name = new Intent();
+        // po co jest context i czym on jest???????
+        intent_name.setClass(context.getApplicationContext(),MainActivity.class);
+        context.startActivity(intent_name);
     }
     @Override
     protected String doInBackground(String... voids) {
@@ -45,12 +45,12 @@ public class bgRejestracja extends AsyncTask<String, Void,String> {
         String nazwisko = voids[2];
         String pesel= voids[3];
         String telefon = voids[4];
-        String data_urodzenia= voids[5];
+        String specjalizacja= voids[5];
         String haslo = voids[6];
         String haslo1= voids[7];
         IP = voids[8];
 
-        String connstr = "http://"+IP+"/rejestracja.php";
+        String connstr = "http://"+IP+"/rejestracjaLekarza.php";
 
         try {
             URL url = new URL(connstr);
@@ -61,14 +61,14 @@ public class bgRejestracja extends AsyncTask<String, Void,String> {
 
             OutputStream ops = http.getOutputStream();
             BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(ops,"UTF-8"));
-            String data = URLEncoder.encode("email","UTF-8")+"="+URLEncoder.encode(email,"UTF-8")
+            String data = URLEncoder.encode("specjalizacja","UTF-8")+"="+URLEncoder.encode(specjalizacja,"UTF-8")
                     +"&&"+URLEncoder.encode("imie","UTF-8")+"="+URLEncoder.encode(imie,"UTF-8")
                     +"&&"+URLEncoder.encode("nazwisko","UTF-8")+"="+URLEncoder.encode(nazwisko,"UTF-8")
-                    +"&&"+URLEncoder.encode("pesel","UTF-8")+"="+URLEncoder.encode(pesel,"UTF-8")
-                    +"&&"+URLEncoder.encode("telefon","UTF-8")+"="+URLEncoder.encode(telefon,"UTF-8")
-                    +"&&"+URLEncoder.encode("data_urodzenia","UTF-8")+"="+URLEncoder.encode(data_urodzenia,"UTF-8")
+                    +"&&"+URLEncoder.encode("email","UTF-8")+"="+URLEncoder.encode(email,"UTF-8")
                     +"&&"+URLEncoder.encode("haslo","UTF-8")+"="+URLEncoder.encode(haslo,"UTF-8")
-                    +"&&"+URLEncoder.encode("haslo1","UTF-8")+"="+URLEncoder.encode(haslo1,"UTF-8");
+                    +"&&"+URLEncoder.encode("haslo1","UTF-8")+"="+URLEncoder.encode(haslo1,"UTF-8")
+                    +"&&"+URLEncoder.encode("pesel","UTF-8")+"="+URLEncoder.encode(pesel,"UTF-8")
+                    +"&&"+URLEncoder.encode("telefon","UTF-8")+"="+URLEncoder.encode(telefon,"UTF-8");
             writer.write(data);
             Log.d("MW",data);
             writer.flush();

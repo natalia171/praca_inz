@@ -22,7 +22,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
 
-public class bgPotwierdzWizyte extends AsyncTask <String, Void,String> {
+public class bgAnulujTermin extends AsyncTask <String, Void,String> {
 
     //utworzenie okienka dialogowego
     AlertDialog dialog;
@@ -30,8 +30,7 @@ public class bgPotwierdzWizyte extends AsyncTask <String, Void,String> {
     String IP;
     //stworzenie pustego stringa wynikowego
     String result = "";
-   // String idPacjenta;
-    public bgPotwierdzWizyte(Context context) {
+    public bgAnulujTermin(Context context) {
         this.context = context;
     }
 
@@ -40,28 +39,28 @@ public class bgPotwierdzWizyte extends AsyncTask <String, Void,String> {
     // funkcja po wykonaniu ??????
     protected void onPostExecute(String s) {
 
-            //tworzenie kolejnej aktywnosci - panelu pacjenta
-            Intent intent_name = new Intent();
-            intent_name.setClass(context.getApplicationContext(),PanelPacjenta.class);
-            intent_name.putExtra("idPacjenta",s);
-            intent_name.putExtra("IP",IP);
-        Log.d("id", "onPostExecute: ID w bg potwierdz wizyte: "+s);
-            context.startActivity(intent_name);
-            Toast toast= Toast.makeText(context,"Wizyta potwierdzona!",Toast.LENGTH_LONG);
-            toast.show();
+        //tworzenie kolejnej aktywnosci - panelu pacjenta
+        Intent intent_name = new Intent();
+        intent_name.setClass(context.getApplicationContext(),PanelLekarza.class);
+        intent_name.putExtra("idLekarza",s);
+        intent_name.putExtra("IP",IP);
+        Log.d("id", "onPostExecute: ID w bg anuluj termin: "+s);
+        context.startActivity(intent_name);
+        Toast toast= Toast.makeText(context,"Termin usunięty!",Toast.LENGTH_LONG);
+        toast.show();
     }
 
     @Override
     //czemu (String... voids)?????
     protected String doInBackground(String... voids) {
-        Log.d("bgPotwierzWizyte", "Uruchomienie ");
+        Log.d("bgAnulujTermin", "Uruchomienie ");
 
         // dodawanie elementow do tablicy voids
         String idWizyty = voids[0];
-        String idPacjenta = voids[1];
+        String idLekarza = voids[1];
         IP = voids[2];
 
-        String connstr = "http://"+IP+"/potwierdzWizyte.php";
+        String connstr = "http://"+IP+"/usunTerminLekarz.php";
 
         try {
             URL url = new URL(connstr);
@@ -73,9 +72,9 @@ public class bgPotwierdzWizyte extends AsyncTask <String, Void,String> {
             OutputStream ops = http.getOutputStream();
             BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(ops,"UTF-8"));
             String data = URLEncoder.encode("ID","UTF-8")+"="+URLEncoder.encode(idWizyty,"UTF-8")
-                    +"&&"+URLEncoder.encode("ID_PACJENTA","UTF-8")+"="+URLEncoder.encode(idPacjenta,"UTF-8");
+                    +"&&"+URLEncoder.encode("ID_LEKARZA","UTF-8")+"="+URLEncoder.encode(idLekarza,"UTF-8");
             writer.write(data);
-            Log.d("bgPotwierzWizyte", "Uruchomienie 1");
+
             writer.flush(); // wysyła o co było napisane przez buffered writer
             writer.close(); // zamyka buffered writer
             ops.close(); // konczy tworzenie stringa do wyslania?????????
@@ -87,7 +86,7 @@ public class bgPotwierdzWizyte extends AsyncTask <String, Void,String> {
             while ((line = reader.readLine()) != null)
             {
                 result += line;
-                Log.d("bgPotwierzWizyte","Odpowiedz "+line);
+                Log.d("Usuwam","Odpowiedz "+line);
             }
             reader.close();
             ips.close();
@@ -97,17 +96,17 @@ public class bgPotwierdzWizyte extends AsyncTask <String, Void,String> {
         } catch (MalformedURLException e) {
             result = e.getMessage();
             //blad odczytu?
-            Log.d("bgPotwierzWizyte", "Ex1 "+result);
+            Log.d("Usuwam", "Ex1 "+result);
 
         } catch (IOException e) {
             result = e.getMessage();
-            Log.d("bgPotwierzWizyte", "Ex2 "+result);
+            Log.d("Usuwam", "Ex2 "+result);
 
         }
 
-        Log.d("bgPotwierzWizyte", "NoEx "+result);
+        Log.d("Usuwam", "NoEx "+result);
 
-        return idPacjenta;
+        return idLekarza;
 
 
     }

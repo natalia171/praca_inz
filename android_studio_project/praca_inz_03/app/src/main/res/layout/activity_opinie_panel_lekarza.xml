@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".PanelPacjenta"
+    style="@style/stylTLA"
+    >
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_margin="10dp"
+        android:padding="10dp"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
+        android:layout_centerInParent="true"
+        >
+
+
+        <TextView
+            android:layout_marginTop="30pt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Opinie Twoich pacjentów:"
+            android:textSize="25sp" />
+
+        <ListView
+            android:id="@+id/listaOpinii"
+            android:layout_width="wrap_content"
+            android:layout_height="200pt"
+            android:layout_marginTop="30dp"
+            />
+
+    </LinearLayout>
+
+    <TextView
+        style="@style/PanelTextview"
+        android:text="OPINIE"
+        />
+    <TextView
+        style="@style/WYLOGUJ"
+        android:onClick="wyloguj"
+        />
+</RelativeLayout>

@@ -61,3 +61,34 @@ INSERT INTO `wizyty`(`ID_PACJENTA`, `ID_LEKARZA`, `CZAS_START`, `CZAS_STOP`) VAL
 ('0','4','2021-04-17 08:15:01','2021-04-17 08:30:00'),
 ('0','5','2021-04-18 12:00:01','2021-04-18 12:15:00'),
 ('0','5','2021-04-19 14:00:01','2021-04-19 14:15:00');
+
+
+-- Struktura tabeli dla tabeli `lekarze`
+--
+
+CREATE TABLE `lekarze` (
+  `ID` int(11) NOT NULL,
+  `specjalizacja` varchar(30) NOT NULL,
+  `imie` varchar(30) NOT NULL,
+  `nazwisko` varchar(30) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Zrzut danych tabeli `lekarze`
+--
+
+INSERT INTO `lekarze` (`ID`, `specjalizacja`, `imie`, `nazwisko`) VALUES
+(1, 'internista', 'Jan', 'Kowalski'),
+(2, 'neurolog', 'Anna', 'Wolska'),
+(3, 'okulista', 'Aleksandra', 'Iksińska'),
+(4, 'internista', 'Mariusz', 'Tomczyk'),
+(5, 'ginekolog', 'Joanna', 'Banaszek'),
+(6, 'okulista', 'Marek', 'Jędrzejewski'),
+(7, 'neurolog', 'Jolanta', 'Krzyszczak'),
+(8, 'chirurg', 'Szymon', 'Grudziński'),
+(9, 'psychiatra', 'Katarzyna', 'Michalczewska');
+
+
+tabela opinie
+
+CREATE TABLE `praca_inz`.`opinie` ( `ID_OPINII` INT(11) NOT NULL AUTO_INCREMENT , `ID_LEKARZA` INT(11) NOT NULL , `ID_PACJENTA` INT(11) NOT NULL , `TRESC_OPINII` VARCHAR(1000) NOT NULL , `OCENA` VARCHAR(3) NOT NULL , PRIMARY KEY (`ID_OPINII`)) ENGINE = InnoDB;

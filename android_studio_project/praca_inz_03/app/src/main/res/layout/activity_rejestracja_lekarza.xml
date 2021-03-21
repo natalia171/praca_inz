@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".rejestracja"
+    tools:context=".rejestracjaLekarza"
     style="@style/stylTLA"
     >
     <LinearLayout
@@ -53,8 +53,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="25sp"
-            android:hint="Data urodzenia"
-            android:id="@+id/data_urodzenia"
+            android:hint="Specjalizacja"
+            android:id="@+id/specjalizacja"
             />
         <EditText
             android:layout_width="match_parent"
@@ -77,9 +77,11 @@
             android:layout_height="wrap_content"
             android:textSize="25sp"
             android:text="DODAJ"
+            android:layout_marginTop="15pt"
             android:onClick="DodajBtn"
             style="@style/stylbatona"
-            android:background="@drawable/rounded_corners"            />
+            android:background="@drawable/rounded_corners"
+            />
     </LinearLayout>
     <TextView
         style="@style/PanelTextview"

@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".DodajNowyTerminLekarz"
+    style="@style/stylTLA"
+    >
+
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_height="match_parent"
+        tools:context=".MainActivity">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Początek Wizyty:"
+            android:textSize="14pt"/>
+
+        <EditText
+            android:hint="Wybierz datę i godzinę"
+            android:id="@+id/date_time_inputStart"
+            android:inputType="none"
+            android:textAlignment="center"
+            android:layout_width="match_parent"
+            android:layout_marginTop="5pt"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10pt"
+            android:text="Koniec Wizyty:"
+            android:textSize="14pt"/>
+
+        <EditText
+            android:hint="Wybierz datę i godzinę"
+            android:id="@+id/date_time_inputEnd"
+            android:inputType="none"
+            android:layout_marginTop="5pt"
+            android:textAlignment="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10pt"
+            android:paddingLeft="50pt"
+            android:paddingRight="50pt"
+            android:text="DODAJ"
+            android:onClick="DodajTermin"
+            style="@style/stylbatona"
+            android:background="@drawable/rounded_corners"
+
+            />
+
+    </LinearLayout>
+
+    <TextView
+        style="@style/PanelTextview"
+        android:text="DODAJ TERMIN"
+        />
+    <TextView
+        style="@style/WYLOGUJ"
+        android:onClick="wyloguj"
+        />
+</RelativeLayout>

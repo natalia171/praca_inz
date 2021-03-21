@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".PanelPacjenta"
+    tools:context=".PanelLekarza"
     style="@style/stylTLA"
     >
 
@@ -18,6 +18,9 @@
         android:gravity="center"
         android:layout_centerInParent="true"
         >
+
+
+
         <Button
             android:id="@+id/dodajWizyte"
             style="@style/stylbatona"
@@ -26,13 +29,24 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:onClick="dodajWizte"
-            android:text="UMÓW WIZYTĘ"
-            android:layout_marginTop="40pt"
-            android:textSize="20sp"
+            android:text="DODAJ NOWY TERMIN"
             android:background="@drawable/rounded_corners"
+            android:layout_marginTop="40pt"
+            android:textSize="20sp" />
+        <TextView
+            android:layout_marginTop="10pt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Twoje wolne terminy:"
+            android:textSize="25sp" />
+
+        <ListView
+            android:id="@+id/wolneTerminy"
+            android:layout_width="wrap_content"
+            android:textAlignment="center"
+            android:layout_height="60pt"
+            android:layout_marginTop="10dp"
             />
-
-
         <TextView
             android:layout_marginTop="10pt"
             android:layout_width="wrap_content"
@@ -44,41 +58,27 @@
             android:id="@+id/nadchodząceWizyty"
             android:layout_width="wrap_content"
             android:layout_height="60pt"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="10dp"
             />
-        <TextView
-            android:layout_marginTop="10pt"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/Historia_wizyt"
-            android:textSize="25sp" />
-
-        <ListView
-            android:id="@+id/historiaWizyt"
-            android:layout_width="wrap_content"
-            android:layout_height="60pt"
-            android:layout_marginTop="15dp"
-            />
-
-        <Button
-            android:id="@+id/opinie"
+            <Button
+            android:id="@+id/podgladOpinii"
             style="@style/stylbatona"
             android:paddingLeft="30pt"
             android:paddingRight="30pt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:onClick="opinie"
-            android:text="OPINIE O LEKARZACH"
-            android:layout_marginTop="7pt"
-            android:textSize="20sp"
+            android:onClick="podgladOpinii"
+            android:text="OPINIE PACJENTÓW"
             android:background="@drawable/rounded_corners"
-            />
-        </LinearLayout>
+            android:layout_marginTop="10pt"
+            android:textSize="20sp" />
 
+
+    </LinearLayout>
     <TextView
         style="@style/PanelTextview"
-        android:text="@string/panel_pacjenta"
-         />
+        android:text="PANEL LEKARZA"
+        />
     <TextView
         style="@style/WYLOGUJgora"
         android:onClick="wyloguj"
