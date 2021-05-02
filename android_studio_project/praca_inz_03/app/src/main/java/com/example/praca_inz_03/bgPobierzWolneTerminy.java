@@ -20,10 +20,13 @@ import java.net.URL;
 
 
 import java.net.URLEncoder;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.DayOfWeek;
 import java.util.ArrayList;
 
 
+import java.util.Calendar;
 import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -115,13 +118,25 @@ public class bgPobierzWolneTerminy extends AsyncTask<String, Void, LinkedHashMap
             arr = new JSONArray(result);
             String key;
             String data;
+            Date data_wolnego_terminu;
+            String dzien_tygodnia;
             for (i = 0; i < arr.length(); i++){
+                String date = arr.getJSONObject(i).getString("CZAS_START_FORMAT");
+                SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+
+                Log.d("dzien0", date);
+                data_wolnego_terminu = format.parse(date);
+                dzien_tygodnia=  new SimpleDateFormat("EE").format(data_wolnego_terminu);
+
+                Log.d("dzien", dzien_tygodnia + " # "+data_wolnego_terminu);
                 key = arr.getJSONObject(i).getString("ID");
-                data = arr.getJSONObject(i).getString("CZAS_START");
+                data = arr.getJSONObject(i).getString("CZAS_START_FORMATED")+" ( "+ dzien_tygodnia + " )";
                 LinkedPWTHashMap.put( key,data );
             }
 
         } catch (JSONException e) {
+            e.printStackTrace();
+        } catch (ParseException e) {
             e.printStackTrace();
         }
 

@@ -14,7 +14,9 @@ $CZAS_START = mysqli_real_escape_string($conn, $_REQUEST['CZAS_START']);
 
 $data = array();
 
-$sql = "select l.imie,l.nazwisko, l.specjalizacja, w.CZAS_START, w.ID from wizyty as w INNER JOIN lekarze as l ON w.ID_LEKARZA=l.ID where ID_PACJENTA='$ID_PACJENTA' and CZAS_START<'$CZAS_START' order by `CZAS_START` DESC";
+$sql = "select l.imie,l.nazwisko, l.specjalizacja, w.CZAS_START,
+DATE_FORMAT(w.czas_start, '%Y-%m-%d %H:%i') AS CZAS_START_FORMATED,
+ w.ID from wizyty as w INNER JOIN lekarze as l ON w.ID_LEKARZA=l.ID where ID_PACJENTA='$ID_PACJENTA' and CZAS_START<'$CZAS_START' order by `CZAS_START` DESC";
 $result = $conn->query($sql);
 if ($result->num_rows > 0) {
   // output data of each row

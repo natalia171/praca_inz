@@ -74,19 +74,11 @@ public class PanelPacjenta extends AppCompatActivity {
 
         bgPobierzNadchodzaceWizyty bgPNW = new bgPobierzNadchodzaceWizyty(this);
 
-
-
-
         LinkedHashMap<String, String> LinkedhashMapaWizyt=new LinkedHashMap<String,String>();
         try {
             LinkedhashMapaWizyt = (LinkedHashMap<String,String>) bgPNW.execute(ajdi,IP).get();
 
         }catch (Exception e){}
-
-
-
-
-
 
 
 

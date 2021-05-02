@@ -8,6 +8,8 @@
             <item name="android:textColor">#FFFFFF</item>
             <item name="android:background">#7e4e7e</item>
         </style>
+
+
     <style name="stylTLA" parent="Theme.AppCompat.Light.DarkActionBar">
 
         <item name="android:background">#D8BFD8</item>

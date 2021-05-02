@@ -21,7 +21,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Początek Wizyty:"
+            android:text="Początek dyżuru:"
             android:textSize="14pt"/>
 
         <EditText
@@ -36,7 +36,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10pt"
-            android:text="Koniec Wizyty:"
+            android:text="Koniec dyżuru:"
             android:textSize="14pt"/>
 
         <EditText
@@ -66,8 +66,5 @@
         style="@style/PanelTextview"
         android:text="DODAJ TERMIN"
         />
-    <TextView
-        style="@style/WYLOGUJ"
-        android:onClick="wyloguj"
-        />
+
 </RelativeLayout>

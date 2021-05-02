@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
@@ -18,42 +17,45 @@
         android:padding="10dp"
         android:layout_centerInParent="true"
         >
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="25sp"
-        android:text="test"
-        android:id="@+id/email" />
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="25sp"
-        android:text="test"
-        android:inputType="textPassword"
-        android:id="@+id/haslo" />
-
-    <RadioGroup
-        android:id="@+id/radiogroup1"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="horizontal"
-        android:layout_marginTop="6pt"
-        android:gravity="center"
-        >
-
-        <RadioButton
-            android:layout_width="wrap_content"
+        <EditText
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Pacjent"
-            android:textSize="20sp"
-            android:id="@+id/RadioPacjent"/>
-        <RadioButton
-            android:layout_width="wrap_content"
+            android:textSize="25sp"
+            android:hint="Login"
+            android:text="test"
+            android:id="@+id/email" />
+        <EditText
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Lekarz"
-            android:layout_marginLeft="20pt"
-            android:textSize="20sp"
-            android:id="@+id/RadioLekarz"/>
+            android:hint="Hasło"
+            android:textSize="25sp"
+            android:text="test"
+
+            android:inputType="textPassword"
+            android:id="@+id/haslo" />
+
+        <RadioGroup
+            android:id="@+id/radiogroup1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:layout_marginTop="6pt"
+            android:gravity="center"
+            >
+
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Pacjent"
+                android:textSize="20sp"
+                android:id="@+id/RadioPacjent"/>
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Lekarz"
+                android:layout_marginLeft="20pt"
+                android:textSize="20sp"
+                android:id="@+id/RadioLekarz"/>
         </RadioGroup>
 
         <Button
@@ -62,7 +64,7 @@
             android:id="@+id/login"
             android:layout_marginTop="6pt"
             style="@style/stylbatona"
-             android:background="@drawable/rounded_corners"
+            android:background="@drawable/rounded_corners"
             />
 
         <TextView

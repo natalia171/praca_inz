@@ -153,8 +153,5 @@ public class DodajNowyTerminLekarz extends AppCompatActivity {
 
     }
 
-    public void wyloguj(View view) {
-        Intent wylogowanie = new Intent(this,MainActivity.class);
-        startActivity(wylogowanie);
-    }
+
 }

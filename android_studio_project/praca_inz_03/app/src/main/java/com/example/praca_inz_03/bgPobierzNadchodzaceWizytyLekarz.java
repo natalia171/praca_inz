@@ -117,8 +117,8 @@ public class bgPobierzNadchodzaceWizytyLekarz extends AsyncTask<String, Void, Li
 
             for(int i = 0; i < arr.length(); i++){
 
-                list.add(arr.getJSONObject(i).getString("imie")+" "+arr.getJSONObject(i).getString("nazwisko")
-                        +"  "+arr.getJSONObject(i).getString("CZAS_START"));
+                list.add("Pacjent: "+arr.getJSONObject(i).getString("imie")+" "+arr.getJSONObject(i).getString("nazwisko")
+                        +"\n"+"Data: "+arr.getJSONObject(i).getString("CZAS_START_FORMATED"));
 
             }
 

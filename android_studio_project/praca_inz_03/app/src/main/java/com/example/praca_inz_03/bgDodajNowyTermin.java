@@ -47,9 +47,8 @@ public class bgDodajNowyTermin extends AsyncTask <String, Void,String> {
         intent_name.setClass(context.getApplicationContext(),PanelLekarza.class);
         intent_name.putExtra("idLekarza",s);
         intent_name.putExtra("IP",IP);
-        Log.d("id", "onPostExecute: ID w bg dodaj nowy termin: "+s);
         context.startActivity(intent_name);
-        Toast toast= Toast.makeText(context,"Termin dodany!",Toast.LENGTH_LONG);
+        Toast toast= Toast.makeText(context,"Gotowe!",Toast.LENGTH_LONG);
         toast.show();
     }
 
@@ -80,6 +79,7 @@ public class bgDodajNowyTermin extends AsyncTask <String, Void,String> {
         Log.d("15min", "Czas od "+poczatekWizyty+" sparsowana "+czas_od.toString());
         int kwadrans=1000*60*15;
         int iloscKwadransow = (int) ((czas_do.getTime() - czas_od.getTime()) /(kwadrans));
+
 
         Log.d("15min", "Ilosc kwadransow "+iloscKwadransow);
         String s_data_od= null;

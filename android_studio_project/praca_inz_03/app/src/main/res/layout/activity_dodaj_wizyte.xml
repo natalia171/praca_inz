@@ -34,9 +34,6 @@
         style="@style/PanelTextview"
         android:text="DODAJ WIZYTE"
         />
-    <TextView
-        style="@style/WYLOGUJ"
-        android:onClick="wyloguj"
-        />
+
 
 </RelativeLayout>

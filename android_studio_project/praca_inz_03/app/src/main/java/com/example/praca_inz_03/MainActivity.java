@@ -16,8 +16,8 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
     EditText pas,usr;
-    String IP="192.168.2.11";
-    //String IP="192.168.0.18";
+    //String IP="192.168.42.1";
+    String IP="192.168.2.6";
     Spinner listaSpecjalizacji;
     RadioButton RadioPacjent, RadioLekarz;
     RadioGroup radiogroup1;
@@ -28,8 +28,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         radiogroup1 = findViewById(R.id.radiogroup1);
-        usr = (EditText) findViewById( R.id.email);
-        pas = (EditText) findViewById(R.id.haslo);
+        usr = findViewById( R.id.email);
+        pas = findViewById(R.id.haslo);
        // RadioPacjent = findViewById(R.id.RadioPacjent);
         //RadioLekarz = findViewById(R.id.RadioLekarz);
         radiogroup1.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {

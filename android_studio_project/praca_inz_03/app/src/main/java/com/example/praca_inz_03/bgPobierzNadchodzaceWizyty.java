@@ -117,7 +117,7 @@ public class bgPobierzNadchodzaceWizyty extends AsyncTask<String, Void, LinkedHa
             String data;
             for (i = 0; i < arr.length(); i++){
                 key = arr.getJSONObject(i).getString("ID");
-                data = arr.getJSONObject(i).getString("imie")+"  "+arr.getJSONObject(i).getString("nazwisko")+" - "+arr.getJSONObject(i).getString("specjalizacja")+"\n "+arr.getJSONObject(i).getString("CZAS_START");
+                data = arr.getJSONObject(i).getString("imie")+"  "+arr.getJSONObject(i).getString("nazwisko")+" - "+arr.getJSONObject(i).getString("specjalizacja")+"\n "+"Data: "+arr.getJSONObject(i).getString("CZAS_START_FORMATED");
                 LinkedNastWizytyHashMap.put( key,data );
             }
 

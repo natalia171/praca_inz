@@ -119,7 +119,7 @@ public class bgPobierzHistorieWizyt extends AsyncTask<String, Void, List<String>
 
             for(int i = 0; i < arr.length(); i++){
 
-                list.add(arr.getJSONObject(i).getString("imie")+" "+arr.getJSONObject(i).getString("nazwisko")+" - "+arr.getJSONObject(i).getString("specjalizacja")+"\n "+arr.getJSONObject(i).getString("CZAS_START"));
+                list.add(arr.getJSONObject(i).getString("imie")+" "+arr.getJSONObject(i).getString("nazwisko")+" - "+arr.getJSONObject(i).getString("specjalizacja")+"\n "+arr.getJSONObject(i).getString("CZAS_START_FORMATED"));
 
             }
 

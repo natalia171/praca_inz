@@ -106,8 +106,6 @@ public class DodajWizyte extends AppCompatActivity {
         //Opisy wizyt
         Collection<String> ListaDanychWizyt = LinkedhashMapaWizyt.values();
         final ArrayList<String> arrayListWizyt = new ArrayList<String>(ListaDanychWizyt);
-        //Info do loga
-        Log.i("XXXX","XXXX"+ LinkedhashMapaWizyt.values()+" "+arrayListWizyt.get(1)+" "+ListaKluczyWizyt.get(1));
 
         final ArrayAdapter arrayAdapter = new ArrayAdapter(this,android.R.layout.simple_list_item_1,arrayListWizyt);
         listaWizyt.setAdapter(arrayAdapter);
@@ -148,8 +146,5 @@ public class DodajWizyte extends AppCompatActivity {
     }
 
 
-    public void wyloguj(View view) {
-        Intent wylogowanie = new Intent(this,MainActivity.class);
-        startActivity(wylogowanie);
-    }
+
 }

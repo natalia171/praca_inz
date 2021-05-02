@@ -127,7 +127,7 @@ public class bgPobierzDostepneWizyty extends AsyncTask<String, Void, LinkedHashM
             String data;
             for (i = 0; i < arr.length(); i++) {
                 key = arr.getJSONObject(i).getString("ID");
-                data = arr.getJSONObject(i).getString("imie")+"  "+arr.getJSONObject(i).getString("nazwisko")+"  "+arr.getJSONObject(i).getString("CZAS_START");
+                data = arr.getJSONObject(i).getString("imie")+"  "+arr.getJSONObject(i).getString("nazwisko")+"  "+arr.getJSONObject(i).getString("CZAS_START_FORMATED");
                 LinkedwizytyHashMap.put( key,data );
             }
 

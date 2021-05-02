@@ -13,7 +13,10 @@ $CZAS = mysqli_real_escape_string($conn, $_REQUEST['CZAS']);
 
 $data = array();
 
-$sql = "select CZAS_START, ID from wizyty where ID_LEKARZA='$ID_LEKARZA' and CZAS_START>'$CZAS' order by `CZAS_START` ASC";
+$sql = "select CZAS_START,
+DATE_FORMAT(czas_start, '%Y-%m-%d %H:%i') AS CZAS_START_FORMATED,
+DATE_FORMAT(czas_start, '%Y-%m-%d') AS CZAS_START_FORMAT,
+ID from wizyty where ID_LEKARZA='$ID_LEKARZA' and CZAS_START>'$CZAS' order by `CZAS_START` ASC";
 $result = $conn->query($sql);
 if ($result->num_rows > 0) {
  
