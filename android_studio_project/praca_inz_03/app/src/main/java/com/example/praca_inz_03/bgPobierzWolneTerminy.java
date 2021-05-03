@@ -49,6 +49,7 @@ public class bgPobierzWolneTerminy extends AsyncTask<String, Void, LinkedHashMap
 
 
 
+
     @Override
     protected void onPreExecute() {} //nic nie robi przed wykonaniem
 
