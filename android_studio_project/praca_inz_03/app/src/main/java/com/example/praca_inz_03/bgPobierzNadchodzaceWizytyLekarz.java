@@ -30,7 +30,7 @@ import java.util.Locale;
 
 
 public class bgPobierzNadchodzaceWizytyLekarz extends AsyncTask<String, Void, List<String>> {
-    Context context; // po co jest context??????
+    Context context;
 
     SimpleDateFormat sdf= new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
     String aktualnyCzas = sdf.format(new Date());
@@ -44,21 +44,11 @@ public class bgPobierzNadchodzaceWizytyLekarz extends AsyncTask<String, Void, Li
         this.context = context;
     }
 
-
-
     @Override
-    protected void onPreExecute() {} //nic nie robi przed wykonaniem
-
-
-
-
-
-
+    protected void onPreExecute() {}
     @Override
-    protected void onPostExecute(List<String> s) { //nic nie robi po wykoananiu
+    protected void onPostExecute(List<String> s) {
     }
-
-
 
     @Override
     protected List<String> doInBackground(String... voids) {
@@ -76,13 +66,13 @@ public class bgPobierzNadchodzaceWizytyLekarz extends AsyncTask<String, Void, Li
             http.setDoInput(true);
             http.setDoOutput(true);
 
-            OutputStream ops = http.getOutputStream(); //skad pobiera output stream i czym  on jest???????
+            OutputStream ops = http.getOutputStream();
             BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(ops,"UTF-8"));
             String data = URLEncoder.encode("ID_LEKARZA","UTF-8")+"="+URLEncoder.encode(idLekarza,"UTF-8")
                     +"&&"+URLEncoder.encode("CZAS","UTF-8")+"="+URLEncoder.encode(aktualnyCzas,"UTF-8");
             writer.write(data);
-            writer.flush(); // wysyła o co było napisane przez buffered writer
-            writer.close(); // zamyka buffered writer
+            writer.flush();
+            writer.close();
             ops.close();
 
 
@@ -94,19 +84,15 @@ public class bgPobierzNadchodzaceWizytyLekarz extends AsyncTask<String, Void, Li
             while ((line = reader.readLine()) != null)
             {
                 result += line;
-
             }
             reader.close();
             ips.close();
             http.disconnect();
 
 
-            //Log.d("MW",result);
         }
-        // po co ten catch???????
         catch (Exception e ){
-            Log.d("bgPNWL",e.getMessage().toString());
-        };
+        }
 
 
         JSONArray arr = null;

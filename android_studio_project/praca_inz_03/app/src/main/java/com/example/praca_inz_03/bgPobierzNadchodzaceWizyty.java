@@ -31,7 +31,7 @@ import java.util.Locale;
 
 
 public class bgPobierzNadchodzaceWizyty extends AsyncTask<String, Void, LinkedHashMap<String,String>> {
-    Context context; // po co jest context??????
+    Context context;
 
     SimpleDateFormat sdf= new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
     String aktualnyCzas = sdf.format(new Date());
@@ -48,7 +48,7 @@ public class bgPobierzNadchodzaceWizyty extends AsyncTask<String, Void, LinkedHa
 
 
     @Override
-    protected void onPreExecute() {} //nic nie robi przed wykonaniem
+    protected void onPreExecute() {}
 
 
 
@@ -56,7 +56,7 @@ public class bgPobierzNadchodzaceWizyty extends AsyncTask<String, Void, LinkedHa
 
 
     @Override
-    protected void onPostExecute(LinkedHashMap<String,String> s) { //nic nie robi po wykoananiu
+    protected void onPostExecute(LinkedHashMap<String,String> s) {
     }
 
 
@@ -76,15 +76,13 @@ public class bgPobierzNadchodzaceWizyty extends AsyncTask<String, Void, LinkedHa
             http.setDoInput(true);
             http.setDoOutput(true);
 
-            OutputStream ops = http.getOutputStream(); //skad pobiera output stream i czym  on jest???????
+            OutputStream ops = http.getOutputStream();
             BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(ops,"UTF-8"));
             String data = URLEncoder.encode("ID_PACJENTA","UTF-8")+"="+URLEncoder.encode(idPacjenta,"UTF-8")
                     +"&&"+URLEncoder.encode("CZAS_START","UTF-8")+"="+URLEncoder.encode(aktualnyCzas,"UTF-8");
             writer.write(data);
-            writer.flush(); // wysyła o co było napisane przez buffered writer
-            Log.d("bPDW","Uruchamia try 2");
-            writer.close(); // zamyka buffered writer
-            Log.d("bPDW","Uruchamia try 3");
+            writer.flush();
+            writer.close();
             ops.close();
 
 
@@ -94,18 +92,13 @@ public class bgPobierzNadchodzaceWizyty extends AsyncTask<String, Void, LinkedHa
             while ((line = reader.readLine()) != null)
             {
                 result += line;
-                Log.d("bgPotwierzWizyte","Odpowiedz "+line);
             }
             reader.close();
             ips.close();
             http.disconnect();
-
-
-            //Log.d("MW",result);
         }
 
         catch (Exception e ){
-            Log.d("bPS",e.getMessage().toString());
         }
 
         LinkedHashMap<String,String> LinkedNastWizytyHashMap= new LinkedHashMap<String,String>();

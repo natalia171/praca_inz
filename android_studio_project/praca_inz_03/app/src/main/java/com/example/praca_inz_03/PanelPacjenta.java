@@ -50,23 +50,14 @@ public class PanelPacjenta extends AppCompatActivity {
 
 
         //pobieranie historii wizyt
-        bgPobierzHistorieWizyt bgPHW = new bgPobierzHistorieWizyt(this); //tworzy nowa klase
+        bgPobierzHistorieWizyt bgPHW = new bgPobierzHistorieWizyt(this);
 
-        List<String> historia_wizyt= new ArrayList<>(); //tworzy liste
+        List<String> historia_wizyt= new ArrayList<>();
         try {
-            historia_wizyt = bgPHW.execute(ajdi,IP).get(); //przypisuje do listy wynik z klasy
-            Log.d("historia","historia "+historia_wizyt.get(0));
+            historia_wizyt = bgPHW.execute(ajdi,IP).get();
         }catch (Exception e){}
-        ArrayAdapter<String> adp1 = new ArrayAdapter<String>(this,  android.R.layout.simple_list_item_1, historia_wizyt);//tworzy arrayadapter ktory bedzie posiadal wartosci listaspecjalizacji
-        //adp1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
+        ArrayAdapter<String> adp1 = new ArrayAdapter<String>(this,  android.R.layout.simple_list_item_1, historia_wizyt);
         historiaWizyt.setAdapter(adp1);
-
-
-
-
-
-
 
 
 
@@ -82,15 +73,11 @@ public class PanelPacjenta extends AppCompatActivity {
 
 
 
-        //Klucze z hashmapy
         Set<String> IdWizyt = LinkedhashMapaWizyt.keySet();
         final ArrayList<String> ListaKluczyWizyt = new ArrayList<String>(IdWizyt);
 
-        //Opisy wizyt
         Collection<String> ListaDanychWizyt = LinkedhashMapaWizyt.values();
         final ArrayList<String> arrayListWizyt = new ArrayList<String>(ListaDanychWizyt);
-        //Info do loga
-//        Log.i("XXXX","XXXX"+ LinkedhashMapaWizyt.values()+" "+arrayListWizyt.get(1)+" "+ListaKluczyWizyt.get(1));
 
         final ArrayAdapter adp2 = new ArrayAdapter(this,android.R.layout.simple_list_item_1, arrayListWizyt);
         nadchodzaceWizyty.setAdapter(adp2);
@@ -100,31 +87,25 @@ public class PanelPacjenta extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
                 Object listItem = nadchodzaceWizyty.getItemAtPosition(position);
-                Log.d("DoWi","ressponse "+listItem.toString());
                 final String idWizyty = ListaKluczyWizyt.get(position);
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(PanelPacjenta.this);
                 builder.setTitle("Anulowanie rezerwacji");
                 builder.setMessage("Czy chcesz anulować wizytę?");
-                // add the buttons
-
                 builder.setPositiveButton("Tak",
 
                         new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                Log.d("id wizytowe", "id wizyty "+idWizyty);
+
                                 bgAnulujWizyte bgAW = new bgAnulujWizyte(PanelPacjenta.this);
                                 String ress=bgAW.execute(idWizyty,ajdi,IP).toString();
-                                Log.d("Main","ressponse "+ress);
                             }
                         }
                 );
                 builder.setNegativeButton("Nie", null);
-                // create and show the alert dialog
                 AlertDialog dialog = builder.create();
                 dialog.show();
-
 
             }
         });
@@ -136,12 +117,10 @@ public class PanelPacjenta extends AppCompatActivity {
 
     public void dodajWizte(View view) {
         String idPacjenta = ajdi;
-        //idPacjenta=getIntent().getStringExtra("s");
         Intent intencjaDodajWizyte = new Intent(this, DodajWizyte.class);
         intencjaDodajWizyte.putExtra("idPacjenta", idPacjenta);
         intencjaDodajWizyte.putExtra("IP", IP);
         startActivity(intencjaDodajWizyte);
-        Log.d("id", "dodajWizyte funkcja: ID w panelu pacjenta:  " + idPacjenta);
 
 
     }

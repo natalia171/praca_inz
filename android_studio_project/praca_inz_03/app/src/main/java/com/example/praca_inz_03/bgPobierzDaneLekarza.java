@@ -3,12 +3,8 @@ package com.example.praca_inz_03;
 
 import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.AsyncTask;
-import android.os.Bundle;
-import android.util.Log;
-import android.widget.Toast;
+
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -27,13 +23,10 @@ import java.net.URLEncoder;
 
 public class bgPobierzDaneLekarza extends AsyncTask <String, Void,String> {
 
-    //utworzenie okienka dialogowego
     AlertDialog dialog;
     Context context;
     String IP;
-    //stworzenie pustego stringa wynikowego
     String result = "";
-    // String idPacjenta;
     public bgPobierzDaneLekarza(Context context) {
         this.context = context;
     }
@@ -41,17 +34,14 @@ public class bgPobierzDaneLekarza extends AsyncTask <String, Void,String> {
 
 
     @Override
-    // funkcja po wykonaniu ??????
     protected void onPostExecute(String s) {
 
 
     }
 
     @Override
-    //czemu (String... voids)?????
     protected String doInBackground(String... voids) {
 
-        // dodawanie elementow do tablicy voids
         String idLekarza = voids[0];
         IP = voids[1];
 
@@ -68,9 +58,9 @@ public class bgPobierzDaneLekarza extends AsyncTask <String, Void,String> {
             BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(ops,"UTF-8"));
             String data = URLEncoder.encode("ID","UTF-8")+"="+URLEncoder.encode(idLekarza,"UTF-8");
             writer.write(data);
-            writer.flush(); // wysyła o co było napisane przez buffered writer
-            writer.close(); // zamyka buffered writer
-            ops.close(); // konczy tworzenie stringa do wyslania?????????
+            writer.flush();
+            writer.close();
+            ops.close();
 
 
             InputStream ips = http.getInputStream();
@@ -79,17 +69,13 @@ public class bgPobierzDaneLekarza extends AsyncTask <String, Void,String> {
             while ((line = reader.readLine()) != null)
             {
                 result += line;
-                Log.d("dupa","poco "+line);
-
             }
             reader.close();
             ips.close();
             http.disconnect();
 
-            //zle sformuowany adres url
         } catch (MalformedURLException e) {
             result = e.getMessage();
-            //blad odczytu?
         } catch (IOException e) {
             result = e.getMessage();
 

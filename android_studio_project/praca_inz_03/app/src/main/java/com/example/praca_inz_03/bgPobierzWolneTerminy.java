@@ -2,7 +2,6 @@ package com.example.praca_inz_03;
 
 import android.content.Context;
 import android.os.AsyncTask;
-import android.util.Log;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -97,18 +96,13 @@ public class bgPobierzWolneTerminy extends AsyncTask<String, Void, LinkedHashMap
             while ((line = reader.readLine()) != null)
             {
                 result += line;
-                Log.d("bgPobierzWolneTerminy","Odpowiedz "+line);
             }
             reader.close();
             ips.close();
             http.disconnect();
-
-
-            //Log.d("MW",result);
         }
 
         catch (Exception e ){
-            Log.d("bPWT",e.getMessage().toString());
         }
 
         LinkedHashMap<String,String> LinkedPWTHashMap= new LinkedHashMap<String,String>();
@@ -123,12 +117,8 @@ public class bgPobierzWolneTerminy extends AsyncTask<String, Void, LinkedHashMap
             for (i = 0; i < arr.length(); i++){
                 String date = arr.getJSONObject(i).getString("CZAS_START_FORMAT");
                 SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-
-                Log.d("dzien0", date);
                 data_wolnego_terminu = format.parse(date);
                 dzien_tygodnia=  new SimpleDateFormat("EE").format(data_wolnego_terminu);
-
-                Log.d("dzien", dzien_tygodnia + " # "+data_wolnego_terminu);
                 key = arr.getJSONObject(i).getString("ID");
                 data = arr.getJSONObject(i).getString("CZAS_START_FORMATED")+" ( "+ dzien_tygodnia + " )";
                 LinkedPWTHashMap.put( key,data );

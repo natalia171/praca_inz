@@ -3,8 +3,13 @@ package com.example.praca_inz_03;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.os.AsyncTask;
 import android.util.Log;
+import android.view.View;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -29,13 +34,18 @@ public class bgRejestracja extends AsyncTask<String, Void,String> {
     {
         this.context = context;
     }
-    //Po wykonaniu (skad wie ze wykonal - wcisniecie buttona???) wraca do mainactivity
     @Override
     protected void onPostExecute(String s) {
             Intent intent_name = new Intent();
-            // po co jest context i czym on jest???????
             intent_name.setClass(context.getApplicationContext(),MainActivity.class);
             context.startActivity(intent_name);
+
+        Toast toast= Toast.makeText(context,"Zarejestrowano!",Toast.LENGTH_LONG);
+        View view = toast.getView();
+        view.getBackground().setColorFilter(Color.parseColor("#C39BD3"), PorterDuff.Mode.SRC_IN);
+        TextView text = view.findViewById(android.R.id.message);
+        text.setTextColor(Color.parseColor("#000000"));
+        toast.show();
     }
     @Override
     protected String doInBackground(String... voids) {
@@ -70,7 +80,6 @@ public class bgRejestracja extends AsyncTask<String, Void,String> {
                     +"&&"+URLEncoder.encode("haslo","UTF-8")+"="+URLEncoder.encode(haslo,"UTF-8")
                     +"&&"+URLEncoder.encode("haslo1","UTF-8")+"="+URLEncoder.encode(haslo1,"UTF-8");
             writer.write(data);
-            Log.d("MW",data);
             writer.flush();
             writer.close();
             ops.close();
@@ -81,7 +90,6 @@ public class bgRejestracja extends AsyncTask<String, Void,String> {
             while ((line = reader.readLine()) != null)
             {
                 result += line;
-                Log.d("MW",line);
             }
             reader.close();
             ips.close();

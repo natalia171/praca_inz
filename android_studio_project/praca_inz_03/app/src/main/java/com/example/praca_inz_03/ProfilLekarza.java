@@ -54,7 +54,6 @@ public class ProfilLekarza extends AppCompatActivity {
         daneLekarza.setText(dL);
 
 
-        //wyswietlenie opinii
         bgWyswietlOpinie bgWO = new bgWyswietlOpinie(this);
 
         List<String> opinie= new ArrayList<>();
@@ -74,7 +73,5 @@ public class ProfilLekarza extends AppCompatActivity {
         finish();
         startActivity(getIntent());
     }
-
-
 
 }

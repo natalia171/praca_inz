@@ -30,7 +30,7 @@ import java.util.Locale;
 
 
 public class bgWyswietlOpinie extends AsyncTask<String, Void, List<String>> {
-    Context context; // po co jest context??????
+    Context context;
 
     SimpleDateFormat sdf= new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
     String aktualnyCzas = sdf.format(new Date());
@@ -45,19 +45,14 @@ public class bgWyswietlOpinie extends AsyncTask<String, Void, List<String>> {
     }
 
 
-
     @Override
-    protected void onPreExecute() {} //nic nie robi przed wykonaniem
-
-
-
+    protected void onPreExecute() {}
 
 
 
     @Override
-    protected void onPostExecute(List<String> s) { //nic nie robi po wykoananiu
+    protected void onPostExecute(List<String> s) {
     }
-
 
 
     @Override
@@ -67,8 +62,6 @@ public class bgWyswietlOpinie extends AsyncTask<String, Void, List<String>> {
 
         String connstr = "http://"+IP+"/wyswietlOpinie.php";
 
-
-
         try {
             URL url = new URL(connstr);
             HttpURLConnection http = (HttpURLConnection) url.openConnection();
@@ -76,7 +69,7 @@ public class bgWyswietlOpinie extends AsyncTask<String, Void, List<String>> {
             http.setDoInput(true);
             http.setDoOutput(true);
 
-            OutputStream ops = http.getOutputStream(); //skad pobiera output stream i czym  on jest???????
+            OutputStream ops = http.getOutputStream();
             BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(ops,"UTF-8"));
             String data = URLEncoder.encode("ID_LEKARZA","UTF-8")+"="+URLEncoder.encode(idLekarza,"UTF-8");
             writer.write(data);
@@ -102,7 +95,6 @@ public class bgWyswietlOpinie extends AsyncTask<String, Void, List<String>> {
 
         }
         catch (Exception e ){
-            Log.d("bgWO",e.getMessage().toString());
         };
 
 
@@ -114,9 +106,8 @@ public class bgWyswietlOpinie extends AsyncTask<String, Void, List<String>> {
 
             for(int i = 0; i < arr.length(); i++){
 
-                list.add(arr.getJSONObject(i).getString("imie")+" "+arr.getJSONObject(i).getString("nazwisko")
-                        +"\n"+arr.getJSONObject(i).getString("TRESC_OPINII"));
-
+                list.add("Pacjent: "+arr.getJSONObject(i).getString("imie")+" "+arr.getJSONObject(i).getString("nazwisko")
+                        +"\n"+"Treść opinii: "+arr.getJSONObject(i).getString("TRESC_OPINII"));
             }
 
         } catch (JSONException e) {

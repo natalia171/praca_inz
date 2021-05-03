@@ -2,7 +2,6 @@ package com.example.praca_inz_03;
 
 import android.content.Context;
 import android.os.AsyncTask;
-import android.util.Log;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -22,18 +21,15 @@ import java.net.URL;
 import java.net.URLEncoder;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-
 
 import java.util.Date;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
 
 
 public class bgPobierzDostepneWizyty extends AsyncTask<String, Void, LinkedHashMap<String,String>> {
-    Context context; // po co jest context??????
+    Context context;
 
     SimpleDateFormat sdf= new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
     String aktualnyCzas = sdf.format(new Date());
@@ -48,17 +44,11 @@ public class bgPobierzDostepneWizyty extends AsyncTask<String, Void, LinkedHashM
         this.context = context;
     }
 
-
+    @Override
+    protected void onPreExecute() {}
 
     @Override
-    protected void onPreExecute() {} //nic nie robi przed wykonaniem
-
-
-
-
-
-    @Override
-    protected void onPostExecute(LinkedHashMap<String,String> s) { //nic nie robi po wykoananiu
+    protected void onPostExecute(LinkedHashMap<String,String> s) {
     }
 
 
@@ -69,10 +59,6 @@ public class bgPobierzDostepneWizyty extends AsyncTask<String, Void, LinkedHashM
         IP = voids[1];
         String connstr = "http://"+IP+"/pobierzDostepneWizyty.php";
 
-
-
-
-
         try {
             URL url = new URL(connstr);
             HttpURLConnection http = (HttpURLConnection) url.openConnection();
@@ -80,17 +66,14 @@ public class bgPobierzDostepneWizyty extends AsyncTask<String, Void, LinkedHashM
             http.setDoInput(true);
             http.setDoOutput(true);
 
-            OutputStream ops = http.getOutputStream(); //skad pobiera output stream i czym  on jest???????
+            OutputStream ops = http.getOutputStream();
             BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(ops,"UTF-8"));
             String data = URLEncoder.encode("specjalizacja","UTF-8")+"="+URLEncoder.encode(specjalizacja,"UTF-8")
                     +"&&"+URLEncoder.encode("CZAS_START","UTF-8")+"="+URLEncoder.encode(aktualnyCzas,"UTF-8");
             writer.write(data);
-            writer.flush(); // wysyła o co było napisane przez buffered writer
-            Log.d("bPDW","Uruchamia try 2");
-            writer.close(); // zamyka buffered writer
-            Log.d("bPDW","Uruchamia try 3");
-            ops.close(); // konczy tworzenie stringa do wyslania?????????
-
+            writer.flush();
+            writer.close();
+            ops.close();
 
 
             InputStream ips = http.getInputStream();
@@ -106,12 +89,9 @@ public class bgPobierzDostepneWizyty extends AsyncTask<String, Void, LinkedHashM
             ips.close();
             http.disconnect();
 
-
-            Log.d("bPDW","odczyt "+result);
         }
 
         catch (Exception e) {
-            Log.d("bPDW", e.getMessage().toString());
         }
 
 

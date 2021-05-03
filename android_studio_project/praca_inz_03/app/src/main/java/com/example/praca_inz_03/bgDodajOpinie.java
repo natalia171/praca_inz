@@ -5,9 +5,13 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.BufferedReader;
@@ -38,15 +42,12 @@ public class bgDodajOpinie extends AsyncTask <String, Void,String> {
     @Override
     protected void onPostExecute(String s) {
 
-//        //tworzenie kolejnej aktywnosci - panelu pacjenta
-//        Intent intent_name = new Intent();
-//        intent_name.setClass(context.getApplicationContext(),PanelPacjenta.class);
-//        intent_name.putExtra("idPacjenta",s);
-//        intent_name.putExtra("IP",IP);
-//        Log.d("id", "onPostExecute: ID w bg potwierdz wizyte: "+s);
-//        context.startActivity(intent_name);
-//        Toast toast= Toast.makeText(context,"Wizyta potwierdzona!",Toast.LENGTH_LONG);
-//        toast.show();
+        Toast toast= Toast.makeText(context,"Opinia dodana!",Toast.LENGTH_LONG);
+        View view = toast.getView();
+        view.getBackground().setColorFilter(Color.parseColor("#C39BD3"), PorterDuff.Mode.SRC_IN);
+        TextView text = view.findViewById(android.R.id.message);
+        text.setTextColor(Color.parseColor("#000000"));
+        toast.show();
     }
 
     @Override
@@ -96,10 +97,7 @@ public class bgDodajOpinie extends AsyncTask <String, Void,String> {
 
         }
 
-        Log.d("bgPotwierzWizyte", "NoEx "+result);
-
         return idPacjenta;
-
 
     }
 }

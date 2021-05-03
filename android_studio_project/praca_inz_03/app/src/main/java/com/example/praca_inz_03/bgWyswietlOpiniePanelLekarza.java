@@ -30,7 +30,7 @@ import java.util.Locale;
 
 
 public class bgWyswietlOpiniePanelLekarza extends AsyncTask<String, Void, List<String>> {
-    Context context; // po co jest context??????
+    Context context;
 
     String IP;
     String result = "";
@@ -45,7 +45,7 @@ public class bgWyswietlOpiniePanelLekarza extends AsyncTask<String, Void, List<S
 
 
     @Override
-    protected void onPreExecute() {} //nic nie robi przed wykonaniem
+    protected void onPreExecute() {}
 
 
 
@@ -100,7 +100,6 @@ public class bgWyswietlOpiniePanelLekarza extends AsyncTask<String, Void, List<S
 
         }
         catch (Exception e ){
-            Log.d("bgWOPA",e.getMessage().toString());
         };
 
 
@@ -112,8 +111,8 @@ public class bgWyswietlOpiniePanelLekarza extends AsyncTask<String, Void, List<S
 
             for(int i = 0; i < arr.length(); i++){
 
-                list.add(arr.getJSONObject(i).getString("imie")+" "+arr.getJSONObject(i).getString("nazwisko")
-                        +"\n"+arr.getJSONObject(i).getString("TRESC_OPINII"));
+                list.add("Pacjent: "+ arr.getJSONObject(i).getString("imie")+" "+arr.getJSONObject(i).getString("nazwisko")
+                        +"\n"+" Treść opinii: "+arr.getJSONObject(i).getString("TRESC_OPINII"));
 
             }
 

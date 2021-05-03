@@ -5,9 +5,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class rejestracjaLekarza extends AppCompatActivity {
-    //stworzenie edittextow
     EditText em, im, nazw, pes, tel, spec, has, has1;
     String IP;
     @Override
@@ -17,8 +17,6 @@ public class rejestracjaLekarza extends AppCompatActivity {
 
         IP = getIntent().getStringExtra("IP");
 
-
-        //znalezienie i przypisanie edittextow
         em=(EditText)findViewById(R.id.email);
         im=(EditText)findViewById(R.id.imie);
         nazw=(EditText)findViewById(R.id.nazwisko);
@@ -30,18 +28,62 @@ public class rejestracjaLekarza extends AppCompatActivity {
     }
 
     public void DodajBtn(View view) {
-        // wyciagniecie wpisanych w edittexty danych do stringow, po wcisnieciu buttona
         String email = em.getText().toString();
+        String regexemail = "[a-zA-Z0-9-_.]+@[a-zA-Z0-9-_.]+\\.[a-zA-Z0-9]+";
         String imie = im.getText().toString();
+        String regeximie = "[a-zA-Za-zżźćńółęąśŻŹĆĄŚĘŁÓŃ0-9]+";
         String nazwisko = nazw.getText().toString();
         String pesel = pes.getText().toString();
+        String regexpesel = "[0-9]{11}";
         String telefon = tel.getText().toString();
+        String regextelefon = "[0-9]{9}";
         String specjalizacja = spec.getText().toString();
         String haslo = has.getText().toString();
         String haslo1 = has1.getText().toString();
+        if (email.matches(regexemail) == false) {
+            Toast toast = Toast.makeText(rejestracjaLekarza.this, "Niepoprawny email!", Toast.LENGTH_LONG);
+            toast.show();
+        }
+        if (imie.matches(regeximie) == false) {
+            Toast toast = Toast.makeText(rejestracjaLekarza.this, "Wpisz poprawne imię!", Toast.LENGTH_LONG);
+            toast.show();
+        }
+        if (nazwisko.matches(regeximie) == false) {
+            Toast toast = Toast.makeText(rejestracjaLekarza.this, "Wpisz poprawne nazwisko!", Toast.LENGTH_LONG);
+            toast.show();
+        }
+        if (pesel.matches(regexpesel) == false) {
+            Toast toast = Toast.makeText(rejestracjaLekarza.this, "Wpisz poprawny PESEL!", Toast.LENGTH_LONG);
+            toast.show();
+        }
+        if (telefon.matches(regextelefon) == false) {
+            Toast toast = Toast.makeText(rejestracjaLekarza.this, "Wpisz poprawny numer telefonu!", Toast.LENGTH_LONG);
+            toast.show();
+        }
+        if (specjalizacja.matches(regeximie) == false) {
+            Toast toast = Toast.makeText(rejestracjaLekarza.this, "Wpisz poprawną specjalizację!", Toast.LENGTH_LONG);
+            toast.show();
+        }
+        if (haslo.isEmpty() == true || haslo1.isEmpty() == true) {
+            Toast toast = Toast.makeText(rejestracjaLekarza.this, "Wprowadź hasło!", Toast.LENGTH_LONG);
+            toast.show();
+        }
+        if ((haslo.equals(haslo1)) == false) {
+            Toast toast = Toast.makeText(rejestracjaLekarza.this, "Hasła nie są identyczne!", Toast.LENGTH_LONG);
+            toast.show();
+        }
 
-        //  ??????? stworzenie klasy rejestracja i wywolanie jej z danymi z edittextow
-        bgRejestracjaLekarza bgRL = new bgRejestracjaLekarza(this);
-        bgRL.execute(email, imie, nazwisko, pesel, telefon, specjalizacja, haslo, haslo1,IP);
+
+        if (email.matches(regexemail)
+                && imie.matches(regeximie)
+                && nazwisko.matches(regeximie)
+                && pesel.matches(regexpesel)
+                && telefon.matches(regextelefon)
+                && specjalizacja.matches(regeximie)
+                && haslo.equals(haslo1) && haslo.isEmpty() == false
+        ) {
+            bgRejestracjaLekarza bgRL = new bgRejestracjaLekarza(this);
+            bgRL.execute(email, imie, nazwisko, pesel, telefon, specjalizacja, haslo, haslo1, IP);
+        }
     }
 }

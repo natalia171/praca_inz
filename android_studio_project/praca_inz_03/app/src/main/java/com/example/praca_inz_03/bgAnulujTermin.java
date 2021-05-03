@@ -5,9 +5,13 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.BufferedReader;
@@ -24,11 +28,9 @@ import java.net.URLEncoder;
 
 public class bgAnulujTermin extends AsyncTask <String, Void,String> {
 
-    //utworzenie okienka dialogowego
     AlertDialog dialog;
     Context context;
     String IP;
-    //stworzenie pustego stringa wynikowego
     String result = "";
     public bgAnulujTermin(Context context) {
         this.context = context;
@@ -36,26 +38,24 @@ public class bgAnulujTermin extends AsyncTask <String, Void,String> {
 
 
     @Override
-    // funkcja po wykonaniu ??????
     protected void onPostExecute(String s) {
 
-        //tworzenie kolejnej aktywnosci - panelu pacjenta
         Intent intent_name = new Intent();
         intent_name.setClass(context.getApplicationContext(),PanelLekarza.class);
         intent_name.putExtra("idLekarza",s);
         intent_name.putExtra("IP",IP);
-        Log.d("id", "onPostExecute: ID w bg anuluj termin: "+s);
         context.startActivity(intent_name);
-        Toast toast= Toast.makeText(context,"Termin usunięty!",Toast.LENGTH_LONG);
+
+        Toast toast= Toast.makeText(context,"Termin anulowany! ",Toast.LENGTH_LONG);
+        View view = toast.getView();
+        view.getBackground().setColorFilter(Color.parseColor("#C39BD3"), PorterDuff.Mode.SRC_IN);
+        TextView text = view.findViewById(android.R.id.message);
+        text.setTextColor(Color.parseColor("#000000"));
         toast.show();
     }
 
     @Override
-    //czemu (String... voids)?????
     protected String doInBackground(String... voids) {
-        Log.d("bgAnulujTermin", "Uruchomienie ");
-
-        // dodawanie elementow do tablicy voids
         String idWizyty = voids[0];
         String idLekarza = voids[1];
         IP = voids[2];
@@ -75,9 +75,9 @@ public class bgAnulujTermin extends AsyncTask <String, Void,String> {
                     +"&&"+URLEncoder.encode("ID_LEKARZA","UTF-8")+"="+URLEncoder.encode(idLekarza,"UTF-8");
             writer.write(data);
 
-            writer.flush(); // wysyła o co było napisane przez buffered writer
-            writer.close(); // zamyka buffered writer
-            ops.close(); // konczy tworzenie stringa do wyslania?????????
+            writer.flush();
+            writer.close();
+            ops.close();
 
 
             InputStream ips = http.getInputStream();
@@ -86,25 +86,17 @@ public class bgAnulujTermin extends AsyncTask <String, Void,String> {
             while ((line = reader.readLine()) != null)
             {
                 result += line;
-                Log.d("Usuwam","Odpowiedz "+line);
             }
             reader.close();
             ips.close();
             http.disconnect();
 
-            //zle sformuowany adres url
         } catch (MalformedURLException e) {
             result = e.getMessage();
-            //blad odczytu?
-            Log.d("Usuwam", "Ex1 "+result);
 
         } catch (IOException e) {
             result = e.getMessage();
-            Log.d("Usuwam", "Ex2 "+result);
-
         }
-
-        Log.d("Usuwam", "NoEx "+result);
 
         return idLekarza;
 

@@ -17,7 +17,7 @@ import android.widget.Toast;
 public class MainActivity extends AppCompatActivity {
     EditText pas,usr;
     //String IP="192.168.42.1";
-    String IP="192.168.2.6";
+    String IP="192.168.2.11";
     Spinner listaSpecjalizacji;
     RadioButton RadioPacjent, RadioLekarz;
     RadioGroup radiogroup1;
@@ -30,14 +30,11 @@ public class MainActivity extends AppCompatActivity {
         radiogroup1 = findViewById(R.id.radiogroup1);
         usr = findViewById( R.id.email);
         pas = findViewById(R.id.haslo);
-       // RadioPacjent = findViewById(R.id.RadioPacjent);
-        //RadioLekarz = findViewById(R.id.RadioLekarz);
         radiogroup1.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 switch (checkedId) {
                     case -1:
-                        Log.d("nic", "Choices cleared!");
                         break;
                     case R.id.RadioPacjent:
                         kto="Pacjent";
@@ -58,21 +55,19 @@ public class MainActivity extends AppCompatActivity {
         if(kto=="Pacjent") {
                 bgLogowanie bg = new bgLogowanie(this);
                 String res=bg.execute(user,pass,IP).toString();
-                Log.d("MainACC","Odpowiedz logowanie "+res);
         }
         if(kto=="Lekarz"){
             bgLogowanieLekarz bgLL = new bgLogowanieLekarz(this);
             String res=bgLL.execute(user,pass,IP).toString();
-            Log.d("MainACC","Odpowiedz logowanie lekarz"+res);
         }
         else if (kto==""){
             Toast toast= Toast.makeText(MainActivity.this,"Wybierz pacjent lub lekarz",Toast.LENGTH_LONG);
-            toast.show();        }
+            toast.show();
+        }
     }
 
     public void rejestracja(View view) {
         if(kto=="Pacjent") {
-            //tworzenie nowej aktywnosci  i jej uruchomienie
             Intent intencjaRejestracja = new Intent(this,rejestracja.class);
             intencjaRejestracja.putExtra("IP",IP);
             startActivity(intencjaRejestracja);

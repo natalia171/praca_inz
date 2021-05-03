@@ -5,9 +5,13 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.BufferedReader;
@@ -24,39 +28,35 @@ import java.net.URLEncoder;
 
 public class bgPotwierdzWizyte extends AsyncTask <String, Void,String> {
 
-    //utworzenie okienka dialogowego
     AlertDialog dialog;
     Context context;
     String IP;
-    //stworzenie pustego stringa wynikowego
     String result = "";
-   // String idPacjenta;
     public bgPotwierdzWizyte(Context context) {
         this.context = context;
     }
 
 
     @Override
-    // funkcja po wykonaniu ??????
     protected void onPostExecute(String s) {
 
-            //tworzenie kolejnej aktywnosci - panelu pacjenta
             Intent intent_name = new Intent();
             intent_name.setClass(context.getApplicationContext(),PanelPacjenta.class);
             intent_name.putExtra("idPacjenta",s);
             intent_name.putExtra("IP",IP);
-        Log.d("id", "onPostExecute: ID w bg potwierdz wizyte: "+s);
             context.startActivity(intent_name);
-            Toast toast= Toast.makeText(context,"Wizyta potwierdzona!",Toast.LENGTH_LONG);
-            toast.show();
+
+        Toast toast= Toast.makeText(context,"Wizyta potwierdzona!",Toast.LENGTH_LONG);
+        View view = toast.getView();
+        view.getBackground().setColorFilter(Color.parseColor("#C39BD3"), PorterDuff.Mode.SRC_IN);
+        TextView text = view.findViewById(android.R.id.message);
+        text.setTextColor(Color.parseColor("#000000"));
+        toast.show();
     }
 
     @Override
-    //czemu (String... voids)?????
     protected String doInBackground(String... voids) {
-        Log.d("bgPotwierzWizyte", "Uruchomienie ");
 
-        // dodawanie elementow do tablicy voids
         String idWizyty = voids[0];
         String idPacjenta = voids[1];
         IP = voids[2];
@@ -75,10 +75,9 @@ public class bgPotwierdzWizyte extends AsyncTask <String, Void,String> {
             String data = URLEncoder.encode("ID","UTF-8")+"="+URLEncoder.encode(idWizyty,"UTF-8")
                     +"&&"+URLEncoder.encode("ID_PACJENTA","UTF-8")+"="+URLEncoder.encode(idPacjenta,"UTF-8");
             writer.write(data);
-            Log.d("bgPotwierzWizyte", "Uruchomienie 1");
-            writer.flush(); // wysyła o co było napisane przez buffered writer
-            writer.close(); // zamyka buffered writer
-            ops.close(); // konczy tworzenie stringa do wyslania?????????
+            writer.flush();
+            writer.close();
+            ops.close();
 
 
             InputStream ips = http.getInputStream();
@@ -87,25 +86,17 @@ public class bgPotwierdzWizyte extends AsyncTask <String, Void,String> {
             while ((line = reader.readLine()) != null)
             {
                 result += line;
-                Log.d("bgPotwierzWizyte","Odpowiedz "+line);
             }
             reader.close();
             ips.close();
             http.disconnect();
 
-            //zle sformuowany adres url
         } catch (MalformedURLException e) {
             result = e.getMessage();
-            //blad odczytu?
-            Log.d("bgPotwierzWizyte", "Ex1 "+result);
 
         } catch (IOException e) {
             result = e.getMessage();
-            Log.d("bgPotwierzWizyte", "Ex2 "+result);
-
         }
-
-        Log.d("bgPotwierzWizyte", "NoEx "+result);
 
         return idPacjenta;
 

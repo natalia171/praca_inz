@@ -5,9 +5,13 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.BufferedReader;
@@ -26,37 +30,35 @@ import java.util.Date;
 
 public class bgDodajNowyTermin extends AsyncTask <String, Void,String> {
 
-    //utworzenie okienka dialogowego
     AlertDialog dialog;
     Context context;
     String IP;
-    //stworzenie pustego stringa wynikowego
     String result = "";
-    // String idPacjenta;
     public bgDodajNowyTermin(Context context) {
         this.context = context;
     }
 
 
     @Override
-    // funkcja po wykonaniu ??????
     protected void onPostExecute(String s) {
 
-        //tworzenie kolejnej aktywnosci - panelu pacjenta
         Intent intent_name = new Intent();
         intent_name.setClass(context.getApplicationContext(),PanelLekarza.class);
         intent_name.putExtra("idLekarza",s);
         intent_name.putExtra("IP",IP);
         context.startActivity(intent_name);
-        Toast toast= Toast.makeText(context,"Gotowe!",Toast.LENGTH_LONG);
+
+        Toast toast= Toast.makeText(context,"Dodano termin!",Toast.LENGTH_LONG);
+        View view = toast.getView();
+        view.getBackground().setColorFilter(Color.parseColor("#C39BD3"), PorterDuff.Mode.SRC_IN);
+        TextView text = view.findViewById(android.R.id.message);
+        text.setTextColor(Color.parseColor("#000000"));
         toast.show();
     }
 
     @Override
-    //czemu (String... voids)?????
     protected String doInBackground(String... voids) {
 
-        // dodawanie elementow do tablicy voids
         String idLekarza = voids[0];
         IP = voids[1];
         String poczatekWizyty = voids[2];
@@ -73,15 +75,12 @@ public class bgDodajNowyTermin extends AsyncTask <String, Void,String> {
             czas_od = sdf.parse(poczatekWizyty);
             czas_do = sdf.parse(koniecWizyty);
         } catch (Exception ex) {
-            Log.v("Exception", ex.getLocalizedMessage());
         }
 
-        Log.d("15min", "Czas od "+poczatekWizyty+" sparsowana "+czas_od.toString());
         int kwadrans=1000*60*15;
         int iloscKwadransow = (int) ((czas_do.getTime() - czas_od.getTime()) /(kwadrans));
 
 
-        Log.d("15min", "Ilosc kwadransow "+iloscKwadransow);
         String s_data_od= null;
         String s_data_do= null;
 
@@ -105,9 +104,9 @@ public class bgDodajNowyTermin extends AsyncTask <String, Void,String> {
                         +"&&"+ URLEncoder.encode("CZAS_STOP","UTF-8")+"="+URLEncoder.encode(s_data_do,"UTF-8")
                         +"&&"+URLEncoder.encode("ID_LEKARZA","UTF-8")+"="+URLEncoder.encode(idLekarza,"UTF-8");
                 writer.write(data);
-                writer.flush(); // wysyła o co było napisane przez buffered writer
-                writer.close(); // zamyka buffered writer
-                ops.close(); // konczy tworzenie stringa do wyslania?????????
+                writer.flush();
+                writer.close();
+                ops.close();
 
 
                 InputStream ips = http.getInputStream();
@@ -116,28 +115,19 @@ public class bgDodajNowyTermin extends AsyncTask <String, Void,String> {
                 while ((line = reader.readLine()) != null)
                 {
                     result += line;
-                    Log.d("bgPotwierzWizyte","Odpowiedz "+line);
                 }
                 reader.close();
                 ips.close();
                 http.disconnect();
 
-                //zle sformuowany adres url
             } catch (MalformedURLException e) {
                 result = e.getMessage();
-                //blad odczytu?
-                Log.d("bgPotwierzWizyte", "Ex1 "+result);
-
             } catch (IOException e) {
                 result = e.getMessage();
-                Log.d("bgPotwierzWizyte", "Ex2 "+result);
-
             }
         }
-        Log.d("bgPotwierzWizyte", "NoEx "+result);
 
         return idLekarza;
-
 
     }
 }

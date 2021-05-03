@@ -33,7 +33,6 @@ public class DodajNowyTerminLekarz extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //zmiana jezyka na polski, zeby w kalendarzu byly polskie napisy
         String languageToLoad  = "pl";
         Locale locale = new Locale(languageToLoad);
         Locale.setDefault(locale);
@@ -131,11 +130,9 @@ public class DodajNowyTerminLekarz extends AppCompatActivity {
         String koniecWizyty = wizytaKoniec.getText().toString();
 
         try {
-            Log.d("DodajNowyTerminLekarz", "poczatek: " + poczatekWizyty + "koniec" + koniecWizyty);
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:00");
             Date poczatek = sdf.parse(poczatekWizyty);
             Date koniec = sdf.parse(koniecWizyty);
-            Log.d("DodajNowyTerminLekarz", "poczatek: " + poczatek + "koniec" + koniec);
             if(koniec.getTime() > poczatek.getTime()) {
                 bgDodajNowyTermin bgDNT = new bgDodajNowyTermin(DodajNowyTerminLekarz.this);
                 String ress = bgDNT.execute(idLekarza, IP, poczatekWizyty, koniecWizyty).toString();

@@ -28,12 +28,11 @@ import java.util.Set;
 
 
 public class DodajWizyte extends AppCompatActivity {
-    String pSpecjalizacja;//="internista"; //Zmien zeby pokazywalo lekarza wybranego ze spinnera
+    String pSpecjalizacja;
 
     Context context;
 
     ListView listaWizyt;
-    //String idPacjenta;
     String IP;
     String ajdi;
 
@@ -46,25 +45,17 @@ public class DodajWizyte extends AppCompatActivity {
         Bundle bundle=getIntent().getExtras();
         ajdi = getIntent().getStringExtra("idPacjenta");
         IP = getIntent().getStringExtra("IP");
-        //ajdi=bundle.getString("idPacjenta");
-        Log.d("id", "onCreate dodaj wizyte: ID w dodaj wizyte:  "+ajdi);
-
-//         bgPotwierdzWizyte bgPW = new bgPotwierdzWizyte(this);
-//         String ress=bgPW.execute("1",ajdi).toString();
-//         Log.d("Main","ressponse "+ress);
-
 
 
         final Spinner listaSpecjalizacjiSpinner;
-        listaSpecjalizacjiSpinner = (Spinner) findViewById( R.id.listaSpecjalizacji); //podpina spinner do obiektu w widoku
-        bgPobierzSpecjalizacje bg = new bgPobierzSpecjalizacje(this); //tworzy nowa klase
+        listaSpecjalizacjiSpinner = (Spinner) findViewById( R.id.listaSpecjalizacji);
+        bgPobierzSpecjalizacje bg = new bgPobierzSpecjalizacje(this);
 
-        List<String> listaSpecjalizacji= new ArrayList<>(); //tworzy liste
+        List<String> listaSpecjalizacji= new ArrayList<>();
         try {
-            listaSpecjalizacji = bg.execute(IP).get(); //przypisuje do listy wynik z klasy
-            Log.d("DoWi","ressponse "+listaSpecjalizacji.get(0));
+            listaSpecjalizacji = bg.execute(IP).get();
         }catch (Exception e){}
-        ArrayAdapter<String> adp1 = new ArrayAdapter<String>(this,  R.layout.spinner_close, listaSpecjalizacji);//tworzy arrayadapter ktory bedzie posiadal wartosci listaspecjalizacji
+        ArrayAdapter<String> adp1 = new ArrayAdapter<String>(this,  R.layout.spinner_close, listaSpecjalizacji);
         adp1.setDropDownViewResource(R.layout.spinner_open);
 
         listaSpecjalizacjiSpinner.setAdapter(adp1);
@@ -73,13 +64,12 @@ public class DodajWizyte extends AppCompatActivity {
         listaSpecjalizacjiSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
-                pSpecjalizacja= (String) listaSpecjalizacjiSpinner.getSelectedItem();//pobieranie stringa z konkretna specjalizacja
+                pSpecjalizacja= (String) listaSpecjalizacjiSpinner.getSelectedItem();
                 Wyswietl(pSpecjalizacja);
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> parentView) {
-                // your code here
             }
         });
     }
@@ -89,9 +79,6 @@ public class DodajWizyte extends AppCompatActivity {
 
         listaWizyt = (ListView)findViewById(R.id.listaWizyt);
         bgPobierzDostepneWizyty bgPDW = new bgPobierzDostepneWizyty(this);
-//        bgPotwierdzWizyte bgPW = new bgPotwierdzWizyte(this);
-//        String ress=bgPW.execute("1","1").toString();
-//        Log.d("Main","ressponse "+ress);
 
         LinkedHashMap<String, String> LinkedhashMapaWizyt = new LinkedHashMap<String,String>();
         try {
@@ -99,11 +86,9 @@ public class DodajWizyte extends AppCompatActivity {
         }catch (Exception e){}
 
 
-        //Klucze z hashmapy
         Set<String> IdWizyt = LinkedhashMapaWizyt.keySet();
         final ArrayList<String> ListaKluczyWizyt = new ArrayList<String>(IdWizyt);
 
-        //Opisy wizyt
         Collection<String> ListaDanychWizyt = LinkedhashMapaWizyt.values();
         final ArrayList<String> arrayListWizyt = new ArrayList<String>(ListaDanychWizyt);
 
@@ -114,29 +99,24 @@ public class DodajWizyte extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
                 Object listItem = listaWizyt.getItemAtPosition(position);
-                Log.d("DoWi","ressponse "+listItem.toString());
                 final String idWizyty = ListaKluczyWizyt.get(position);
 
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(DodajWizyte.this);
                 builder.setTitle("Potwierdzenie rezerwacji");
                 builder.setMessage("Czy chcesz potwierdzić rezerwację wizyty?");
-                // add the buttons
 
                 builder.setPositiveButton("Tak",
 
                         new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                Log.d("id wizytowe", "id wizyty "+idWizyty);
                                 bgPotwierdzWizyte bgPW = new bgPotwierdzWizyte(DodajWizyte.this);
                                 String ress=bgPW.execute(idWizyty,ajdi,IP).toString();
-                                Log.d("Main","ressponse "+ress);
                             }
                         }
                 );
                 builder.setNegativeButton("Nie", null);
-                // create and show the alert dialog
                 AlertDialog dialog = builder.create();
                 dialog.show();
 
