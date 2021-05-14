@@ -17,7 +17,7 @@ $haslo = mysqli_real_escape_string($conn, $_REQUEST['haslo']);
 
 
 //polecenie sql - zlicz rekordy o loginie i hasle takim jak otrzymanym z androida
-$sql = "select count(*) as IL from lekarze where email='$email' and haslo='$encrypted_password'";
+$sql = "select czy_aktywne_konto as IL from lekarze where email='$email' and haslo='$encrypted_password' and czy_aktywne_konto=1";
 
 $sql2 = "select id from lekarze where email='$email' and haslo='$encrypted_password'";
 
@@ -33,7 +33,7 @@ if ($result->num_rows > 0) {
   // output data of each row
   //wyciaga dane z tabeli
   while($row = $result->fetch_assoc()) {
-    echo $row["IL"] ;
+    echo "tak" ;
 	echo "\n";
   }
 } else {

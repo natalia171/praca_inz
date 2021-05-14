@@ -31,7 +31,7 @@ public class rejestracjaLekarza extends AppCompatActivity {
         String email = em.getText().toString();
         String regexemail = "[a-zA-Z0-9-_.]+@[a-zA-Z0-9-_.]+\\.[a-zA-Z0-9]+";
         String imie = im.getText().toString();
-        String regeximie = "[a-zA-Za-zżźćńółęąśŻŹĆĄŚĘŁÓŃ0-9]+";
+        String regeximie = "[a-zA-Za-zżźćńółęąśŻŹĆĄŚĘŁÓŃ]+";
         String nazwisko = nazw.getText().toString();
         String pesel = pes.getText().toString();
         String regexpesel = "[0-9]{11}";

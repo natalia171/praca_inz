@@ -53,9 +53,16 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Lekarz"
-                android:layout_marginLeft="20pt"
+                android:layout_marginLeft="10pt"
                 android:textSize="20sp"
                 android:id="@+id/RadioLekarz"/>
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Admin"
+                android:layout_marginLeft="10pt"
+                android:textSize="20sp"
+                android:id="@+id/RadioAdmin"/>
         </RadioGroup>
 
         <Button

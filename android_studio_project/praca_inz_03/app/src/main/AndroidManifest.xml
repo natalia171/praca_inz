@@ -12,7 +12,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:windowSoftInputMode="adjustPan">
-        <activity android:name=".OpiniePanelLekarza"></activity>
+        <activity android:name=".aktywneKontaAdmin"></activity>
+        <activity android:name=".profilAdmina" />
+        <activity android:name=".PanelAdmina" />
+        <activity android:name=".OpiniePanelLekarza" />
         <activity
             android:name=".ProfilLekarza"
             android:windowSoftInputMode="adjustPan" />

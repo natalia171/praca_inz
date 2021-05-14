@@ -25,38 +25,36 @@ import java.util.ArrayList;
 
 
 import java.util.Date;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
 
 
-public class bgPobierzHistorieWizyt extends AsyncTask<String, Void, List<String>> {
+public class bgPobierzLekarzyDoZatwierdzenia extends AsyncTask<String, Void, LinkedHashMap<String,String>> {
     Context context;
-
-    SimpleDateFormat sdf= new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
-    String aktualnyCzas = sdf.format(new Date());
-    String IP;
     String result = "";
+    String IP;
+
     List<String> list;
 
-    public bgPobierzHistorieWizyt(Context context)
+    public bgPobierzLekarzyDoZatwierdzenia(Context context)
     {
         this.context = context;
     }
 
-
-
     @Override
     protected void onPreExecute() {}
-    @Override
-    protected void onPostExecute(List<String> s) {
-    }
+
 
     @Override
-    protected List<String> doInBackground(String... voids) {
-        String idPacjenta = voids[0];
-        IP = voids[1];
+    protected void onPostExecute(LinkedHashMap<String,String> s) {}
 
-        String connstr = "http://"+IP+"/historiaWizyt.php";
+    @Override
+    protected LinkedHashMap<String,String> doInBackground(String... voids) {
+        IP = voids[0];
+        String connstr = "http://"+IP+"/pobierzLekarzyDoZatwierdzenia.php";
+
+
 
         try {
             URL url = new URL(connstr);
@@ -66,45 +64,35 @@ public class bgPobierzHistorieWizyt extends AsyncTask<String, Void, List<String>
             http.setDoOutput(true);
 
             OutputStream ops = http.getOutputStream();
-            BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(ops,"UTF-8"));
-            String data = URLEncoder.encode("ID_PACJENTA","UTF-8")+"="+URLEncoder.encode(idPacjenta,"UTF-8")
-                    +"&&"+URLEncoder.encode("CZAS_START","UTF-8")+"="+URLEncoder.encode(aktualnyCzas,"UTF-8");
-            writer.write(data);
-            writer.flush();
-            writer.close();
             ops.close();
-
 
 
             InputStream ips = http.getInputStream();
             BufferedReader reader = new BufferedReader(new InputStreamReader(ips,"ISO-8859-1"));
-
             String line ="";
             while ((line = reader.readLine()) != null)
             {
                 result += line;
-
             }
             reader.close();
             ips.close();
             http.disconnect();
-
-
         }
+
         catch (Exception e ){
         }
 
-
+        LinkedHashMap<String,String> LinkedLekarzeDoZatwierdzeniaHashMap= new LinkedHashMap<String,String>();
         JSONArray arr = null;
         try {
-
+            int i;
             arr = new JSONArray(result);
-            list = new ArrayList<String>();
-
-            for(int i = 0; i < arr.length(); i++){
-
-                list.add(arr.getJSONObject(i).getString("imie")+" "+arr.getJSONObject(i).getString("nazwisko")+" - "+arr.getJSONObject(i).getString("specjalizacja")+"\n "+arr.getJSONObject(i).getString("CZAS_START_FORMATED"));
-
+            String key;
+            String data;
+            for (i = 0; i < arr.length(); i++){
+                key = arr.getJSONObject(i).getString("ID");
+                data = arr.getJSONObject(i).getString("imie")+"  "+arr.getJSONObject(i).getString("nazwisko");
+                LinkedLekarzeDoZatwierdzeniaHashMap.put( key,data );
             }
 
         } catch (JSONException e) {
@@ -112,7 +100,7 @@ public class bgPobierzHistorieWizyt extends AsyncTask<String, Void, List<String>
         }
 
 
-        return list;
+        return LinkedLekarzeDoZatwierdzeniaHashMap;
     }
 
 }

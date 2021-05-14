@@ -26,7 +26,7 @@ import java.net.URL;
 import java.net.URLEncoder;
 
 
-public class bgLogowanieLekarz extends AsyncTask <String, Void,String> {
+public class bgLogowanieAdmin extends AsyncTask <String, Void,String> {
 
     AlertDialog dialog;
     Context context;
@@ -35,13 +35,13 @@ public class bgLogowanieLekarz extends AsyncTask <String, Void,String> {
     String ajdi;
     String IP;
 
-    public bgLogowanieLekarz(Context context)
+
+    public bgLogowanieAdmin(Context context)
     {
         this.context = context;
     }
 
     @Override
-
     protected void onPreExecute() {
         dialog = new AlertDialog.Builder(context).create();
         dialog.setTitle("Login Status");
@@ -50,12 +50,14 @@ public class bgLogowanieLekarz extends AsyncTask <String, Void,String> {
 
     @Override
     protected void onPostExecute(String s) {
+
         if(s.contains("tak"))
         {
             Intent intent_name = new Intent();
-            intent_name.setClass(context.getApplicationContext(),PanelLekarza.class);////////
-            intent_name.putExtra("idLekarza",ajdi);
+            intent_name.setClass(context.getApplicationContext(),PanelAdmina.class);
+            intent_name.putExtra("idAdmina",ajdi);
             intent_name.putExtra("IP",IP);
+
             context.startActivity(intent_name);
 
             Toast toast= Toast.makeText(context,"Zalogowano",Toast.LENGTH_LONG);
@@ -66,9 +68,8 @@ public class bgLogowanieLekarz extends AsyncTask <String, Void,String> {
             toast.show();
 
 
-
         }else{
-            dialog.setMessage("Zły login/hasło lub nieaktywne konto");
+            dialog.setMessage("Złe hasło lub login");
             dialog.show();
         }
 
@@ -81,7 +82,7 @@ public class bgLogowanieLekarz extends AsyncTask <String, Void,String> {
         String pass = voids[1];
         IP = voids[2];
 
-        String connstr = "http://"+IP+"/loginLekarz.php";
+        String connstr = "http://"+IP+"/loginAdmin.php";
 
         try {
             URL url = new URL(connstr);
@@ -97,6 +98,7 @@ public class bgLogowanieLekarz extends AsyncTask <String, Void,String> {
             writer.flush();
             writer.close();
             ops.close();
+
             InputStream ips = http.getInputStream();
             BufferedReader reader = new BufferedReader(new InputStreamReader(ips,"ISO-8859-1"));
             String line ="";
@@ -113,11 +115,12 @@ public class bgLogowanieLekarz extends AsyncTask <String, Void,String> {
             http.disconnect();
             ajdi=tab[1];
 
-            } catch (MalformedURLException e) {
+        } catch (MalformedURLException e) {
             result = e.getMessage();
         } catch (IOException e) {
             result = e.getMessage();
         }
+
 
         return result;
 

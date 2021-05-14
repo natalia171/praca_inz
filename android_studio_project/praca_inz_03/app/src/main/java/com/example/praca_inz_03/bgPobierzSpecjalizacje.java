@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class bgPobierzSpecjalizacje extends AsyncTask<String, Void, List<String>> {
-    Context context; // po co jest context??????
+    Context context;
 
     String IP;
     String result = "";
@@ -28,10 +28,9 @@ public class bgPobierzSpecjalizacje extends AsyncTask<String, Void, List<String>
         this.context = context;
     }
     @Override
-    protected void onPreExecute() {} //nic nie robi przed wykonaniem
+    protected void onPreExecute() {}
     @Override
-    protected void onPostExecute(List<String> s) { //nic nie robi po wykoananiu
-    }
+    protected void onPostExecute(List<String> s) {}
 
     @Override
     protected List<String> doInBackground(String... voids) {
@@ -44,7 +43,7 @@ public class bgPobierzSpecjalizacje extends AsyncTask<String, Void, List<String>
             http.setDoInput(true);
             http.setDoOutput(true);
 
-            OutputStream ops = http.getOutputStream(); //skad pobiera output stream i czym  on jest???????
+            OutputStream ops = http.getOutputStream();
             ops.close();
 
             InputStream ips = http.getInputStream();
@@ -58,9 +57,7 @@ public class bgPobierzSpecjalizacje extends AsyncTask<String, Void, List<String>
             reader.close();
             ips.close();
             http.disconnect();
-            //Log.d("MW",result);
         }
-        // po co ten catch???????
         catch (Exception e ){
             Log.d("bPS",e.getMessage().toString());
         };

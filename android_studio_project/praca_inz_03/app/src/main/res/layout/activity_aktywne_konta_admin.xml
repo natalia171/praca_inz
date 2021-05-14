@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".aktywneKontaAdmin"
+    style="@style/stylTLA"
+    >
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_margin="10dp"
+        android:padding="10dp"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
+        android:layout_centerInParent="true"
+        >
+
+
+
+        <TextView
+            android:layout_marginTop="10pt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Dane lekarza:"
+            android:textSize="25sp" />
+
+        <ListView
+            android:id="@+id/daneLekarz"
+            android:layout_width="wrap_content"
+            android:layout_height="60pt"
+            android:layout_marginTop="15dp"
+            />
+
+
+        <Button
+            android:id="@+id/opinie"
+            style="@style/stylbatona"
+            android:paddingLeft="30pt"
+            android:paddingRight="30pt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="zatwierdz"
+            android:text="DEZAKTYWUJ KONTO"
+            android:layout_marginTop="7pt"
+            android:textSize="20sp"
+            android:background="@drawable/rounded_corners"
+            />
+    </LinearLayout>
+
+    <TextView
+        style="@style/PanelTextview"
+        android:text="PROFIL ADMINA"
+        />
+
+</RelativeLayout>

@@ -16,12 +16,16 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
     EditText pas,usr;
-    //String IP="192.168.42.1";
-    String IP="192.168.2.11";
+    //String IP="192.168.0.17";
+    String IP="192.168.2.3";
+
     Spinner listaSpecjalizacji;
     RadioButton RadioPacjent, RadioLekarz;
     RadioGroup radiogroup1;
     String kto="";
+    String pacjent="Pacjent";
+    String lekarz="Lekarz";
+    String admin="Admin";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,45 +47,51 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.RadioLekarz:
                         kto="Lekarz";
                         break;
+                    case R.id.RadioAdmin:
+                        kto="Admin";
+                        break;
                 }
             }
         });
     }
 
     public void login(View view) {
-       final String user = usr.getText().toString();
+        final String user = usr.getText().toString();
         final String pass = pas.getText().toString();
 
-        if(kto=="Pacjent") {
+        if(kto.equals(pacjent)) {
                 bgLogowanie bg = new bgLogowanie(this);
                 String res=bg.execute(user,pass,IP).toString();
         }
-        if(kto=="Lekarz"){
+        if(kto.equals(lekarz)){
             bgLogowanieLekarz bgLL = new bgLogowanieLekarz(this);
             String res=bgLL.execute(user,pass,IP).toString();
         }
-        else if (kto==""){
+        if(kto.equals(admin)){
+            bgLogowanieAdmin bgLA = new bgLogowanieAdmin(this);
+            String res=bgLA.execute(user,pass,IP).toString();
+        }
+        else if (kto.isEmpty()){
             Toast toast= Toast.makeText(MainActivity.this,"Wybierz pacjent lub lekarz",Toast.LENGTH_LONG);
             toast.show();
         }
     }
 
     public void rejestracja(View view) {
-        if(kto=="Pacjent") {
+        if(kto.equals(pacjent)) {
             Intent intencjaRejestracja = new Intent(this,rejestracja.class);
             intencjaRejestracja.putExtra("IP",IP);
             startActivity(intencjaRejestracja);
         }
-        if(kto=="Lekarz"){
+        if(kto.equals(lekarz)){
             Intent intencjaRejestracjaLekarza = new Intent(this,rejestracjaLekarza.class);
             intencjaRejestracjaLekarza.putExtra("IP",IP);
             startActivity(intencjaRejestracjaLekarza);
         }
-        else if (kto==""){
+        else if (kto.isEmpty()||kto.equals(admin)){
             Toast toast= Toast.makeText(MainActivity.this,"Wybierz pacjent lub lekarz",Toast.LENGTH_LONG);
-            toast.show();        }
-
-
+            toast.show();
+        }
 
     }
 

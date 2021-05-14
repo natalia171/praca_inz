@@ -95,6 +95,7 @@ public class Opinie extends AppCompatActivity {
 
         final ArrayAdapter arrayAdapter = new ArrayAdapter(this,android.R.layout.simple_list_item_1,arrayListNazwisk);
         listaNazwisk.setAdapter(arrayAdapter);
+
         listaNazwisk.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
