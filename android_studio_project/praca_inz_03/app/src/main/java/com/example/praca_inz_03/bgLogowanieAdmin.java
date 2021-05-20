@@ -94,6 +94,7 @@ public class bgLogowanieAdmin extends AsyncTask <String, Void,String> {
             BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(ops,"UTF-8"));
             String data = URLEncoder.encode("email","UTF-8")+"="+URLEncoder.encode(user,"UTF-8")
                     +"&&"+URLEncoder.encode("haslo","UTF-8")+"="+URLEncoder.encode(pass,"UTF-8");
+
             writer.write(data);
             writer.flush();
             writer.close();

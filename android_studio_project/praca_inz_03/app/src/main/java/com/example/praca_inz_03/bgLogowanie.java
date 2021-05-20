@@ -66,14 +66,10 @@ public class bgLogowanie extends AsyncTask <String, Void,String> {
             TextView text = view.findViewById(android.R.id.message);
             text.setTextColor(Color.parseColor("#000000"));
             toast.show();
-
-
         }else{
             dialog.setMessage("Złe hasło lub login");
             dialog.show();
         }
-
-
     }
     @Override
     protected String doInBackground(String... voids) {

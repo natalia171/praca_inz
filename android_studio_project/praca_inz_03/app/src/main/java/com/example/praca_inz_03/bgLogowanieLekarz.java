@@ -56,6 +56,7 @@ public class bgLogowanieLekarz extends AsyncTask <String, Void,String> {
             intent_name.setClass(context.getApplicationContext(),PanelLekarza.class);////////
             intent_name.putExtra("idLekarza",ajdi);
             intent_name.putExtra("IP",IP);
+
             context.startActivity(intent_name);
 
             Toast toast= Toast.makeText(context,"Zalogowano",Toast.LENGTH_LONG);
@@ -64,8 +65,6 @@ public class bgLogowanieLekarz extends AsyncTask <String, Void,String> {
             TextView text = view.findViewById(android.R.id.message);
             text.setTextColor(Color.parseColor("#000000"));
             toast.show();
-
-
 
         }else{
             dialog.setMessage("Zły login/hasło lub nieaktywne konto");
@@ -93,6 +92,7 @@ public class bgLogowanieLekarz extends AsyncTask <String, Void,String> {
             BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(ops,"UTF-8"));
             String data = URLEncoder.encode("email","UTF-8")+"="+URLEncoder.encode(user,"UTF-8")
                     +"&&"+URLEncoder.encode("haslo","UTF-8")+"="+URLEncoder.encode(pass,"UTF-8");
+
             writer.write(data);
             writer.flush();
             writer.close();
@@ -106,7 +106,6 @@ public class bgLogowanieLekarz extends AsyncTask <String, Void,String> {
                 tab[i]=line;
                 i++;
                 result += line;
-
             }
             reader.close();
             ips.close();

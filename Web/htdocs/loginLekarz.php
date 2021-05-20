@@ -1,55 +1,43 @@
 <?php
-// wyslij zadanie do pliku config.php
 require_once 'config.php';
-//otwiera polaczenie z serwerem mysql ????skad wie jakie sa wartosci
 $conn = new mysqli($hostname, $username, $password, $db_name);
 
-//pobiera ostatni blad i wyswietla
 if ($conn->connect_error) {
   die("Connection failed: " . $conn->connect_error);
 }
 
-//tworzenie zmiennych o wartosciach pobranych z androida przez request
-$encrypted_password = md5(mysqli_real_escape_string($conn, $_REQUEST['haslo']));
-$email = mysqli_real_escape_string($conn, $_REQUEST['email']);
-$haslo = mysqli_real_escape_string($conn, $_REQUEST['haslo']);
-//$id = mysqli_real_escape_string($conn, $_REQUEST['id']);
+		$encrypted_password = md5(mysqli_real_escape_string($conn, $_REQUEST['haslo']));
+		$email = mysqli_real_escape_string($conn, $_REQUEST['email']);
+		$haslo = mysqli_real_escape_string($conn, $_REQUEST['haslo']);
 
 
-//polecenie sql - zlicz rekordy o loginie i hasle takim jak otrzymanym z androida
-$sql = "select czy_aktywne_konto as IL from lekarze where email='$email' and haslo='$encrypted_password' and czy_aktywne_konto=1";
+		$sql = "select czy_aktywne_konto as IL from lekarze
+		where email='$email' and haslo='$encrypted_password' and czy_aktywne_konto=1";
+		
+		$sql2 = "select id from lekarze where email='$email' and haslo='$encrypted_password'";
 
-$sql2 = "select id from lekarze where email='$email' and haslo='$encrypted_password'";
 
+		$result = $conn->query($sql);
+		$result2= $conn->query($sql2);
 
-// tworzenie wyniku po wyslaniu zapytania sql
-$result = $conn->query($sql);
+		if ($result->num_rows > 0) {
 
-$result2= $conn->query($sql2);
+		  while($row = $result->fetch_assoc()) {
+			echo "tak" ;
+			echo "\n";
+		  }
+		} else {
+		  echo "Brak wyniku";
+		}
 
-//pobiera liczbe wierszy w wyniku i sprawdza czy jest wieksza od 0
-if ($result->num_rows > 0) {
-	
-  // output data of each row
-  //wyciaga dane z tabeli
-  while($row = $result->fetch_assoc()) {
-    echo "tak" ;
-	echo "\n";
-  }
-} else {
-  echo "0 results";
-}
-
-if ($result2->num_rows > 0) {
-	
-  // output data of each row
-  //wyciaga dane z tabeli
-  while($row = $result2->fetch_assoc()) {
-    echo $row["id"] ;
-  }
-} else {
-  echo "0 results";
-}
+		if ($result2->num_rows > 0) {
+			
+		  while($row = $result2->fetch_assoc()) {
+			echo $row["id"] ;
+		  }
+		} else {
+		  echo "Brak wyniku";
+		}
 
 $conn->close();
 ?>

@@ -34,6 +34,7 @@
             android:inputType="textPassword"
             android:id="@+id/haslo" />
 
+
         <RadioGroup
             android:id="@+id/radiogroup1"
             android:layout_width="match_parent"
@@ -84,6 +85,7 @@
             android:onClick="rejestracja"
             android:id="@+id/rejestr"
             />
+
 
     </LinearLayout>
 </RelativeLayout>

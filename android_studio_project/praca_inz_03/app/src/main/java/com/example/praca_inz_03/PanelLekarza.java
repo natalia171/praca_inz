@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import org.json.JSONException;
@@ -49,6 +50,7 @@ public class PanelLekarza extends AppCompatActivity {
         nadchodzaceWizyty = findViewById(R.id.nadchodząceWizyty);
 
 
+
         //pobieranie nadchodzacych wizyt
         bgPobierzNadchodzaceWizytyLekarz bgPNWL = new bgPobierzNadchodzaceWizytyLekarz(this);
 
@@ -63,6 +65,7 @@ public class PanelLekarza extends AppCompatActivity {
 
 
       //  pobieranie wolnych terminow
+
         bgPobierzWolneTerminy bgPWT = new bgPobierzWolneTerminy(this);
 
         LinkedHashMap<String, String> LinkedhashMapaTerminow=new LinkedHashMap<String,String>();
@@ -70,8 +73,6 @@ public class PanelLekarza extends AppCompatActivity {
             LinkedhashMapaTerminow = (LinkedHashMap<String,String>) bgPWT.execute(ajdi,IP).get();
 
         }catch (Exception e){}
-
-
 
         Set<String> IdWizyt = LinkedhashMapaTerminow.keySet();
         final ArrayList<String> ListaKluczy = new ArrayList<String>(IdWizyt);

@@ -11,13 +11,14 @@ import android.util.Log;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 
 public class MainActivity extends AppCompatActivity {
     EditText pas,usr;
-    //String IP="192.168.0.17";
-    String IP="192.168.2.3";
+    String IP="192.168.0.18";
+    //String IP="192.168.2.5";
 
     Spinner listaSpecjalizacji;
     RadioButton RadioPacjent, RadioLekarz;
@@ -34,6 +35,8 @@ public class MainActivity extends AppCompatActivity {
         radiogroup1 = findViewById(R.id.radiogroup1);
         usr = findViewById( R.id.email);
         pas = findViewById(R.id.haslo);
+
+
         radiogroup1.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
@@ -64,15 +67,16 @@ public class MainActivity extends AppCompatActivity {
                 String res=bg.execute(user,pass,IP).toString();
         }
         if(kto.equals(lekarz)){
-            bgLogowanieLekarz bgLL = new bgLogowanieLekarz(this);
-            String res=bgLL.execute(user,pass,IP).toString();
+           // bgLogowanieLekarz bgLL = new bgLogowanieLekarz(this);
+           // String res=bgLL.execute(user,pass,IP).toString();
+
         }
         if(kto.equals(admin)){
             bgLogowanieAdmin bgLA = new bgLogowanieAdmin(this);
             String res=bgLA.execute(user,pass,IP).toString();
         }
         else if (kto.isEmpty()){
-            Toast toast= Toast.makeText(MainActivity.this,"Wybierz pacjent lub lekarz",Toast.LENGTH_LONG);
+            Toast toast= Toast.makeText(MainActivity.this,"Wybierz pacjent, lekarz lub admin",Toast.LENGTH_LONG);
             toast.show();
         }
     }

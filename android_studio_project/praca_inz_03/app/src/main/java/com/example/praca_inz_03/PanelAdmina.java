@@ -24,9 +24,6 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Set;
 
-
-
-
 public class PanelAdmina extends AppCompatActivity {
     ListView lekarzeDoZatwierdzenia;
     ListView aktywneKonta;
