@@ -78,9 +78,6 @@ public class PanelAdmina extends AppCompatActivity {
                profilAdmina.putExtra("idLekarza", idLekarza);
 
                startActivity(profilAdmina);
-
-
-
             }
         });
 

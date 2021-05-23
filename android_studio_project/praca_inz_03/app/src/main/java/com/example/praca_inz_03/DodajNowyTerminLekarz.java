@@ -33,7 +33,7 @@ public class DodajNowyTerminLekarz extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        String languageToLoad  = "pl";
+                String languageToLoad  = "pl";
         Locale locale = new Locale(languageToLoad);
         Locale.setDefault(locale);
         Configuration config = new Configuration();
@@ -128,17 +128,25 @@ public class DodajNowyTerminLekarz extends AppCompatActivity {
     public void DodajTermin(View view) {
         String poczatekWizyty = wizytaStart.getText().toString();
         String koniecWizyty = wizytaKoniec.getText().toString();
+        Date aktualnyCzas = Calendar.getInstance().getTime();
+
 
         try {
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:00");
             Date poczatek = sdf.parse(poczatekWizyty);
             Date koniec = sdf.parse(koniecWizyty);
-            if(koniec.getTime() > poczatek.getTime()) {
+            if(koniec.getTime() > poczatek.getTime()&& poczatek.getTime()>aktualnyCzas.getTime()) {
                 bgDodajNowyTermin bgDNT = new bgDodajNowyTermin(DodajNowyTerminLekarz.this);
                 String ress = bgDNT.execute(idLekarza, IP, poczatekWizyty, koniecWizyty).toString();
-            }else
+            }if(koniec.getTime() <= poczatek.getTime())
             {
-                Toast toast= Toast.makeText(DodajNowyTerminLekarz.this,"Czas końcowy musi być większy od początkowego!",Toast.LENGTH_LONG);
+                Toast toast= Toast.makeText(DodajNowyTerminLekarz.this,
+                        "Czas końcowy musi być większy od początkowego!",Toast.LENGTH_LONG);
+                toast.show();
+            }if(poczatek.getTime()<= aktualnyCzas.getTime())
+            {
+                Toast toast= Toast.makeText(DodajNowyTerminLekarz.this,
+                        "Wpisz prawidłową datę!",Toast.LENGTH_LONG);
                 toast.show();
             }
         }
