@@ -16,8 +16,8 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
     EditText pas,usr;
-    //String IP="192.168.0.17";
-    String IP="192.168.2.9";
+    String IP="192.168.0.18";
+    //String IP="192.168.2.9";
 
     Spinner listaSpecjalizacji;
     RadioButton RadioPacjent, RadioLekarz;

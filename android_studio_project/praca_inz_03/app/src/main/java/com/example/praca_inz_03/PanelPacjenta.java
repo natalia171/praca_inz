@@ -138,4 +138,6 @@ public class PanelPacjenta extends AppCompatActivity {
         Intent wylogowanie = new Intent(this,MainActivity.class);
         startActivity(wylogowanie);
     }
+    public void onBackPressed(){}
+
 }

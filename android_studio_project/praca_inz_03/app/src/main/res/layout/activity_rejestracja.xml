@@ -20,12 +20,14 @@
             android:layout_height="wrap_content"
             android:textSize="25sp"
             android:hint="e-mail"
+            android:inputType="textWebEmailAddress"
             android:id="@+id/email"
             />
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="25sp"
+            android:inputType="text"
             android:hint="Imię"
             android:id="@+id/imie"
             />
@@ -33,6 +35,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="25sp"
+            android:inputType="text"
             android:hint="Nazwisko"
             android:id="@+id/nazwisko"
             />
@@ -41,6 +44,7 @@
             android:layout_height="wrap_content"
             android:textSize="25sp"
             android:hint="PESEL"
+            android:inputType="number"
             android:id="@+id/pesel"
             />
         <EditText
@@ -48,26 +52,33 @@
             android:layout_height="wrap_content"
             android:textSize="25sp"
             android:hint="Numer telefonu"
+            android:inputType="phone"
             android:id="@+id/telefon"/>
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="25sp"
-            android:hint="Data urodzenia"
+            android:hint="Data urodzenia (YYYY-MM-DD)"
+            android:inputType="date"
             android:id="@+id/data_urodzenia"
             />
+
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="25sp"
             android:hint="Hasło"
+            android:inputType="textWebPassword"
             android:id="@+id/haslo"
             />
+
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="25sp"
             android:hint="Powtórz hasło"
+            android:inputType="textWebPassword"
+            android:visibility="visible"
             android:id="@+id/haslo1"
             />
         />

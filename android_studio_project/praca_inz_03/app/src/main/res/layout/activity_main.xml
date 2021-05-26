@@ -22,18 +22,17 @@
             android:layout_height="wrap_content"
             android:textSize="25sp"
             android:hint="Login"
-            android:text="test"
             android:id="@+id/email" />
+        <!--            android:text="test"-->
+
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Hasło"
             android:textSize="25sp"
-            android:text="test"
-
             android:inputType="textPassword"
             android:id="@+id/haslo" />
-
+<!--        android:text="test"-->
         <RadioGroup
             android:id="@+id/radiogroup1"
             android:layout_width="match_parent"
